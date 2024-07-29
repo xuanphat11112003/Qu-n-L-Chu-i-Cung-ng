@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="com.mycompany_SupplyChainManagement_war_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>com.XPTB.pojo.Supplierperformance</class>
+    <class>com.XPTB.pojo.Detailexportorder</class>
+    <class>com.XPTB.pojo.Materialsstock</class>
+    <class>com.XPTB.pojo.Users</class>
+    <class>com.XPTB.pojo.Detailimportorder</class>
+    <class>com.XPTB.pojo.Exportorders</class>
+    <class>com.XPTB.pojo.Importorders</class>
+    <class>com.XPTB.pojo.Importordercosts</class>
+    <class>com.XPTB.pojo.Payments</class>
+    <class>com.XPTB.pojo.Inventory</class>
+    <class>com.XPTB.pojo.Materials</class>
+    <class>com.XPTB.pojo.Productstock</class>
+    <class>com.XPTB.pojo.Materialprice</class>
+    <class>com.XPTB.pojo.Customers</class>
+    <class>com.XPTB.pojo.Warehouse</class>
+    <class>com.XPTB.pojo.Detailsimportordercost</class>
+    <class>com.XPTB.pojo.Suppliers</class>
+    <class>com.XPTB.pojo.Transport</class>
+    <class>com.XPTB.pojo.Products</class>
+    <class>com.XPTB.pojo.Transportcompanies</class>
+    <class>com.XPTB.pojo.Supportcustomer</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/qlccudb?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="123456"/>
+    </properties>
+  </persistence-unit>
+</persistence>
