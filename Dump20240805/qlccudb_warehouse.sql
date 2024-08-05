@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: qlccudb
 -- ------------------------------------------------------
--- Server version	8.0.36
+-- Server version	8.0.31
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,30 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `materials`
+-- Table structure for table `warehouse`
 --
 
-DROP TABLE IF EXISTS `materials`;
+DROP TABLE IF EXISTS `warehouse`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `materials` (
-  `ID` int NOT NULL,
-  `Name` varchar(100) DEFAULT NULL,
-  `Price` decimal(10,2) DEFAULT NULL,
-  `SupplierID` int DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `SupplierID` (`SupplierID`),
-  CONSTRAINT `materials_ibfk_1` FOREIGN KEY (`SupplierID`) REFERENCES `suppliers` (`id`)
+CREATE TABLE `warehouse` (
+  `id` int NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `address` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `materials`
+-- Dumping data for table `warehouse`
 --
 
-LOCK TABLES `materials` WRITE;
-/*!40000 ALTER TABLE `materials` DISABLE KEYS */;
-/*!40000 ALTER TABLE `materials` ENABLE KEYS */;
+LOCK TABLES `warehouse` WRITE;
+/*!40000 ALTER TABLE `warehouse` DISABLE KEYS */;
+/*!40000 ALTER TABLE `warehouse` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-29 16:31:22
+-- Dump completed on 2024-08-05 22:41:22

@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: qlccudb
 -- ------------------------------------------------------
--- Server version	8.0.36
+-- Server version	8.0.31
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,28 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `importordercosts`
+-- Table structure for table `detailsimportordercost`
 --
 
-DROP TABLE IF EXISTS `importordercosts`;
+DROP TABLE IF EXISTS `detailsimportordercost`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `importordercosts` (
-  `ID` int NOT NULL,
-  `CostType` varchar(50) DEFAULT NULL,
-  `CostAmount` decimal(10,2) DEFAULT NULL,
-  `CostDate` date DEFAULT NULL,
-  PRIMARY KEY (`ID`)
+CREATE TABLE `detailsimportordercost` (
+  `id` int NOT NULL,
+  `import_order_id` int NOT NULL,
+  `cost_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `detailsimportordercost_ibfk_1` (`import_order_id`),
+  KEY `detailsimportordercost_ibfk_2` (`cost_id`),
+  CONSTRAINT `detailsimportordercost_ibfk_1` FOREIGN KEY (`import_order_id`) REFERENCES `importorder` (`id`),
+  CONSTRAINT `detailsimportordercost_ibfk_2` FOREIGN KEY (`cost_id`) REFERENCES `importordercost` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `importordercosts`
+-- Dumping data for table `detailsimportordercost`
 --
 
-LOCK TABLES `importordercosts` WRITE;
-/*!40000 ALTER TABLE `importordercosts` DISABLE KEYS */;
-/*!40000 ALTER TABLE `importordercosts` ENABLE KEYS */;
+LOCK TABLES `detailsimportordercost` WRITE;
+/*!40000 ALTER TABLE `detailsimportordercost` DISABLE KEYS */;
+/*!40000 ALTER TABLE `detailsimportordercost` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -49,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-29 16:31:21
+-- Dump completed on 2024-08-05 22:41:21

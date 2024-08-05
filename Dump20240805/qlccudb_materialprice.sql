@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: qlccudb
 -- ------------------------------------------------------
--- Server version	8.0.36
+-- Server version	8.0.31
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,32 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `materialsstock`
+-- Table structure for table `materialprice`
 --
 
-DROP TABLE IF EXISTS `materialsstock`;
+DROP TABLE IF EXISTS `materialprice`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `materialsstock` (
-  `ID` int NOT NULL,
-  `Amount` int DEFAULT NULL,
-  `ProductID` int DEFAULT NULL,
-  `MaterialID` int DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `ProductID` (`ProductID`),
-  KEY `MaterialID` (`MaterialID`),
-  CONSTRAINT `materialsstock_ibfk_1` FOREIGN KEY (`ProductID`) REFERENCES `inventory` (`ID`),
-  CONSTRAINT `materialsstock_ibfk_2` FOREIGN KEY (`MaterialID`) REFERENCES `materials` (`ID`)
+CREATE TABLE `materialprice` (
+  `id` int NOT NULL,
+  `material_id` int NOT NULL,
+  `unit_price` decimal(10,2) NOT NULL,
+  `change_date` date NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `materialprice_ibfk_1` (`material_id`),
+  CONSTRAINT `materialprice_ibfk_1` FOREIGN KEY (`material_id`) REFERENCES `material` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `materialsstock`
+-- Dumping data for table `materialprice`
 --
 
-LOCK TABLES `materialsstock` WRITE;
-/*!40000 ALTER TABLE `materialsstock` DISABLE KEYS */;
-/*!40000 ALTER TABLE `materialsstock` ENABLE KEYS */;
+LOCK TABLES `materialprice` WRITE;
+/*!40000 ALTER TABLE `materialprice` DISABLE KEYS */;
+/*!40000 ALTER TABLE `materialprice` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -53,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-29 16:31:20
+-- Dump completed on 2024-08-05 22:41:21

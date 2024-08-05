@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: qlccudb
 -- ------------------------------------------------------
--- Server version	8.0.36
+-- Server version	8.0.31
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,28 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `exportorders`
+-- Table structure for table `exportorder`
 --
 
-DROP TABLE IF EXISTS `exportorders`;
+DROP TABLE IF EXISTS `exportorder`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `exportorders` (
+CREATE TABLE `exportorder` (
   `id` int NOT NULL,
-  `CreateDate` datetime DEFAULT NULL,
-  `State` varchar(25) DEFAULT NULL,
-  `TotalAmount` decimal(10,2) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `create_date` datetime NOT NULL,
+  `state` varchar(25) NOT NULL,
+  `total_amount` decimal(10,2) NOT NULL,
+  `agency_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `CustomerID_idx` (`agency_id`),
+  CONSTRAINT `agency_id` FOREIGN KEY (`agency_id`) REFERENCES `agency` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `exportorders`
+-- Dumping data for table `exportorder`
 --
 
-LOCK TABLES `exportorders` WRITE;
-/*!40000 ALTER TABLE `exportorders` DISABLE KEYS */;
-/*!40000 ALTER TABLE `exportorders` ENABLE KEYS */;
+LOCK TABLES `exportorder` WRITE;
+/*!40000 ALTER TABLE `exportorder` DISABLE KEYS */;
+/*!40000 ALTER TABLE `exportorder` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -49,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-29 16:31:22
+-- Dump completed on 2024-08-05 22:41:21

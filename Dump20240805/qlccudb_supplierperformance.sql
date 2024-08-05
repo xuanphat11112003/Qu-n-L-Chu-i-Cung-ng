@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: qlccudb
 -- ------------------------------------------------------
--- Server version	8.0.36
+-- Server version	8.0.31
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,27 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `warehouse`
+-- Table structure for table `supplierperformance`
 --
 
-DROP TABLE IF EXISTS `warehouse`;
+DROP TABLE IF EXISTS `supplierperformance`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `warehouse` (
-  `ID` int NOT NULL,
-  `Name` varchar(100) DEFAULT NULL,
-  `Address` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
+CREATE TABLE `supplierperformance` (
+  `id` int NOT NULL,
+  `supplier_id` int NOT NULL,
+  `evaluation_date` date NOT NULL,
+  `delivery_rating` int NOT NULL,
+  `quality_rating` int NOT NULL,
+  `price_rating` int NOT NULL,
+  `comment` text,
+  PRIMARY KEY (`id`),
+  KEY `supplierperformance_ibfk_1` (`supplier_id`),
+  CONSTRAINT `supplierperformance_ibfk_1` FOREIGN KEY (`supplier_id`) REFERENCES `supplier` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `warehouse`
+-- Dumping data for table `supplierperformance`
 --
 
-LOCK TABLES `warehouse` WRITE;
-/*!40000 ALTER TABLE `warehouse` DISABLE KEYS */;
-/*!40000 ALTER TABLE `warehouse` ENABLE KEYS */;
+LOCK TABLES `supplierperformance` WRITE;
+/*!40000 ALTER TABLE `supplierperformance` DISABLE KEYS */;
+/*!40000 ALTER TABLE `supplierperformance` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -48,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-29 16:31:21
+-- Dump completed on 2024-08-05 22:41:21

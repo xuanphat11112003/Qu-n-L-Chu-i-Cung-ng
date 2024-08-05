@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: qlccudb
 -- ------------------------------------------------------
--- Server version	8.0.36
+-- Server version	8.0.31
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,33 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `detailimportorder`
+-- Table structure for table `inventory`
 --
 
-DROP TABLE IF EXISTS `detailimportorder`;
+DROP TABLE IF EXISTS `inventory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `detailimportorder` (
-  `ID` int NOT NULL,
-  `Quantity` int DEFAULT NULL,
-  `TotalAmount` decimal(10,2) DEFAULT NULL,
-  `MaterialID` int DEFAULT NULL,
-  `ImportOrderID` int DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `MaterialID` (`MaterialID`),
-  KEY `ImportOrderID` (`ImportOrderID`),
-  CONSTRAINT `detailimportorder_ibfk_1` FOREIGN KEY (`MaterialID`) REFERENCES `materials` (`ID`),
-  CONSTRAINT `detailimportorder_ibfk_2` FOREIGN KEY (`ImportOrderID`) REFERENCES `importorders` (`ID`)
+CREATE TABLE `inventory` (
+  `id` int NOT NULL,
+  `entry_date` date DEFAULT NULL,
+  `exit_date` date DEFAULT NULL,
+  `warehouse_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `StockID` (`warehouse_id`),
+  CONSTRAINT `inventory_ibfk_1` FOREIGN KEY (`warehouse_id`) REFERENCES `warehouse` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `detailimportorder`
+-- Dumping data for table `inventory`
 --
 
-LOCK TABLES `detailimportorder` WRITE;
-/*!40000 ALTER TABLE `detailimportorder` DISABLE KEYS */;
-/*!40000 ALTER TABLE `detailimportorder` ENABLE KEYS */;
+LOCK TABLES `inventory` WRITE;
+/*!40000 ALTER TABLE `inventory` DISABLE KEYS */;
+/*!40000 ALTER TABLE `inventory` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-29 16:31:21
+-- Dump completed on 2024-08-05 22:41:22

@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: qlccudb
 -- ------------------------------------------------------
--- Server version	8.0.36
+-- Server version	8.0.31
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,31 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `payments`
+-- Table structure for table `manufacture`
 --
 
-DROP TABLE IF EXISTS `payments`;
+DROP TABLE IF EXISTS `manufacture`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `payments` (
-  `ID` int NOT NULL,
-  `ImportOrderID` int DEFAULT NULL,
-  `PaymentAmount` decimal(10,2) DEFAULT NULL,
-  `PaymentDate` date DEFAULT NULL,
-  `PaymentMethod` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `ImportOrderID` (`ImportOrderID`),
-  CONSTRAINT `payments_ibfk_1` FOREIGN KEY (`ImportOrderID`) REFERENCES `importorders` (`ID`)
+CREATE TABLE `manufacture` (
+  `id` int NOT NULL,
+  `amount` int NOT NULL,
+  `product_id` int NOT NULL,
+  `material_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `productid_idx` (`product_id`),
+  KEY `materialid_idx` (`material_id`),
+  CONSTRAINT `materialid` FOREIGN KEY (`material_id`) REFERENCES `material` (`id`),
+  CONSTRAINT `productid` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `payments`
+-- Dumping data for table `manufacture`
 --
 
-LOCK TABLES `payments` WRITE;
-/*!40000 ALTER TABLE `payments` DISABLE KEYS */;
-/*!40000 ALTER TABLE `payments` ENABLE KEYS */;
+LOCK TABLES `manufacture` WRITE;
+/*!40000 ALTER TABLE `manufacture` DISABLE KEYS */;
+/*!40000 ALTER TABLE `manufacture` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-29 16:31:22
+-- Dump completed on 2024-08-05 22:41:21

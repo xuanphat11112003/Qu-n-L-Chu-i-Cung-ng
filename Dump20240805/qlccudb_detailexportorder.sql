@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: qlccudb
 -- ------------------------------------------------------
--- Server version	8.0.36
+-- Server version	8.0.31
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,30 +16,35 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `materialprice`
+-- Table structure for table `detailexportorder`
 --
 
-DROP TABLE IF EXISTS `materialprice`;
+DROP TABLE IF EXISTS `detailexportorder`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `materialprice` (
-  `ID` int NOT NULL,
-  `MaterialID` int DEFAULT NULL,
-  `UnitPrice` decimal(10,2) DEFAULT NULL,
-  `ChangeDate` date DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `MaterialID` (`MaterialID`),
-  CONSTRAINT `materialprice_ibfk_1` FOREIGN KEY (`MaterialID`) REFERENCES `materials` (`ID`)
+CREATE TABLE `detailexportorder` (
+  `id` int NOT NULL,
+  `amount` int NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `discount` decimal(10,2) NOT NULL,
+  `total_price` decimal(10,2) NOT NULL,
+  `export_order_id` int NOT NULL,
+  `product_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `detailexportorder_ibfk_1` (`export_order_id`),
+  KEY `detailexportorder_ibfk_2` (`product_id`),
+  CONSTRAINT `detailexportorder_ibfk_1` FOREIGN KEY (`export_order_id`) REFERENCES `exportorder` (`id`),
+  CONSTRAINT `detailexportorder_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `materialprice`
+-- Dumping data for table `detailexportorder`
 --
 
-LOCK TABLES `materialprice` WRITE;
-/*!40000 ALTER TABLE `materialprice` DISABLE KEYS */;
-/*!40000 ALTER TABLE `materialprice` ENABLE KEYS */;
+LOCK TABLES `detailexportorder` WRITE;
+/*!40000 ALTER TABLE `detailexportorder` DISABLE KEYS */;
+/*!40000 ALTER TABLE `detailexportorder` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-29 16:31:19
+-- Dump completed on 2024-08-05 22:41:21

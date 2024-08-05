@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: qlccudb
 -- ------------------------------------------------------
--- Server version	8.0.36
+-- Server version	8.0.31
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,30 +16,36 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `suppliers`
+-- Table structure for table `transport`
 --
 
-DROP TABLE IF EXISTS `suppliers`;
+DROP TABLE IF EXISTS `transport`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `suppliers` (
+CREATE TABLE `transport` (
   `id` int NOT NULL,
-  `Name` varchar(100) DEFAULT NULL,
-  `Address` varchar(100) DEFAULT NULL,
-  `PhoneNumber` varchar(20) DEFAULT NULL,
-  `FeedBack` text,
-  `Evaluate` int DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `transport_company_id` int NOT NULL,
+  `export_order_id` int NOT NULL,
+  `price` int NOT NULL,
+  `feed_back` text NOT NULL,
+  `evaluate` int NOT NULL,
+  `delivery_date` date NOT NULL,
+  `shipment_date` date NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `transport_ibfk_1` (`transport_company_id`),
+  KEY `transport_ibfk_2` (`export_order_id`),
+  CONSTRAINT `transport_ibfk_1` FOREIGN KEY (`transport_company_id`) REFERENCES `transportcompany` (`id`),
+  CONSTRAINT `transport_ibfk_2` FOREIGN KEY (`export_order_id`) REFERENCES `exportorder` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `suppliers`
+-- Dumping data for table `transport`
 --
 
-LOCK TABLES `suppliers` WRITE;
-/*!40000 ALTER TABLE `suppliers` DISABLE KEYS */;
-/*!40000 ALTER TABLE `suppliers` ENABLE KEYS */;
+LOCK TABLES `transport` WRITE;
+/*!40000 ALTER TABLE `transport` DISABLE KEYS */;
+/*!40000 ALTER TABLE `transport` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-29 16:31:21
+-- Dump completed on 2024-08-05 22:41:21
