@@ -5,9 +5,10 @@
 package com.XPTB.pojo;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -41,21 +42,21 @@ public class Inventory implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ID")
+    @Column(name = "id")
     private Integer id;
-    @Column(name = "EntryDate")
+    @Column(name = "entry_date")
     @Temporal(TemporalType.DATE)
     private Date entryDate;
-    @Column(name = "ExitDate")
+    @Column(name = "exit_date")
     @Temporal(TemporalType.DATE)
     private Date exitDate;
-    @OneToMany(mappedBy = "productID")
-    private Set<Materialsstock> materialsstockSet;
-    @JoinColumn(name = "StockID", referencedColumnName = "ID")
+    @JoinColumn(name = "warehouse_id", referencedColumnName = "id")
     @ManyToOne
-    private Warehouse stockID;
-    @OneToMany(mappedBy = "inventoryID")
-    private Set<Productstock> productstockSet;
+    private Warehouse warehouseId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
+    private Collection<Materialstock> materialstockCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "inventoryId")
+    private Collection<Productstock> productstockCollection;
 
     public Inventory() {
     }
@@ -88,30 +89,30 @@ public class Inventory implements Serializable {
         this.exitDate = exitDate;
     }
 
-    @XmlTransient
-    public Set<Materialsstock> getMaterialsstockSet() {
-        return materialsstockSet;
+    public Warehouse getWarehouseId() {
+        return warehouseId;
     }
 
-    public void setMaterialsstockSet(Set<Materialsstock> materialsstockSet) {
-        this.materialsstockSet = materialsstockSet;
-    }
-
-    public Warehouse getStockID() {
-        return stockID;
-    }
-
-    public void setStockID(Warehouse stockID) {
-        this.stockID = stockID;
+    public void setWarehouseId(Warehouse warehouseId) {
+        this.warehouseId = warehouseId;
     }
 
     @XmlTransient
-    public Set<Productstock> getProductstockSet() {
-        return productstockSet;
+    public Collection<Materialstock> getMaterialstockCollection() {
+        return materialstockCollection;
     }
 
-    public void setProductstockSet(Set<Productstock> productstockSet) {
-        this.productstockSet = productstockSet;
+    public void setMaterialstockCollection(Collection<Materialstock> materialstockCollection) {
+        this.materialstockCollection = materialstockCollection;
+    }
+
+    @XmlTransient
+    public Collection<Productstock> getProductstockCollection() {
+        return productstockCollection;
+    }
+
+    public void setProductstockCollection(Collection<Productstock> productstockCollection) {
+        this.productstockCollection = productstockCollection;
     }
 
     @Override

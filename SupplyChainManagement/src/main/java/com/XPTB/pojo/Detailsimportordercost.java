@@ -5,7 +5,6 @@
 package com.XPTB.pojo;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,25 +26,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Detailsimportordercost.findAll", query = "SELECT d FROM Detailsimportordercost d"),
-    @NamedQuery(name = "Detailsimportordercost.findById", query = "SELECT d FROM Detailsimportordercost d WHERE d.id = :id"),
-    @NamedQuery(name = "Detailsimportordercost.findByCostAmount", query = "SELECT d FROM Detailsimportordercost d WHERE d.costAmount = :costAmount")})
+    @NamedQuery(name = "Detailsimportordercost.findById", query = "SELECT d FROM Detailsimportordercost d WHERE d.id = :id")})
 public class Detailsimportordercost implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ID")
+    @Column(name = "id")
     private Integer id;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "CostAmount")
-    private BigDecimal costAmount;
-    @JoinColumn(name = "CostID", referencedColumnName = "ID")
-    @ManyToOne
-    private Importordercosts costID;
-    @JoinColumn(name = "ImportOrderID", referencedColumnName = "ID")
-    @ManyToOne
-    private Importorders importOrderID;
+    @JoinColumn(name = "import_order_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Importorder importOrderId;
+    @JoinColumn(name = "cost_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Importordercost costId;
 
     public Detailsimportordercost() {
     }
@@ -62,28 +57,20 @@ public class Detailsimportordercost implements Serializable {
         this.id = id;
     }
 
-    public BigDecimal getCostAmount() {
-        return costAmount;
+    public Importorder getImportOrderId() {
+        return importOrderId;
     }
 
-    public void setCostAmount(BigDecimal costAmount) {
-        this.costAmount = costAmount;
+    public void setImportOrderId(Importorder importOrderId) {
+        this.importOrderId = importOrderId;
     }
 
-    public Importordercosts getCostID() {
-        return costID;
+    public Importordercost getCostId() {
+        return costId;
     }
 
-    public void setCostID(Importordercosts costID) {
-        this.costID = costID;
-    }
-
-    public Importorders getImportOrderID() {
-        return importOrderID;
-    }
-
-    public void setImportOrderID(Importorders importOrderID) {
-        this.importOrderID = importOrderID;
+    public void setCostId(Importordercost costId) {
+        this.costId = costId;
     }
 
     @Override

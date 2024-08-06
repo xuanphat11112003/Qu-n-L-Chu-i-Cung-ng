@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: qlccudb
 -- ------------------------------------------------------
--- Server version	8.0.31
+-- Server version	8.0.36
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -28,7 +28,8 @@ CREATE TABLE `material` (
   `price` decimal(10,2) NOT NULL,
   `supplier_id` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `materials_ibfk_1` (`supplier_id`)
+  KEY `materials_ibfk_1` (`supplier_id`),
+  CONSTRAINT `supplier` FOREIGN KEY (`supplier_id`) REFERENCES `supplier` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -38,6 +39,7 @@ CREATE TABLE `material` (
 
 LOCK TABLES `material` WRITE;
 /*!40000 ALTER TABLE `material` DISABLE KEYS */;
+INSERT INTO `material` VALUES (1,'đường mía',100.00,1),(2,'Trà',50.00,2);
 /*!40000 ALTER TABLE `material` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-08-05 22:41:21
+-- Dump completed on 2024-08-06 17:10:21

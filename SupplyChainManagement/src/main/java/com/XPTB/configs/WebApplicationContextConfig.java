@@ -25,10 +25,11 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableWebMvc
 @EnableTransactionManagement
 @ComponentScan(basePackages = {
-    "com.XPTB.controllers"
-
+    "com.XPTB.controller",
+    "com.XPTB.repository",
+    "com.XPTB.service"
 })
-public class SupplyChainWebContextConfigs implements WebMvcConfigurer {
+public class WebApplicationContextConfig implements WebMvcConfigurer {
 
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
@@ -38,7 +39,7 @@ public class SupplyChainWebContextConfigs implements WebMvcConfigurer {
     @Bean
     public InternalResourceViewResolver internalResourceViewResolver() {
         InternalResourceViewResolver r = new InternalResourceViewResolver();
-        r.setPrefix("/WEB-INF/pages/");
+        r.setPrefix("/WEB-INF/tiles.xml");
         r.setSuffix(".jsp");
         r.setViewClass(JstlView.class);
 

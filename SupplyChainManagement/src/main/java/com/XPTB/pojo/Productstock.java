@@ -5,7 +5,7 @@
 package com.XPTB.pojo;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -29,32 +31,49 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Productstock.findAll", query = "SELECT p FROM Productstock p"),
     @NamedQuery(name = "Productstock.findById", query = "SELECT p FROM Productstock p WHERE p.id = :id"),
     @NamedQuery(name = "Productstock.findByQuantity", query = "SELECT p FROM Productstock p WHERE p.quantity = :quantity"),
-    @NamedQuery(name = "Productstock.findByTotalProductValue", query = "SELECT p FROM Productstock p WHERE p.totalProductValue = :totalProductValue")})
+    @NamedQuery(name = "Productstock.findByDate", query = "SELECT p FROM Productstock p WHERE p.date = :date"),
+    @NamedQuery(name = "Productstock.findByDateExpire", query = "SELECT p FROM Productstock p WHERE p.dateExpire = :dateExpire")})
 public class Productstock implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ID")
+    @Column(name = "id")
     private Integer id;
-    @Column(name = "Quantity")
-    private Integer quantity;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "TotalProductValue")
-    private BigDecimal totalProductValue;
-    @JoinColumn(name = "InventoryID", referencedColumnName = "ID")
-    @ManyToOne
-    private Inventory inventoryID;
-    @JoinColumn(name = "ProductID", referencedColumnName = "id")
-    @ManyToOne
-    private Products productID;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "quantity")
+    private int quantity;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "date")
+    @Temporal(TemporalType.DATE)
+    private Date date;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "date_expire")
+    @Temporal(TemporalType.DATE)
+    private Date dateExpire;
+    @JoinColumn(name = "inventory_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Inventory inventoryId;
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Product productId;
 
     public Productstock() {
     }
 
     public Productstock(Integer id) {
         this.id = id;
+    }
+
+    public Productstock(Integer id, int quantity, Date date, Date dateExpire) {
+        this.id = id;
+        this.quantity = quantity;
+        this.date = date;
+        this.dateExpire = dateExpire;
     }
 
     public Integer getId() {
@@ -65,36 +84,44 @@ public class Productstock implements Serializable {
         this.id = id;
     }
 
-    public Integer getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
-    public BigDecimal getTotalProductValue() {
-        return totalProductValue;
+    public Date getDate() {
+        return date;
     }
 
-    public void setTotalProductValue(BigDecimal totalProductValue) {
-        this.totalProductValue = totalProductValue;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    public Inventory getInventoryID() {
-        return inventoryID;
+    public Date getDateExpire() {
+        return dateExpire;
     }
 
-    public void setInventoryID(Inventory inventoryID) {
-        this.inventoryID = inventoryID;
+    public void setDateExpire(Date dateExpire) {
+        this.dateExpire = dateExpire;
     }
 
-    public Products getProductID() {
-        return productID;
+    public Inventory getInventoryId() {
+        return inventoryId;
     }
 
-    public void setProductID(Products productID) {
-        this.productID = productID;
+    public void setInventoryId(Inventory inventoryId) {
+        this.inventoryId = inventoryId;
+    }
+
+    public Product getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Product productId) {
+        this.productId = productId;
     }
 
     @Override

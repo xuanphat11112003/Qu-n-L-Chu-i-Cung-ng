@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: qlccudb
 -- ------------------------------------------------------
--- Server version	8.0.31
+-- Server version	8.0.36
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -32,7 +32,7 @@ CREATE TABLE `user` (
   `name` varchar(45) NOT NULL,
   `adress` varchar(45) NOT NULL,
   `phone` varchar(45) NOT NULL,
-  `avartar` varchar(255) NOT NULL,
+  `avartar` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -43,6 +43,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'admin','$2a$10$5X9k5N1sTc1/CjVH5XJoje3QMYijH3ETpgkox00R0MdPaJPPrf7wO','ROLE_ADMIN','2024-08-06','admin@gmail.com','Xuan Phat','123','12345678',NULL),(2,'admin1','$2a$10$5X9k5N1sTc1/CjVH5XJoje3QMYijH3ETpgkox00R0MdPaJPPrf7wO','ROLE_ADMIN','2024-08-06','admin1@gmail.com','Thai Binh','123','12345678',NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-08-05 22:41:22
+-- Dump completed on 2024-08-06 17:10:21

@@ -44,32 +44,51 @@ public class Transport implements Serializable {
     @NotNull
     @Column(name = "id")
     private Integer id;
-    @Column(name = "Price")
-    private Integer price;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "price")
+    private int price;
+    @Basic(optional = false)
+    @NotNull
     @Lob
-    @Size(max = 65535)
-    @Column(name = "FeedBack")
+    @Size(min = 1, max = 65535)
+    @Column(name = "feed_back")
     private String feedBack;
-    @Column(name = "Evaluate")
-    private Integer evaluate;
-    @Column(name = "DeliveryDate")
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "evaluate")
+    private int evaluate;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "delivery_date")
     @Temporal(TemporalType.DATE)
     private Date deliveryDate;
-    @Column(name = "ShipmentDate")
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "shipment_date")
     @Temporal(TemporalType.DATE)
     private Date shipmentDate;
-    @JoinColumn(name = "OrderID", referencedColumnName = "id")
-    @ManyToOne
-    private Exportorders orderID;
-    @JoinColumn(name = "TransportCompanyID", referencedColumnName = "id")
-    @ManyToOne
-    private Transportcompanies transportCompanyID;
+    @JoinColumn(name = "export_order_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Exportorder exportOrderId;
+    @JoinColumn(name = "transport_company_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Transportcompany transportCompanyId;
 
     public Transport() {
     }
 
     public Transport(Integer id) {
         this.id = id;
+    }
+
+    public Transport(Integer id, int price, String feedBack, int evaluate, Date deliveryDate, Date shipmentDate) {
+        this.id = id;
+        this.price = price;
+        this.feedBack = feedBack;
+        this.evaluate = evaluate;
+        this.deliveryDate = deliveryDate;
+        this.shipmentDate = shipmentDate;
     }
 
     public Integer getId() {
@@ -80,11 +99,11 @@ public class Transport implements Serializable {
         this.id = id;
     }
 
-    public Integer getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -96,11 +115,11 @@ public class Transport implements Serializable {
         this.feedBack = feedBack;
     }
 
-    public Integer getEvaluate() {
+    public int getEvaluate() {
         return evaluate;
     }
 
-    public void setEvaluate(Integer evaluate) {
+    public void setEvaluate(int evaluate) {
         this.evaluate = evaluate;
     }
 
@@ -120,20 +139,20 @@ public class Transport implements Serializable {
         this.shipmentDate = shipmentDate;
     }
 
-    public Exportorders getOrderID() {
-        return orderID;
+    public Exportorder getExportOrderId() {
+        return exportOrderId;
     }
 
-    public void setOrderID(Exportorders orderID) {
-        this.orderID = orderID;
+    public void setExportOrderId(Exportorder exportOrderId) {
+        this.exportOrderId = exportOrderId;
     }
 
-    public Transportcompanies getTransportCompanyID() {
-        return transportCompanyID;
+    public Transportcompany getTransportCompanyId() {
+        return transportCompanyId;
     }
 
-    public void setTransportCompanyID(Transportcompanies transportCompanyID) {
-        this.transportCompanyID = transportCompanyID;
+    public void setTransportCompanyId(Transportcompany transportCompanyId) {
+        this.transportCompanyId = transportCompanyId;
     }
 
     @Override
