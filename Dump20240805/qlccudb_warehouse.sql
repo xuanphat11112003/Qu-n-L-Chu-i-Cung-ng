@@ -16,28 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `importordercosts`
+-- Table structure for table `warehouse`
 --
 
-DROP TABLE IF EXISTS `importordercosts`;
+DROP TABLE IF EXISTS `warehouse`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `importordercosts` (
-  `ID` int NOT NULL,
-  `CostType` varchar(50) DEFAULT NULL,
-  `CostAmount` decimal(10,2) DEFAULT NULL,
-  `CostDate` date DEFAULT NULL,
-  PRIMARY KEY (`ID`)
+CREATE TABLE `warehouse` (
+  `id` int NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `address` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `importordercosts`
+-- Dumping data for table `warehouse`
 --
 
-LOCK TABLES `importordercosts` WRITE;
-/*!40000 ALTER TABLE `importordercosts` DISABLE KEYS */;
-/*!40000 ALTER TABLE `importordercosts` ENABLE KEYS */;
+LOCK TABLES `warehouse` WRITE;
+/*!40000 ALTER TABLE `warehouse` DISABLE KEYS */;
+/*!40000 ALTER TABLE `warehouse` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -49,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-29 16:31:21
+-- Dump completed on 2024-08-06 17:10:19

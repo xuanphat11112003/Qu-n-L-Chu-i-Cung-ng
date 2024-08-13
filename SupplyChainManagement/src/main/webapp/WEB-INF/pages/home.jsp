@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<<<<<<< HEAD
 <style>
     .card {
       margin: 15px; /* Khoảng cách giữa các thẻ card */
@@ -95,4 +96,11 @@
         </div>
 
     </div>
+=======
+<h1 class="text-center text-danger">hello</h1>
+<div>
+
+    <h1>hello ${material.name} </h1>
+
+>>>>>>> 73f473402519512d283afc13ec32a081b94a2390
 </div>

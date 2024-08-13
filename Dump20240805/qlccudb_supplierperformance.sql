@@ -16,33 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `detailimportorder`
+-- Table structure for table `supplierperformance`
 --
 
-DROP TABLE IF EXISTS `detailimportorder`;
+DROP TABLE IF EXISTS `supplierperformance`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `detailimportorder` (
-  `ID` int NOT NULL,
-  `Quantity` int DEFAULT NULL,
-  `TotalAmount` decimal(10,2) DEFAULT NULL,
-  `MaterialID` int DEFAULT NULL,
-  `ImportOrderID` int DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `MaterialID` (`MaterialID`),
-  KEY `ImportOrderID` (`ImportOrderID`),
-  CONSTRAINT `detailimportorder_ibfk_1` FOREIGN KEY (`MaterialID`) REFERENCES `materials` (`ID`),
-  CONSTRAINT `detailimportorder_ibfk_2` FOREIGN KEY (`ImportOrderID`) REFERENCES `importorders` (`ID`)
+CREATE TABLE `supplierperformance` (
+  `id` int NOT NULL,
+  `supplier_id` int NOT NULL,
+  `evaluation_date` date NOT NULL,
+  `delivery_rating` int NOT NULL,
+  `quality_rating` int NOT NULL,
+  `price_rating` int NOT NULL,
+  `comment` text,
+  PRIMARY KEY (`id`),
+  KEY `supplierperformance_ibfk_1` (`supplier_id`),
+  CONSTRAINT `supplierperformance_ibfk_1` FOREIGN KEY (`supplier_id`) REFERENCES `supplier` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `detailimportorder`
+-- Dumping data for table `supplierperformance`
 --
 
-LOCK TABLES `detailimportorder` WRITE;
-/*!40000 ALTER TABLE `detailimportorder` DISABLE KEYS */;
-/*!40000 ALTER TABLE `detailimportorder` ENABLE KEYS */;
+LOCK TABLES `supplierperformance` WRITE;
+/*!40000 ALTER TABLE `supplierperformance` DISABLE KEYS */;
+/*!40000 ALTER TABLE `supplierperformance` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-29 16:31:21
+-- Dump completed on 2024-08-06 17:10:22

@@ -16,28 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `transportcompanies`
+-- Table structure for table `payment`
 --
 
-DROP TABLE IF EXISTS `transportcompanies`;
+DROP TABLE IF EXISTS `payment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `transportcompanies` (
+CREATE TABLE `payment` (
   `id` int NOT NULL,
-  `TransportCompanyName` varchar(100) DEFAULT NULL,
-  `Information` varchar(500) DEFAULT NULL,
-  `TermsOfCooperation` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `import_order_id` int NOT NULL,
+  `payment_amount` decimal(10,2) NOT NULL,
+  `payment_date` date NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `payments_ibfk_1` (`import_order_id`),
+  CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`import_order_id`) REFERENCES `importorder` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `transportcompanies`
+-- Dumping data for table `payment`
 --
 
-LOCK TABLES `transportcompanies` WRITE;
-/*!40000 ALTER TABLE `transportcompanies` DISABLE KEYS */;
-/*!40000 ALTER TABLE `transportcompanies` ENABLE KEYS */;
+LOCK TABLES `payment` WRITE;
+/*!40000 ALTER TABLE `payment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `payment` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -49,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-29 16:31:21
+-- Dump completed on 2024-08-06 17:10:21

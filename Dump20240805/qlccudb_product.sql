@@ -16,31 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `payments`
+-- Table structure for table `product`
 --
 
-DROP TABLE IF EXISTS `payments`;
+DROP TABLE IF EXISTS `product`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `payments` (
-  `ID` int NOT NULL,
-  `ImportOrderID` int DEFAULT NULL,
-  `PaymentAmount` decimal(10,2) DEFAULT NULL,
-  `PaymentDate` date DEFAULT NULL,
-  `PaymentMethod` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `ImportOrderID` (`ImportOrderID`),
-  CONSTRAINT `payments_ibfk_1` FOREIGN KEY (`ImportOrderID`) REFERENCES `importorders` (`ID`)
+CREATE TABLE `product` (
+  `id` int NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `detail` varchar(200) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `payments`
+-- Dumping data for table `product`
 --
 
-LOCK TABLES `payments` WRITE;
-/*!40000 ALTER TABLE `payments` DISABLE KEYS */;
-/*!40000 ALTER TABLE `payments` ENABLE KEYS */;
+LOCK TABLES `product` WRITE;
+/*!40000 ALTER TABLE `product` DISABLE KEYS */;
+/*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-29 16:31:22
+-- Dump completed on 2024-08-06 17:10:21

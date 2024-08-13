@@ -16,35 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `detailexportorder`
+-- Table structure for table `materialstock`
 --
 
-DROP TABLE IF EXISTS `detailexportorder`;
+DROP TABLE IF EXISTS `materialstock`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `detailexportorder` (
+CREATE TABLE `materialstock` (
   `id` int NOT NULL,
-  `amount` int DEFAULT NULL,
-  `price` decimal(10,2) DEFAULT NULL,
-  `Discount` decimal(10,2) DEFAULT NULL,
-  `TotalPrice` decimal(10,2) DEFAULT NULL,
-  `ExportOrderID` int DEFAULT NULL,
-  `ProductID` int DEFAULT NULL,
+  `amount` int NOT NULL,
+  `product_id` int NOT NULL,
+  `material_id` int NOT NULL,
+  `date_expire` date NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `ExportOrderID` (`ExportOrderID`),
-  KEY `ProductID` (`ProductID`),
-  CONSTRAINT `detailexportorder_ibfk_1` FOREIGN KEY (`ExportOrderID`) REFERENCES `exportorders` (`id`),
-  CONSTRAINT `detailexportorder_ibfk_2` FOREIGN KEY (`ProductID`) REFERENCES `products` (`id`)
+  KEY `materialsstock_ibfk_1` (`product_id`),
+  KEY `materialsstock_ibfk_2` (`material_id`),
+  CONSTRAINT `materialstock_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `inventory` (`id`),
+  CONSTRAINT `materialstock_ibfk_2` FOREIGN KEY (`material_id`) REFERENCES `material` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `detailexportorder`
+-- Dumping data for table `materialstock`
 --
 
-LOCK TABLES `detailexportorder` WRITE;
-/*!40000 ALTER TABLE `detailexportorder` DISABLE KEYS */;
-/*!40000 ALTER TABLE `detailexportorder` ENABLE KEYS */;
+LOCK TABLES `materialstock` WRITE;
+/*!40000 ALTER TABLE `materialstock` DISABLE KEYS */;
+/*!40000 ALTER TABLE `materialstock` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -56,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-29 16:31:19
+-- Dump completed on 2024-08-06 17:10:22

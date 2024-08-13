@@ -24,11 +24,14 @@ public class MaterialServiceImpl implements MaterialService{
     public List<Material> getMaterials() {
         return this.maRepo.getMaterials();
     }
+<<<<<<< HEAD
 
     @Override
     public Material getMaterialById(int id) {
         return this.maRepo.getMaterialById(id);
     }
+=======
+>>>>>>> 73f473402519512d283afc13ec32a081b94a2390
     
     
 }

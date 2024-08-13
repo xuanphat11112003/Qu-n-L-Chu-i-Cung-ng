@@ -16,27 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `importorders`
+-- Table structure for table `manufacture`
 --
 
-DROP TABLE IF EXISTS `importorders`;
+DROP TABLE IF EXISTS `manufacture`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `importorders` (
-  `ID` int NOT NULL,
-  `ExpectDate` date DEFAULT NULL,
-  `DeliveryDate` date DEFAULT NULL,
-  PRIMARY KEY (`ID`)
+CREATE TABLE `manufacture` (
+  `id` int NOT NULL,
+  `amount` int NOT NULL,
+  `product_id` int NOT NULL,
+  `material_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `productid_idx` (`product_id`),
+  KEY `materialid_idx` (`material_id`),
+  CONSTRAINT `materialid` FOREIGN KEY (`material_id`) REFERENCES `material` (`id`),
+  CONSTRAINT `productid` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `importorders`
+-- Dumping data for table `manufacture`
 --
 
-LOCK TABLES `importorders` WRITE;
-/*!40000 ALTER TABLE `importorders` DISABLE KEYS */;
-/*!40000 ALTER TABLE `importorders` ENABLE KEYS */;
+LOCK TABLES `manufacture` WRITE;
+/*!40000 ALTER TABLE `manufacture` DISABLE KEYS */;
+/*!40000 ALTER TABLE `manufacture` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -48,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-29 16:31:21
+-- Dump completed on 2024-08-06 17:10:21

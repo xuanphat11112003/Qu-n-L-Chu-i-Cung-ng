@@ -16,29 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `customers`
+-- Table structure for table `exportorder`
 --
 
-DROP TABLE IF EXISTS `customers`;
+DROP TABLE IF EXISTS `exportorder`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `customers` (
+CREATE TABLE `exportorder` (
   `id` int NOT NULL,
-  `Name` varchar(100) DEFAULT NULL,
-  `Email` varchar(100) DEFAULT NULL,
-  `PhoneNumber` varchar(20) DEFAULT NULL,
-  `Address` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `create_date` datetime NOT NULL,
+  `state` varchar(25) NOT NULL,
+  `total_amount` decimal(10,2) NOT NULL,
+  `agency_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `CustomerID_idx` (`agency_id`),
+  CONSTRAINT `agency_id` FOREIGN KEY (`agency_id`) REFERENCES `agency` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `customers`
+-- Dumping data for table `exportorder`
 --
 
-LOCK TABLES `customers` WRITE;
-/*!40000 ALTER TABLE `customers` DISABLE KEYS */;
-/*!40000 ALTER TABLE `customers` ENABLE KEYS */;
+LOCK TABLES `exportorder` WRITE;
+/*!40000 ALTER TABLE `exportorder` DISABLE KEYS */;
+/*!40000 ALTER TABLE `exportorder` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-29 16:31:20
+-- Dump completed on 2024-08-06 17:10:20

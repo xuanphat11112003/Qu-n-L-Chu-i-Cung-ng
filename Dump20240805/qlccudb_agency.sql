@@ -16,33 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `productstock`
+-- Table structure for table `agency`
 --
 
-DROP TABLE IF EXISTS `productstock`;
+DROP TABLE IF EXISTS `agency`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `productstock` (
-  `ID` int NOT NULL,
-  `ProductID` int DEFAULT NULL,
-  `InventoryID` int DEFAULT NULL,
-  `Quantity` int DEFAULT NULL,
-  `TotalProductValue` decimal(10,2) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `ProductID` (`ProductID`),
-  KEY `InventoryID` (`InventoryID`),
-  CONSTRAINT `productstock_ibfk_1` FOREIGN KEY (`ProductID`) REFERENCES `products` (`id`),
-  CONSTRAINT `productstock_ibfk_2` FOREIGN KEY (`InventoryID`) REFERENCES `inventory` (`ID`)
+CREATE TABLE `agency` (
+  `user_id` int NOT NULL,
+  `type` varchar(45) NOT NULL,
+  PRIMARY KEY (`user_id`),
+  CONSTRAINT `userid` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `productstock`
+-- Dumping data for table `agency`
 --
 
-LOCK TABLES `productstock` WRITE;
-/*!40000 ALTER TABLE `productstock` DISABLE KEYS */;
-/*!40000 ALTER TABLE `productstock` ENABLE KEYS */;
+LOCK TABLES `agency` WRITE;
+/*!40000 ALTER TABLE `agency` DISABLE KEYS */;
+/*!40000 ALTER TABLE `agency` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-29 16:31:20
+-- Dump completed on 2024-08-06 17:10:19

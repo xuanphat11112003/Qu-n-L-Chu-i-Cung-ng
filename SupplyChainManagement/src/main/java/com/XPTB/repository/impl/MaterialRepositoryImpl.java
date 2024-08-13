@@ -33,10 +33,13 @@ public class MaterialRepositoryImpl implements MaterialRepository {
         return q.getResultList();
     }
 
+<<<<<<< HEAD
     @Override
     public Material getMaterialById(int id) {
         Session  s = this.factory.getObject().getCurrentSession();
         return s.get(Material.class,id);
     }
 
+=======
+>>>>>>> 73f473402519512d283afc13ec32a081b94a2390
 }

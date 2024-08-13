@@ -16,36 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `transport`
+-- Table structure for table `materialprice`
 --
 
-DROP TABLE IF EXISTS `transport`;
+DROP TABLE IF EXISTS `materialprice`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `transport` (
+CREATE TABLE `materialprice` (
   `id` int NOT NULL,
-  `TransportCompanyID` int DEFAULT NULL,
-  `OrderID` int DEFAULT NULL,
-  `Price` int DEFAULT NULL,
-  `FeedBack` text,
-  `Evaluate` int DEFAULT NULL,
-  `DeliveryDate` date DEFAULT NULL,
-  `ShipmentDate` date DEFAULT NULL,
+  `material_id` int NOT NULL,
+  `unit_price` decimal(10,2) NOT NULL,
+  `change_date` date NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `TransportCompanyID` (`TransportCompanyID`),
-  KEY `OrderID` (`OrderID`),
-  CONSTRAINT `transport_ibfk_1` FOREIGN KEY (`TransportCompanyID`) REFERENCES `transportcompanies` (`id`),
-  CONSTRAINT `transport_ibfk_2` FOREIGN KEY (`OrderID`) REFERENCES `exportorders` (`id`)
+  KEY `materialprice_ibfk_1` (`material_id`),
+  CONSTRAINT `materialprice_ibfk_1` FOREIGN KEY (`material_id`) REFERENCES `material` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `transport`
+-- Dumping data for table `materialprice`
 --
 
-LOCK TABLES `transport` WRITE;
-/*!40000 ALTER TABLE `transport` DISABLE KEYS */;
-/*!40000 ALTER TABLE `transport` ENABLE KEYS */;
+LOCK TABLES `materialprice` WRITE;
+/*!40000 ALTER TABLE `materialprice` DISABLE KEYS */;
+/*!40000 ALTER TABLE `materialprice` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -57,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-29 16:31:22
+-- Dump completed on 2024-08-06 17:10:20

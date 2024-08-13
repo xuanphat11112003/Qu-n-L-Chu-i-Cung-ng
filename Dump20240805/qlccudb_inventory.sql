@@ -23,13 +23,13 @@ DROP TABLE IF EXISTS `inventory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `inventory` (
-  `ID` int NOT NULL,
-  `EntryDate` date DEFAULT NULL,
-  `ExitDate` date DEFAULT NULL,
-  `StockID` int DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `StockID` (`StockID`),
-  CONSTRAINT `inventory_ibfk_1` FOREIGN KEY (`StockID`) REFERENCES `warehouse` (`ID`)
+  `id` int NOT NULL,
+  `entry_date` date DEFAULT NULL,
+  `exit_date` date DEFAULT NULL,
+  `warehouse_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `StockID` (`warehouse_id`),
+  CONSTRAINT `inventory_ibfk_1` FOREIGN KEY (`warehouse_id`) REFERENCES `warehouse` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-29 16:31:21
+-- Dump completed on 2024-08-06 17:10:19

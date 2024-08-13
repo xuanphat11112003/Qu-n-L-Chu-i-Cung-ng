@@ -16,33 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `supportcustomer`
+-- Table structure for table `importorder`
 --
 
-DROP TABLE IF EXISTS `supportcustomer`;
+DROP TABLE IF EXISTS `importorder`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `supportcustomer` (
+CREATE TABLE `importorder` (
   `id` int NOT NULL,
-  `problem` varchar(100) DEFAULT NULL,
-  `supportstate` varchar(20) DEFAULT NULL,
-  `CustomerID` int DEFAULT NULL,
-  `ExportOrderID` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `CustomerID` (`CustomerID`),
-  KEY `ExportOrderID` (`ExportOrderID`),
-  CONSTRAINT `supportcustomer_ibfk_1` FOREIGN KEY (`CustomerID`) REFERENCES `customers` (`id`),
-  CONSTRAINT `supportcustomer_ibfk_2` FOREIGN KEY (`ExportOrderID`) REFERENCES `exportorders` (`id`)
+  `expect_date` date NOT NULL,
+  `delivery_date` date DEFAULT NULL,
+  `total_price` decimal(10,2) NOT NULL,
+  `total_cost` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `supportcustomer`
+-- Dumping data for table `importorder`
 --
 
-LOCK TABLES `supportcustomer` WRITE;
-/*!40000 ALTER TABLE `supportcustomer` DISABLE KEYS */;
-/*!40000 ALTER TABLE `supportcustomer` ENABLE KEYS */;
+LOCK TABLES `importorder` WRITE;
+/*!40000 ALTER TABLE `importorder` DISABLE KEYS */;
+/*!40000 ALTER TABLE `importorder` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-29 16:31:20
+-- Dump completed on 2024-08-06 17:10:19

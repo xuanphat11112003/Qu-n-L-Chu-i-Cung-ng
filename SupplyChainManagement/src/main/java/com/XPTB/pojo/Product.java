@@ -11,15 +11,21 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+<<<<<<< HEAD
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+=======
+>>>>>>> 73f473402519512d283afc13ec32a081b94a2390
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+<<<<<<< HEAD
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+=======
+>>>>>>> 73f473402519512d283afc13ec32a081b94a2390
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -43,21 +49,34 @@ public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
+<<<<<<< HEAD
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+=======
+    @NotNull
+>>>>>>> 73f473402519512d283afc13ec32a081b94a2390
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
     @NotNull
+<<<<<<< HEAD
     @Size(min=4, max=50,message="{product.name.sizeMsg}")
+=======
+    @Size(min = 1, max = 100)
+>>>>>>> 73f473402519512d283afc13ec32a081b94a2390
     @Column(name = "name")
     private String name;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
+<<<<<<< HEAD
     
     @Column(name = "price")
     @NotNull(message="{product.price.notNullMsg}")
     @Min(value = 10000, message = "{product.price.minMsg}")
     @Max(value = 10000000, message = "{product.price.maxMsg}")
+=======
+    @NotNull
+    @Column(name = "price")
+>>>>>>> 73f473402519512d283afc13ec32a081b94a2390
     private BigDecimal price;
     @Basic(optional = false)
     @NotNull
@@ -168,5 +187,9 @@ public class Product implements Serializable {
     public String toString() {
         return "com.XPTB.pojo.Product[ id=" + id + " ]";
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 73f473402519512d283afc13ec32a081b94a2390
 }

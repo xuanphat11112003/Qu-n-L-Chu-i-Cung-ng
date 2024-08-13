@@ -16,32 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `detailsimportordercost`
+-- Table structure for table `supplier`
 --
 
-DROP TABLE IF EXISTS `detailsimportordercost`;
+DROP TABLE IF EXISTS `supplier`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `detailsimportordercost` (
-  `ID` int NOT NULL,
-  `ImportOrderID` int DEFAULT NULL,
-  `CostID` int DEFAULT NULL,
-  `CostAmount` decimal(10,2) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `ImportOrderID` (`ImportOrderID`),
-  KEY `CostID` (`CostID`),
-  CONSTRAINT `detailsimportordercost_ibfk_1` FOREIGN KEY (`ImportOrderID`) REFERENCES `importorders` (`ID`),
-  CONSTRAINT `detailsimportordercost_ibfk_2` FOREIGN KEY (`CostID`) REFERENCES `importordercosts` (`ID`)
+CREATE TABLE `supplier` (
+  `id` int NOT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `address` varchar(100) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `feedback` text,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `detailsimportordercost`
+-- Dumping data for table `supplier`
 --
 
-LOCK TABLES `detailsimportordercost` WRITE;
-/*!40000 ALTER TABLE `detailsimportordercost` DISABLE KEYS */;
-/*!40000 ALTER TABLE `detailsimportordercost` ENABLE KEYS */;
+LOCK TABLES `supplier` WRITE;
+/*!40000 ALTER TABLE `supplier` DISABLE KEYS */;
+INSERT INTO `supplier` VALUES (1,'Đường Hoàng Phát','1545 Lê Văn Luong Nhà Bè','12345678',NULL),(2,'Trà Quý Thành','Quận 10','12345678',NULL);
+/*!40000 ALTER TABLE `supplier` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -53,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-29 16:31:22
+-- Dump completed on 2024-08-06 17:10:20

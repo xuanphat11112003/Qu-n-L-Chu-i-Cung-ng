@@ -17,6 +17,7 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content"
                        value="/WEB-INF/pages/home.jsp" />
     </definition>
+<<<<<<< HEAD
     <definition name="product" extends="baseLayout">
         <put-attribute name="title" value="Sản Phẩm" />
         <put-attribute name="content"
@@ -32,5 +33,7 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content"
                        value="/WEB-INF/pages/order.jsp" />
     </definition>
+=======
+>>>>>>> 73f473402519512d283afc13ec32a081b94a2390
     
 </tiles-definitions>

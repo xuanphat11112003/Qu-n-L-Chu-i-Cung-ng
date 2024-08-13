@@ -16,30 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `suppliers`
+-- Table structure for table `detailsimportordercost`
 --
 
-DROP TABLE IF EXISTS `suppliers`;
+DROP TABLE IF EXISTS `detailsimportordercost`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `suppliers` (
+CREATE TABLE `detailsimportordercost` (
   `id` int NOT NULL,
-  `Name` varchar(100) DEFAULT NULL,
-  `Address` varchar(100) DEFAULT NULL,
-  `PhoneNumber` varchar(20) DEFAULT NULL,
-  `FeedBack` text,
-  `Evaluate` int DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `import_order_id` int NOT NULL,
+  `cost_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `detailsimportordercost_ibfk_1` (`import_order_id`),
+  KEY `detailsimportordercost_ibfk_2` (`cost_id`),
+  CONSTRAINT `detailsimportordercost_ibfk_1` FOREIGN KEY (`import_order_id`) REFERENCES `importorder` (`id`),
+  CONSTRAINT `detailsimportordercost_ibfk_2` FOREIGN KEY (`cost_id`) REFERENCES `importordercost` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `suppliers`
+-- Dumping data for table `detailsimportordercost`
 --
 
-LOCK TABLES `suppliers` WRITE;
-/*!40000 ALTER TABLE `suppliers` DISABLE KEYS */;
-/*!40000 ALTER TABLE `suppliers` ENABLE KEYS */;
+LOCK TABLES `detailsimportordercost` WRITE;
+/*!40000 ALTER TABLE `detailsimportordercost` DISABLE KEYS */;
+/*!40000 ALTER TABLE `detailsimportordercost` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-29 16:31:21
+-- Dump completed on 2024-08-06 17:10:21

@@ -16,28 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `exportorders`
+-- Table structure for table `detailimportorder`
 --
 
-DROP TABLE IF EXISTS `exportorders`;
+DROP TABLE IF EXISTS `detailimportorder`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `exportorders` (
+CREATE TABLE `detailimportorder` (
   `id` int NOT NULL,
-  `CreateDate` datetime DEFAULT NULL,
-  `State` varchar(25) DEFAULT NULL,
-  `TotalAmount` decimal(10,2) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `quantity` int NOT NULL,
+  `total_amount` decimal(10,2) DEFAULT NULL,
+  `material_id` int NOT NULL,
+  `import_order_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `detailimportorder_ibfk_1` (`material_id`),
+  KEY `detailimportorder_ibfk_2` (`import_order_id`),
+  CONSTRAINT `detailimportorder_ibfk_1` FOREIGN KEY (`material_id`) REFERENCES `material` (`id`),
+  CONSTRAINT `detailimportorder_ibfk_2` FOREIGN KEY (`import_order_id`) REFERENCES `importorder` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `exportorders`
+-- Dumping data for table `detailimportorder`
 --
 
-LOCK TABLES `exportorders` WRITE;
-/*!40000 ALTER TABLE `exportorders` DISABLE KEYS */;
-/*!40000 ALTER TABLE `exportorders` ENABLE KEYS */;
+LOCK TABLES `detailimportorder` WRITE;
+/*!40000 ALTER TABLE `detailimportorder` DISABLE KEYS */;
+/*!40000 ALTER TABLE `detailimportorder` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -49,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-29 16:31:22
+-- Dump completed on 2024-08-06 17:10:20

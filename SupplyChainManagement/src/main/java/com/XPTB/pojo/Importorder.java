@@ -39,11 +39,14 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Importorder.findByTotalCost", query = "SELECT i FROM Importorder i WHERE i.totalCost = :totalCost")})
 public class Importorder implements Serializable {
 
+<<<<<<< HEAD
     @Basic(optional = false)
     @NotNull
     @Column(name = "active")
     private boolean active;
 
+=======
+>>>>>>> 73f473402519512d283afc13ec32a081b94a2390
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -67,7 +70,10 @@ public class Importorder implements Serializable {
     @NotNull
     @Column(name = "total_cost")
     private BigDecimal totalCost;
+<<<<<<< HEAD
     
+=======
+>>>>>>> 73f473402519512d283afc13ec32a081b94a2390
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "importOrderId")
     private Collection<Detailsimportordercost> detailsimportordercostCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "importOrderId")
@@ -180,6 +186,7 @@ public class Importorder implements Serializable {
     public String toString() {
         return "com.XPTB.pojo.Importorder[ id=" + id + " ]";
     }
+<<<<<<< HEAD
 
     public boolean getActive() {
         return active;
@@ -188,5 +195,7 @@ public class Importorder implements Serializable {
     public void setActive(boolean active) {
         this.active = active;
     }
+=======
+>>>>>>> 73f473402519512d283afc13ec32a081b94a2390
     
 }

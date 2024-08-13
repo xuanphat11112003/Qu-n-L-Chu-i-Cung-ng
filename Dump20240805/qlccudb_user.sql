@@ -16,33 +16,35 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `supplierperformance`
+-- Table structure for table `user`
 --
 
-DROP TABLE IF EXISTS `supplierperformance`;
+DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `supplierperformance` (
-  `ID` int NOT NULL,
-  `SupplierID` int DEFAULT NULL,
-  `EvaluationDate` date DEFAULT NULL,
-  `DeliveryTimelinessRating` int DEFAULT NULL,
-  `QualityRating` int DEFAULT NULL,
-  `CustomerServiceRating` int DEFAULT NULL,
-  `Comments` text,
-  PRIMARY KEY (`ID`),
-  KEY `SupplierID` (`SupplierID`),
-  CONSTRAINT `supplierperformance_ibfk_1` FOREIGN KEY (`SupplierID`) REFERENCES `suppliers` (`id`)
+CREATE TABLE `user` (
+  `id` int NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(250) NOT NULL,
+  `user_role` varchar(15) NOT NULL,
+  `create_date` date NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `adress` varchar(45) NOT NULL,
+  `phone` varchar(45) NOT NULL,
+  `avartar` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `supplierperformance`
+-- Dumping data for table `user`
 --
 
-LOCK TABLES `supplierperformance` WRITE;
-/*!40000 ALTER TABLE `supplierperformance` DISABLE KEYS */;
-/*!40000 ALTER TABLE `supplierperformance` ENABLE KEYS */;
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'admin','$2a$10$5X9k5N1sTc1/CjVH5XJoje3QMYijH3ETpgkox00R0MdPaJPPrf7wO','ROLE_ADMIN','2024-08-06','admin@gmail.com','Xuan Phat','123','12345678',NULL),(2,'admin1','$2a$10$5X9k5N1sTc1/CjVH5XJoje3QMYijH3ETpgkox00R0MdPaJPPrf7wO','ROLE_ADMIN','2024-08-06','admin1@gmail.com','Thai Binh','123','12345678',NULL);
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-29 16:31:20
+-- Dump completed on 2024-08-06 17:10:21
