@@ -40,5 +40,4 @@ public class MaterialRepositoryImpl implements MaterialRepository {
         return s.get(Material.class,id);
     }
 
-
 }

@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface MaterialRepository {
     List<Material> getMaterials();
-
     public Material getMaterialById(int id);
+
 
 }

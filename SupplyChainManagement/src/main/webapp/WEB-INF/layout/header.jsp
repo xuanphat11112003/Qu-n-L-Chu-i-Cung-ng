@@ -2,6 +2,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 
+
+
     <div class="container text-light p-3 mb-3">
         <h1>Chào mừng đến với trang web của chúng tôi!</h1>
     </div>
@@ -24,3 +26,4 @@
         </c:when>
     </c:choose>
 </div>
+

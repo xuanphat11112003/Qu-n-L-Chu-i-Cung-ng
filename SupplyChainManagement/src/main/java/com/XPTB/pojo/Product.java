@@ -44,15 +44,20 @@ public class Product implements Serializable {
     @Id
     @Basic(optional = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
     @NotNull
+
+    @Size(min=4, max=50,message="{product.name.sizeMsg}")
+
     @Size(min=4, max=50,message="{product.name.sizeMsg}")
     @Column(name = "name")
     private String name;
     
     @Basic(optional = false)
+
     @Column(name = "price")
     @NotNull(message="{product.price.notNullMsg}")
     @Min(value = 10000, message = "{product.price.minMsg}")
@@ -168,4 +173,8 @@ public class Product implements Serializable {
         return "com.XPTB.pojo.Product[ id=" + id + " ]";
     }
 
+
 }
+
+    
+

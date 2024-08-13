@@ -33,5 +33,6 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content"
                        value="/WEB-INF/pages/order.jsp" />
     </definition>
+
     
 </tiles-definitions>
