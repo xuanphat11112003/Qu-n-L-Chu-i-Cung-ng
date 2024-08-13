@@ -13,4 +13,7 @@ import java.util.List;
  */
 public interface MaterialService {
     List<Material> getMaterials();
+
+    public Material getMaterialById(int id);
+
 }

@@ -4,16 +4,14 @@
  */
 package com.XPTB.repository;
 
-import com.XPTB.pojo.Material;
+import com.XPTB.pojo.Product;
 import java.util.List;
 
 /**
  *
  * @author ADMIN
  */
-public interface MaterialRepository {
-    List<Material> getMaterials();
-
-    public Material getMaterialById(int id);
-
+public interface ProductRepository {
+    List<Product> getListProducts();
+    void addOrUpdate(Product p);
 }
