@@ -23,6 +23,18 @@
     <class>com.XPTB.pojo.Products</class>
     <class>com.XPTB.pojo.Transportcompanies</class>
     <class>com.XPTB.pojo.Supportcustomer</class>
+    <class>com.XPTB.pojo.Agency</class>
+    <class>com.XPTB.pojo.Manufacture</class>
+    <class>com.XPTB.pojo.Exportorder</class>
+    <class>com.XPTB.pojo.Supplier</class>
+    <class>com.XPTB.pojo.Product</class>
+    <class>com.XPTB.pojo.Importordercost</class>
+    <class>com.XPTB.pojo.Payment</class>
+    <class>com.XPTB.pojo.Material</class>
+    <class>com.XPTB.pojo.Materialstock</class>
+    <class>com.XPTB.pojo.Importorder</class>
+    <class>com.XPTB.pojo.Transportcompany</class>
+    <class>com.XPTB.pojo.User</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/qlccudb?zeroDateTimeBehavior=CONVERT_TO_NULL"/>

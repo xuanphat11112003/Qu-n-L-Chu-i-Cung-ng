@@ -36,25 +36,32 @@ public class Detailimportorder implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ID")
+    @Column(name = "id")
     private Integer id;
-    @Column(name = "Quantity")
-    private Integer quantity;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "quantity")
+    private int quantity;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "TotalAmount")
+    @Column(name = "total_amount")
     private BigDecimal totalAmount;
-    @JoinColumn(name = "ImportOrderID", referencedColumnName = "ID")
-    @ManyToOne
-    private Importorders importOrderID;
-    @JoinColumn(name = "MaterialID", referencedColumnName = "ID")
-    @ManyToOne
-    private Materials materialID;
+    @JoinColumn(name = "import_order_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Importorder importOrderId;
+    @JoinColumn(name = "material_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Material materialId;
 
     public Detailimportorder() {
     }
 
     public Detailimportorder(Integer id) {
         this.id = id;
+    }
+
+    public Detailimportorder(Integer id, int quantity) {
+        this.id = id;
+        this.quantity = quantity;
     }
 
     public Integer getId() {
@@ -65,11 +72,11 @@ public class Detailimportorder implements Serializable {
         this.id = id;
     }
 
-    public Integer getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
@@ -81,20 +88,20 @@ public class Detailimportorder implements Serializable {
         this.totalAmount = totalAmount;
     }
 
-    public Importorders getImportOrderID() {
-        return importOrderID;
+    public Importorder getImportOrderId() {
+        return importOrderId;
     }
 
-    public void setImportOrderID(Importorders importOrderID) {
-        this.importOrderID = importOrderID;
+    public void setImportOrderId(Importorder importOrderId) {
+        this.importOrderId = importOrderId;
     }
 
-    public Materials getMaterialID() {
-        return materialID;
+    public Material getMaterialId() {
+        return materialId;
     }
 
-    public void setMaterialID(Materials materialID) {
-        this.materialID = materialID;
+    public void setMaterialId(Material materialId) {
+        this.materialId = materialId;
     }
 
     @Override

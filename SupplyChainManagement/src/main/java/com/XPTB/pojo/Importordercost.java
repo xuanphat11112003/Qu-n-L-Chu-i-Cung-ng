@@ -6,9 +6,10 @@ package com.XPTB.pojo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.Date;
-import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -28,39 +29,52 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author ADMIN
  */
 @Entity
-@Table(name = "importordercosts")
+@Table(name = "importordercost")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Importordercosts.findAll", query = "SELECT i FROM Importordercosts i"),
-    @NamedQuery(name = "Importordercosts.findById", query = "SELECT i FROM Importordercosts i WHERE i.id = :id"),
-    @NamedQuery(name = "Importordercosts.findByCostType", query = "SELECT i FROM Importordercosts i WHERE i.costType = :costType"),
-    @NamedQuery(name = "Importordercosts.findByCostAmount", query = "SELECT i FROM Importordercosts i WHERE i.costAmount = :costAmount"),
-    @NamedQuery(name = "Importordercosts.findByCostDate", query = "SELECT i FROM Importordercosts i WHERE i.costDate = :costDate")})
-public class Importordercosts implements Serializable {
+    @NamedQuery(name = "Importordercost.findAll", query = "SELECT i FROM Importordercost i"),
+    @NamedQuery(name = "Importordercost.findById", query = "SELECT i FROM Importordercost i WHERE i.id = :id"),
+    @NamedQuery(name = "Importordercost.findByCostType", query = "SELECT i FROM Importordercost i WHERE i.costType = :costType"),
+    @NamedQuery(name = "Importordercost.findByCostAmount", query = "SELECT i FROM Importordercost i WHERE i.costAmount = :costAmount"),
+    @NamedQuery(name = "Importordercost.findByCostDate", query = "SELECT i FROM Importordercost i WHERE i.costDate = :costDate")})
+public class Importordercost implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ID")
+    @Column(name = "id")
     private Integer id;
-    @Size(max = 50)
-    @Column(name = "CostType")
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
+    @Column(name = "cost_type")
     private String costType;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "CostAmount")
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "cost_amount")
     private BigDecimal costAmount;
-    @Column(name = "CostDate")
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "cost_date")
     @Temporal(TemporalType.DATE)
     private Date costDate;
-    @OneToMany(mappedBy = "costID")
-    private Set<Detailsimportordercost> detailsimportordercostSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "costId")
+    private Collection<Detailsimportordercost> detailsimportordercostCollection;
 
-    public Importordercosts() {
+    public Importordercost() {
     }
 
-    public Importordercosts(Integer id) {
+    public Importordercost(Integer id) {
         this.id = id;
+    }
+
+    public Importordercost(Integer id, String costType, BigDecimal costAmount, Date costDate) {
+        this.id = id;
+        this.costType = costType;
+        this.costAmount = costAmount;
+        this.costDate = costDate;
     }
 
     public Integer getId() {
@@ -96,12 +110,12 @@ public class Importordercosts implements Serializable {
     }
 
     @XmlTransient
-    public Set<Detailsimportordercost> getDetailsimportordercostSet() {
-        return detailsimportordercostSet;
+    public Collection<Detailsimportordercost> getDetailsimportordercostCollection() {
+        return detailsimportordercostCollection;
     }
 
-    public void setDetailsimportordercostSet(Set<Detailsimportordercost> detailsimportordercostSet) {
-        this.detailsimportordercostSet = detailsimportordercostSet;
+    public void setDetailsimportordercostCollection(Collection<Detailsimportordercost> detailsimportordercostCollection) {
+        this.detailsimportordercostCollection = detailsimportordercostCollection;
     }
 
     @Override
@@ -114,10 +128,10 @@ public class Importordercosts implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Importordercosts)) {
+        if (!(object instanceof Importordercost)) {
             return false;
         }
-        Importordercosts other = (Importordercosts) object;
+        Importordercost other = (Importordercost) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -126,7 +140,7 @@ public class Importordercosts implements Serializable {
 
     @Override
     public String toString() {
-        return "com.XPTB.pojo.Importordercosts[ id=" + id + " ]";
+        return "com.XPTB.pojo.Importordercost[ id=" + id + " ]";
     }
     
 }

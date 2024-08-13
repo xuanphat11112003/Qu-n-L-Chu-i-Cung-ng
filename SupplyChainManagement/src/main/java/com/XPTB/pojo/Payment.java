@@ -19,7 +19,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -27,40 +26,52 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author ADMIN
  */
 @Entity
-@Table(name = "payments")
+@Table(name = "payment")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Payments.findAll", query = "SELECT p FROM Payments p"),
-    @NamedQuery(name = "Payments.findById", query = "SELECT p FROM Payments p WHERE p.id = :id"),
-    @NamedQuery(name = "Payments.findByPaymentAmount", query = "SELECT p FROM Payments p WHERE p.paymentAmount = :paymentAmount"),
-    @NamedQuery(name = "Payments.findByPaymentDate", query = "SELECT p FROM Payments p WHERE p.paymentDate = :paymentDate"),
-    @NamedQuery(name = "Payments.findByPaymentMethod", query = "SELECT p FROM Payments p WHERE p.paymentMethod = :paymentMethod")})
-public class Payments implements Serializable {
+    @NamedQuery(name = "Payment.findAll", query = "SELECT p FROM Payment p"),
+    @NamedQuery(name = "Payment.findById", query = "SELECT p FROM Payment p WHERE p.id = :id"),
+    @NamedQuery(name = "Payment.findByPaymentAmount", query = "SELECT p FROM Payment p WHERE p.paymentAmount = :paymentAmount"),
+    @NamedQuery(name = "Payment.findByPaymentDate", query = "SELECT p FROM Payment p WHERE p.paymentDate = :paymentDate"),
+    @NamedQuery(name = "Payment.findByIsActive", query = "SELECT p FROM Payment p WHERE p.isActive = :isActive")})
+public class Payment implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ID")
+    @Column(name = "id")
     private Integer id;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "PaymentAmount")
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "payment_amount")
     private BigDecimal paymentAmount;
-    @Column(name = "PaymentDate")
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "payment_date")
     @Temporal(TemporalType.DATE)
     private Date paymentDate;
-    @Size(max = 50)
-    @Column(name = "PaymentMethod")
-    private String paymentMethod;
-    @JoinColumn(name = "ImportOrderID", referencedColumnName = "ID")
-    @ManyToOne
-    private Importorders importOrderID;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "is_active")
+    private boolean isActive;
+    @JoinColumn(name = "import_order_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Importorder importOrderId;
 
-    public Payments() {
+    public Payment() {
     }
 
-    public Payments(Integer id) {
+    public Payment(Integer id) {
         this.id = id;
+    }
+
+    public Payment(Integer id, BigDecimal paymentAmount, Date paymentDate, boolean isActive) {
+        this.id = id;
+        this.paymentAmount = paymentAmount;
+        this.paymentDate = paymentDate;
+        this.isActive = isActive;
     }
 
     public Integer getId() {
@@ -87,20 +98,20 @@ public class Payments implements Serializable {
         this.paymentDate = paymentDate;
     }
 
-    public String getPaymentMethod() {
-        return paymentMethod;
+    public boolean getIsActive() {
+        return isActive;
     }
 
-    public void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
     }
 
-    public Importorders getImportOrderID() {
-        return importOrderID;
+    public Importorder getImportOrderId() {
+        return importOrderId;
     }
 
-    public void setImportOrderID(Importorders importOrderID) {
-        this.importOrderID = importOrderID;
+    public void setImportOrderId(Importorder importOrderId) {
+        this.importOrderId = importOrderId;
     }
 
     @Override
@@ -113,10 +124,10 @@ public class Payments implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Payments)) {
+        if (!(object instanceof Payment)) {
             return false;
         }
-        Payments other = (Payments) object;
+        Payment other = (Payment) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -125,7 +136,7 @@ public class Payments implements Serializable {
 
     @Override
     public String toString() {
-        return "com.XPTB.pojo.Payments[ id=" + id + " ]";
+        return "com.XPTB.pojo.Payment[ id=" + id + " ]";
     }
     
 }

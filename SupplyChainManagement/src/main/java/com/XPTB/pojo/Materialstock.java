@@ -5,7 +5,6 @@
 package com.XPTB.pojo;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -26,14 +25,14 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author ADMIN
  */
 @Entity
-@Table(name = "materialprice")
+@Table(name = "materialstock")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Materialprice.findAll", query = "SELECT m FROM Materialprice m"),
-    @NamedQuery(name = "Materialprice.findById", query = "SELECT m FROM Materialprice m WHERE m.id = :id"),
-    @NamedQuery(name = "Materialprice.findByUnitPrice", query = "SELECT m FROM Materialprice m WHERE m.unitPrice = :unitPrice"),
-    @NamedQuery(name = "Materialprice.findByChangeDate", query = "SELECT m FROM Materialprice m WHERE m.changeDate = :changeDate")})
-public class Materialprice implements Serializable {
+    @NamedQuery(name = "Materialstock.findAll", query = "SELECT m FROM Materialstock m"),
+    @NamedQuery(name = "Materialstock.findById", query = "SELECT m FROM Materialstock m WHERE m.id = :id"),
+    @NamedQuery(name = "Materialstock.findByAmount", query = "SELECT m FROM Materialstock m WHERE m.amount = :amount"),
+    @NamedQuery(name = "Materialstock.findByDateExpire", query = "SELECT m FROM Materialstock m WHERE m.dateExpire = :dateExpire")})
+public class Materialstock implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,31 +40,33 @@ public class Materialprice implements Serializable {
     @NotNull
     @Column(name = "id")
     private Integer id;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
-    @Column(name = "unit_price")
-    private BigDecimal unitPrice;
+    @Column(name = "amount")
+    private int amount;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "change_date")
+    @Column(name = "date_expire")
     @Temporal(TemporalType.DATE)
-    private Date changeDate;
+    private Date dateExpire;
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Inventory productId;
     @JoinColumn(name = "material_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Material materialId;
 
-    public Materialprice() {
+    public Materialstock() {
     }
 
-    public Materialprice(Integer id) {
+    public Materialstock(Integer id) {
         this.id = id;
     }
 
-    public Materialprice(Integer id, BigDecimal unitPrice, Date changeDate) {
+    public Materialstock(Integer id, int amount, Date dateExpire) {
         this.id = id;
-        this.unitPrice = unitPrice;
-        this.changeDate = changeDate;
+        this.amount = amount;
+        this.dateExpire = dateExpire;
     }
 
     public Integer getId() {
@@ -76,20 +77,28 @@ public class Materialprice implements Serializable {
         this.id = id;
     }
 
-    public BigDecimal getUnitPrice() {
-        return unitPrice;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setUnitPrice(BigDecimal unitPrice) {
-        this.unitPrice = unitPrice;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
-    public Date getChangeDate() {
-        return changeDate;
+    public Date getDateExpire() {
+        return dateExpire;
     }
 
-    public void setChangeDate(Date changeDate) {
-        this.changeDate = changeDate;
+    public void setDateExpire(Date dateExpire) {
+        this.dateExpire = dateExpire;
+    }
+
+    public Inventory getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Inventory productId) {
+        this.productId = productId;
     }
 
     public Material getMaterialId() {
@@ -110,10 +119,10 @@ public class Materialprice implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Materialprice)) {
+        if (!(object instanceof Materialstock)) {
             return false;
         }
-        Materialprice other = (Materialprice) object;
+        Materialstock other = (Materialstock) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -122,7 +131,7 @@ public class Materialprice implements Serializable {
 
     @Override
     public String toString() {
-        return "com.XPTB.pojo.Materialprice[ id=" + id + " ]";
+        return "com.XPTB.pojo.Materialstock[ id=" + id + " ]";
     }
     
 }

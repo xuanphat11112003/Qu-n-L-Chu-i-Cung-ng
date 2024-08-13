@@ -4,6 +4,7 @@
  */
 package com.XPTB.configs;
 
+
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**
@@ -15,7 +16,10 @@ public class DispatcherServleInit extends AbstractAnnotationConfigDispatcherServ
     @Override
     protected Class<?>[] getRootConfigClasses() {
        return new Class[]{
-           HibernateConfigs.class
+           HibernateConfigs.class,
+           TilesConfigs.class,
+           SpringSecurityConfig.class,
+           JwtSecurityConfig.class
            
        };
     }
@@ -23,7 +27,7 @@ public class DispatcherServleInit extends AbstractAnnotationConfigDispatcherServ
     @Override
     protected Class<?>[] getServletConfigClasses() {
         return new Class[]{
-            SupplyChainWebContextConfigs.class
+            WebApplicationContextConfig.class
         };
     }
 

@@ -22,34 +22,41 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author ADMIN
  */
 @Entity
-@Table(name = "materialsstock")
+@Table(name = "manufacture")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Materialsstock.findAll", query = "SELECT m FROM Materialsstock m"),
-    @NamedQuery(name = "Materialsstock.findById", query = "SELECT m FROM Materialsstock m WHERE m.id = :id"),
-    @NamedQuery(name = "Materialsstock.findByAmount", query = "SELECT m FROM Materialsstock m WHERE m.amount = :amount")})
-public class Materialsstock implements Serializable {
+    @NamedQuery(name = "Manufacture.findAll", query = "SELECT m FROM Manufacture m"),
+    @NamedQuery(name = "Manufacture.findById", query = "SELECT m FROM Manufacture m WHERE m.id = :id"),
+    @NamedQuery(name = "Manufacture.findByAmount", query = "SELECT m FROM Manufacture m WHERE m.amount = :amount")})
+public class Manufacture implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ID")
+    @Column(name = "id")
     private Integer id;
-    @Column(name = "Amount")
-    private Integer amount;
-    @JoinColumn(name = "ProductID", referencedColumnName = "ID")
-    @ManyToOne
-    private Inventory productID;
-    @JoinColumn(name = "MaterialID", referencedColumnName = "ID")
-    @ManyToOne
-    private Materials materialID;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "amount")
+    private int amount;
+    @JoinColumn(name = "material_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Material materialId;
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Product productId;
 
-    public Materialsstock() {
+    public Manufacture() {
     }
 
-    public Materialsstock(Integer id) {
+    public Manufacture(Integer id) {
         this.id = id;
+    }
+
+    public Manufacture(Integer id, int amount) {
+        this.id = id;
+        this.amount = amount;
     }
 
     public Integer getId() {
@@ -60,28 +67,28 @@ public class Materialsstock implements Serializable {
         this.id = id;
     }
 
-    public Integer getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 
-    public Inventory getProductID() {
-        return productID;
+    public Material getMaterialId() {
+        return materialId;
     }
 
-    public void setProductID(Inventory productID) {
-        this.productID = productID;
+    public void setMaterialId(Material materialId) {
+        this.materialId = materialId;
     }
 
-    public Materials getMaterialID() {
-        return materialID;
+    public Product getProductId() {
+        return productId;
     }
 
-    public void setMaterialID(Materials materialID) {
-        this.materialID = materialID;
+    public void setProductId(Product productId) {
+        this.productId = productId;
     }
 
     @Override
@@ -94,10 +101,10 @@ public class Materialsstock implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Materialsstock)) {
+        if (!(object instanceof Manufacture)) {
             return false;
         }
-        Materialsstock other = (Materialsstock) object;
+        Manufacture other = (Manufacture) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -106,7 +113,7 @@ public class Materialsstock implements Serializable {
 
     @Override
     public String toString() {
-        return "com.XPTB.pojo.Materialsstock[ id=" + id + " ]";
+        return "com.XPTB.pojo.Manufacture[ id=" + id + " ]";
     }
     
 }

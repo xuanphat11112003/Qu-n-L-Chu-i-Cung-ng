@@ -40,27 +40,43 @@ public class Detailexportorder implements Serializable {
     @NotNull
     @Column(name = "id")
     private Integer id;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "amount")
-    private Integer amount;
+    private int amount;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "price")
     private BigDecimal price;
-    @Column(name = "Discount")
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "discount")
     private BigDecimal discount;
-    @Column(name = "TotalPrice")
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "total_price")
     private BigDecimal totalPrice;
-    @JoinColumn(name = "ExportOrderID", referencedColumnName = "id")
-    @ManyToOne
-    private Exportorders exportOrderID;
-    @JoinColumn(name = "ProductID", referencedColumnName = "id")
-    @ManyToOne
-    private Products productID;
+    @JoinColumn(name = "export_order_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Exportorder exportOrderId;
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Product productId;
 
     public Detailexportorder() {
     }
 
     public Detailexportorder(Integer id) {
         this.id = id;
+    }
+
+    public Detailexportorder(Integer id, int amount, BigDecimal price, BigDecimal discount, BigDecimal totalPrice) {
+        this.id = id;
+        this.amount = amount;
+        this.price = price;
+        this.discount = discount;
+        this.totalPrice = totalPrice;
     }
 
     public Integer getId() {
@@ -71,11 +87,11 @@ public class Detailexportorder implements Serializable {
         this.id = id;
     }
 
-    public Integer getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 
@@ -103,20 +119,20 @@ public class Detailexportorder implements Serializable {
         this.totalPrice = totalPrice;
     }
 
-    public Exportorders getExportOrderID() {
-        return exportOrderID;
+    public Exportorder getExportOrderId() {
+        return exportOrderId;
     }
 
-    public void setExportOrderID(Exportorders exportOrderID) {
-        this.exportOrderID = exportOrderID;
+    public void setExportOrderId(Exportorder exportOrderId) {
+        this.exportOrderId = exportOrderId;
     }
 
-    public Products getProductID() {
-        return productID;
+    public Product getProductId() {
+        return productId;
     }
 
-    public void setProductID(Products productID) {
-        this.productID = productID;
+    public void setProductId(Product productId) {
+        this.productId = productId;
     }
 
     @Override

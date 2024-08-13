@@ -7,9 +7,11 @@ package com.XPTB.pojo;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -24,14 +26,15 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author ADMIN
  */
 @Entity
-@Table(name = "warehouse")
+@Table(name = "supplier")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Warehouse.findAll", query = "SELECT w FROM Warehouse w"),
-    @NamedQuery(name = "Warehouse.findById", query = "SELECT w FROM Warehouse w WHERE w.id = :id"),
-    @NamedQuery(name = "Warehouse.findByName", query = "SELECT w FROM Warehouse w WHERE w.name = :name"),
-    @NamedQuery(name = "Warehouse.findByAddress", query = "SELECT w FROM Warehouse w WHERE w.address = :address")})
-public class Warehouse implements Serializable {
+    @NamedQuery(name = "Supplier.findAll", query = "SELECT s FROM Supplier s"),
+    @NamedQuery(name = "Supplier.findById", query = "SELECT s FROM Supplier s WHERE s.id = :id"),
+    @NamedQuery(name = "Supplier.findByName", query = "SELECT s FROM Supplier s WHERE s.name = :name"),
+    @NamedQuery(name = "Supplier.findByAddress", query = "SELECT s FROM Supplier s WHERE s.address = :address"),
+    @NamedQuery(name = "Supplier.findByPhone", query = "SELECT s FROM Supplier s WHERE s.phone = :phone")})
+public class Supplier implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -39,30 +42,28 @@ public class Warehouse implements Serializable {
     @NotNull
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+    @Size(max = 100)
     @Column(name = "name")
     private String name;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
+    @Size(max = 100)
     @Column(name = "address")
     private String address;
-    @OneToMany(mappedBy = "warehouseId")
-    private Collection<Inventory> inventoryCollection;
+    // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
+    @Size(max = 20)
+    @Column(name = "phone")
+    private String phone;
+    @Lob
+    @Size(max = 65535)
+    @Column(name = "feedback")
+    private String feedback;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "supplierId")
+    private Collection<Supplierperformance> supplierperformanceCollection;
 
-    public Warehouse() {
+    public Supplier() {
     }
 
-    public Warehouse(Integer id) {
+    public Supplier(Integer id) {
         this.id = id;
-    }
-
-    public Warehouse(Integer id, String name, String address) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
     }
 
     public Integer getId() {
@@ -89,13 +90,29 @@ public class Warehouse implements Serializable {
         this.address = address;
     }
 
-    @XmlTransient
-    public Collection<Inventory> getInventoryCollection() {
-        return inventoryCollection;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setInventoryCollection(Collection<Inventory> inventoryCollection) {
-        this.inventoryCollection = inventoryCollection;
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(String feedback) {
+        this.feedback = feedback;
+    }
+
+    @XmlTransient
+    public Collection<Supplierperformance> getSupplierperformanceCollection() {
+        return supplierperformanceCollection;
+    }
+
+    public void setSupplierperformanceCollection(Collection<Supplierperformance> supplierperformanceCollection) {
+        this.supplierperformanceCollection = supplierperformanceCollection;
     }
 
     @Override
@@ -108,10 +125,10 @@ public class Warehouse implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Warehouse)) {
+        if (!(object instanceof Supplier)) {
             return false;
         }
-        Warehouse other = (Warehouse) object;
+        Supplier other = (Supplier) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -120,7 +137,7 @@ public class Warehouse implements Serializable {
 
     @Override
     public String toString() {
-        return "com.XPTB.pojo.Warehouse[ id=" + id + " ]";
+        return "com.XPTB.pojo.Supplier[ id=" + id + " ]";
     }
     
 }
