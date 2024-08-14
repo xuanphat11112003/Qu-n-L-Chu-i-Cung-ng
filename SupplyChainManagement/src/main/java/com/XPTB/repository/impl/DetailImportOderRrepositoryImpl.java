@@ -10,12 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import com.XPTB.repository.ImportOderDetailsRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author ADMIN
  */
 @Repository
+@Transactional
 public class DetailImportOderRrepositoryImpl implements ImportOderDetailsRepository{
     @Autowired
     private LocalSessionFactoryBean factory;

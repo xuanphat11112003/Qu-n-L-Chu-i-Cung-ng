@@ -33,6 +33,11 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content"
                        value="/WEB-INF/pages/order.jsp" />
     </definition>
+    <definition name="sorder" extends="baseLayout">
+        <put-attribute name="title" value="mua hàng" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/success-order.jsp" />
+    </definition>
 
     
 </tiles-definitions>

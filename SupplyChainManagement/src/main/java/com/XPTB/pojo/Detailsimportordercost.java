@@ -8,13 +8,14 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -31,16 +32,16 @@ public class Detailsimportordercost implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id")
     private Integer id;
     @JoinColumn(name = "import_order_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Importorder importOrderId;
-    @JoinColumn(name = "cost_id", referencedColumnName = "id")
+    @JoinColumn(name = "Cost_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Importordercost costId;
+    private Importordercost costid;
 
     public Detailsimportordercost() {
     }
@@ -65,12 +66,12 @@ public class Detailsimportordercost implements Serializable {
         this.importOrderId = importOrderId;
     }
 
-    public Importordercost getCostId() {
-        return costId;
+    public Importordercost getCostid() {
+        return costid;
     }
 
-    public void setCostId(Importordercost costId) {
-        this.costId = costId;
+    public void setCostid(Importordercost costid) {
+        this.costid = costid;
     }
 
     @Override

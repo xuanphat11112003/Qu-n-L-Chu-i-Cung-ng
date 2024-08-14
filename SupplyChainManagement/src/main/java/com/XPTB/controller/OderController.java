@@ -10,6 +10,7 @@ import com.XPTB.pojo.Material;
 import com.XPTB.service.ImportOderService;
 import com.XPTB.service.MaterialService;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
@@ -40,26 +41,10 @@ public class OderController {
     @GetMapping("")
     public String showCreateOrderForm(Model model) {
         List<Material> materials = materialRepository.getMaterials();
+
         model.addAttribute("materials", materials);
         model.addAttribute("importOrder", new Importorder());
         model.addAttribute("details", new ArrayList<Detailimportorder>());
-        return "order";
-    }
-
-    @PostMapping("/add")
-    public String createOrder(Model model,
-            @ModelAttribute(value = "importOrder") @Valid Importorder importOrders,
-            
-            BindingResult rs) {
-        if (rs.hasErrors()) {
-            return "order";
-        }
-        try {
-//            importOrder.save(importOrders, Details);
-            return "redirect:/order/success";
-        } catch (Exception ex) {
-            model.addAttribute("errMsg", ex.getMessage());
-        }
         return "order";
     }
 }

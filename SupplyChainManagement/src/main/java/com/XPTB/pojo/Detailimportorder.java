@@ -5,10 +5,11 @@
 package com.XPTB.pojo;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -34,23 +35,22 @@ public class Detailimportorder implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
     @NotNull
     @Column(name = "quantity")
     private int quantity;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "total_amount")
-    private BigDecimal totalAmount;
-    @JoinColumn(name = "import_order_id", referencedColumnName = "id")
+    private Long totalAmount;
+    @JoinColumn(name = "ImportOder_ID", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Importorder importOrderId;
-    @JoinColumn(name = "material_id", referencedColumnName = "id")
+    private Importorder importOderID;
+    @JoinColumn(name = "Material_ID", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Material materialId;
+    private Material materialID;
 
     public Detailimportorder() {
     }
@@ -80,28 +80,28 @@ public class Detailimportorder implements Serializable {
         this.quantity = quantity;
     }
 
-    public BigDecimal getTotalAmount() {
+    public Long getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(BigDecimal totalAmount) {
+    public void setTotalAmount(Long totalAmount) {
         this.totalAmount = totalAmount;
     }
 
-    public Importorder getImportOrderId() {
-        return importOrderId;
+    public Importorder getImportOderID() {
+        return importOderID;
     }
 
-    public void setImportOrderId(Importorder importOrderId) {
-        this.importOrderId = importOrderId;
+    public void setImportOderID(Importorder importOderID) {
+        this.importOderID = importOderID;
     }
 
-    public Material getMaterialId() {
-        return materialId;
+    public Material getMaterialID() {
+        return materialID;
     }
 
-    public void setMaterialId(Material materialId) {
-        this.materialId = materialId;
+    public void setMaterialID(Material materialID) {
+        this.materialID = materialID;
     }
 
     @Override

@@ -9,21 +9,43 @@ import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import com.XPTB.repository.ImportOderRepository;
+import com.XPTB.utils.StringUtils;
+import java.text.ParseException;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.apache.velocity.runtime.directive.Foreach;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author ADMIN
  */
 @Repository
-public class ImportOderRepositoryImpl implements ImportOderRepository{
+@Transactional
+public class ImportOderRepositoryImpl implements ImportOderRepository {
+
     @Autowired
     private LocalSessionFactoryBean factory;
-    
+
     @Override
     public void save(Importorder impoder) {
         Session s = factory.getObject().getCurrentSession();
-        s.save(impoder);
+        if(impoder.getId() == null)
+            s.save(impoder);
+        else
+            s.update(impoder);
     }
-    
+
+    @Override
+    public void Create(Map<String, Object> params) {
+        Session s = factory.getObject().getCurrentSession();
+        
+//        s.getTransaction().commit();
+    }
+
 }

@@ -5,13 +5,14 @@
 package com.XPTB.pojo;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -36,21 +37,14 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Importorder.findByExpectDate", query = "SELECT i FROM Importorder i WHERE i.expectDate = :expectDate"),
     @NamedQuery(name = "Importorder.findByDeliveryDate", query = "SELECT i FROM Importorder i WHERE i.deliveryDate = :deliveryDate"),
     @NamedQuery(name = "Importorder.findByTotalPrice", query = "SELECT i FROM Importorder i WHERE i.totalPrice = :totalPrice"),
-    @NamedQuery(name = "Importorder.findByTotalCost", query = "SELECT i FROM Importorder i WHERE i.totalCost = :totalCost")})
+    @NamedQuery(name = "Importorder.findByTotalCost", query = "SELECT i FROM Importorder i WHERE i.totalCost = :totalCost"),
+    @NamedQuery(name = "Importorder.findByActive", query = "SELECT i FROM Importorder i WHERE i.active = :active")})
 public class Importorder implements Serializable {
 
-<<<<<<< HEAD
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "active")
-    private boolean active;
-
-=======
->>>>>>> 73f473402519512d283afc13ec32a081b94a2390
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
@@ -61,25 +55,20 @@ public class Importorder implements Serializable {
     @Column(name = "delivery_date")
     @Temporal(TemporalType.DATE)
     private Date deliveryDate;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "total_price")
-    private BigDecimal totalPrice;
+    private Long totalPrice;
     @Basic(optional = false)
     @NotNull
     @Column(name = "total_cost")
-    private BigDecimal totalCost;
-<<<<<<< HEAD
-    
-=======
->>>>>>> 73f473402519512d283afc13ec32a081b94a2390
+    private long totalCost;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "active")
+    private boolean active;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "importOrderId")
     private Collection<Detailsimportordercost> detailsimportordercostCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "importOrderId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "importOderID")
     private Collection<Detailimportorder> detailimportorderCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "importOrderId")
-    private Collection<Payment> paymentCollection;
 
     public Importorder() {
     }
@@ -88,11 +77,11 @@ public class Importorder implements Serializable {
         this.id = id;
     }
 
-    public Importorder(Integer id, Date expectDate, BigDecimal totalPrice, BigDecimal totalCost) {
+    public Importorder(Integer id, Date expectDate, long totalCost, boolean active) {
         this.id = id;
         this.expectDate = expectDate;
-        this.totalPrice = totalPrice;
         this.totalCost = totalCost;
+        this.active = active;
     }
 
     public Integer getId() {
@@ -119,20 +108,28 @@ public class Importorder implements Serializable {
         this.deliveryDate = deliveryDate;
     }
 
-    public BigDecimal getTotalPrice() {
+    public Long getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(BigDecimal totalPrice) {
+    public void setTotalPrice(Long totalPrice) {
         this.totalPrice = totalPrice;
     }
 
-    public BigDecimal getTotalCost() {
+    public long getTotalCost() {
         return totalCost;
     }
 
-    public void setTotalCost(BigDecimal totalCost) {
+    public void setTotalCost(long totalCost) {
         this.totalCost = totalCost;
+    }
+
+    public boolean getActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     @XmlTransient
@@ -151,15 +148,6 @@ public class Importorder implements Serializable {
 
     public void setDetailimportorderCollection(Collection<Detailimportorder> detailimportorderCollection) {
         this.detailimportorderCollection = detailimportorderCollection;
-    }
-
-    @XmlTransient
-    public Collection<Payment> getPaymentCollection() {
-        return paymentCollection;
-    }
-
-    public void setPaymentCollection(Collection<Payment> paymentCollection) {
-        this.paymentCollection = paymentCollection;
     }
 
     @Override
@@ -186,16 +174,5 @@ public class Importorder implements Serializable {
     public String toString() {
         return "com.XPTB.pojo.Importorder[ id=" + id + " ]";
     }
-<<<<<<< HEAD
-
-    public boolean getActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-=======
->>>>>>> 73f473402519512d283afc13ec32a081b94a2390
     
 }

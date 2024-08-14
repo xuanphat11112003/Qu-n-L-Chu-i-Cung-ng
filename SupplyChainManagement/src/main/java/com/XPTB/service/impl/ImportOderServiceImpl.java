@@ -11,6 +11,7 @@ import com.XPTB.repository.ImportOderRepository;
 import com.XPTB.repository.MaterialRepository;
 import com.XPTB.service.ImportOderService;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,11 +31,14 @@ public class ImportOderServiceImpl implements ImportOderService{
     private MaterialRepository materialRepository;
 
     @Override
-    public void save(Importorder impoder, List<Detailimportorder> detail) {
+    public void save(Importorder impoder) {
         importOrderRepository.save(impoder);
-        for(Detailimportorder d : detail){
-            detailImportOrderRepository.saveimp(d);
-        } 
     }
+
+    @Override
+    public void Create(Map<String, Object> params) {
+        importOrderRepository.Create(params);
+    }
+    
     
 }
