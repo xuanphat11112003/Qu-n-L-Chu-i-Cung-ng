@@ -49,7 +49,7 @@ public class Warehouse implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "address")
     private String address;
-    @OneToMany(mappedBy = "warehouseId")
+    @OneToMany(mappedBy = "warehouse")
     private Collection<Inventory> inventoryCollection;
 
     public Warehouse() {

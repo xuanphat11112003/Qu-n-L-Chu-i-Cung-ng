@@ -6,6 +6,7 @@ package com.XPTB.repository;
 
 import com.XPTB.pojo.Material;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -14,6 +15,7 @@ import java.util.List;
 public interface MaterialRepository {
     List<Material> getMaterials();
     public Material getMaterialById(int id);
-
+    public Material getMaterialByName(String name);
+    List<Material> getMaterialsBySupplier(Map<String, String> params);
 
 }

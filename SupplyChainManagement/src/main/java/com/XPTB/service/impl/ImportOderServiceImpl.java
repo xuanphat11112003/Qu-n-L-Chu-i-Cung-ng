@@ -36,9 +36,10 @@ public class ImportOderServiceImpl implements ImportOderService{
     }
 
     @Override
-    public void Create(Map<String, Object> params) {
-        importOrderRepository.Create(params);
+    public void UpdateActive(int i) {
+        this.importOrderRepository.UpdateActive(i);
     }
+
     
     
 }

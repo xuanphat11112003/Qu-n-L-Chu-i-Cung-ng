@@ -11,8 +11,11 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -38,10 +41,12 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Inventory.findByExitDate", query = "SELECT i FROM Inventory i WHERE i.exitDate = :exitDate")})
 public class Inventory implements Serializable {
 
+   
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
     @Column(name = "entry_date")
@@ -52,10 +57,10 @@ public class Inventory implements Serializable {
     private Date exitDate;
     @JoinColumn(name = "warehouse_id", referencedColumnName = "id")
     @ManyToOne
-    private Warehouse warehouseId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
+    private Warehouse warehouse;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "inventory")
     private Collection<Materialstock> materialstockCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "inventoryId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "inventory")
     private Collection<Productstock> productstockCollection;
 
     public Inventory() {
@@ -89,12 +94,12 @@ public class Inventory implements Serializable {
         this.exitDate = exitDate;
     }
 
-    public Warehouse getWarehouseId() {
-        return warehouseId;
+    public Warehouse getWarehouse() {
+        return warehouse;
     }
 
-    public void setWarehouseId(Warehouse warehouseId) {
-        this.warehouseId = warehouseId;
+    public void setWarehouse(Warehouse warehouse) {
+        this.warehouse = warehouse;
     }
 
     @XmlTransient
@@ -139,5 +144,7 @@ public class Inventory implements Serializable {
     public String toString() {
         return "com.XPTB.pojo.Inventory[ id=" + id + " ]";
     }
+
+
     
 }

@@ -59,7 +59,7 @@ public class Product implements Serializable {
     private String detail;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
     private Collection<Manufacture> manufactureCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     private Collection<Productstock> productstockCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
     private Collection<Detailexportorder> detailexportorderCollection;

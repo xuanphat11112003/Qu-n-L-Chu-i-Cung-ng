@@ -4,8 +4,10 @@
  */
 package com.XPTB.service;
 
+import com.XPTB.DTO.MaterialDTO;
 import com.XPTB.pojo.Material;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -14,6 +16,8 @@ import java.util.List;
 public interface MaterialService {
     List<Material> getMaterials();
     public Material getMaterialById(int id);
+    public Material getMaterialByName(String name);
+    List<MaterialDTO> getMaterialsBySupplier(Map<String, String> params);
 
 
    

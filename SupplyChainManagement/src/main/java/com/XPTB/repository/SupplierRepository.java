@@ -2,20 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package com.XPTB.service;
+package com.XPTB.repository;
 
-import com.XPTB.pojo.Detailimportorder;
-
+import com.XPTB.pojo.Supplier;
 import java.util.List;
-import com.XPTB.pojo.Importorder;
-import java.util.Map;
 
 /**
  *
  * @author ADMIN
  */
-public interface ImportOderService {
-    public void save(Importorder impoder);
-    public void UpdateActive(int id);
-
+public interface SupplierRepository {
+    List<Supplier> getAllSupplier();
+    
 }

@@ -28,15 +28,20 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content"
                        value="/WEB-INF/pages/add_product.jsp" />
     </definition>
-    <definition name="order" extends="baseLayout">
+    <definition name="addorder" extends="baseLayout">
         <put-attribute name="title" value="mua hàng" />
         <put-attribute name="content"
-                       value="/WEB-INF/pages/order.jsp" />
+                       value="/WEB-INF/pages/add-order.jsp" />
     </definition>
-    <definition name="sorder" extends="baseLayout">
+    <definition name="seeorder" extends="baseLayout">
         <put-attribute name="title" value="mua hàng" />
         <put-attribute name="content"
-                       value="/WEB-INF/pages/success-order.jsp" />
+                       value="/WEB-INF/pages/see-order.jsp" />
+    </definition>
+    <definition name="viewInventory" extends="baseLayout">
+        <put-attribute name="title" value="mua hàng" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/viewInventory.jsp" />
     </definition>
 
     

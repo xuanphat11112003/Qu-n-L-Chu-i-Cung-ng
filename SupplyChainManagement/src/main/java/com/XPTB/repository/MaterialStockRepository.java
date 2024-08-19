@@ -4,16 +4,13 @@
  */
 package com.XPTB.repository;
 
-import com.XPTB.pojo.Detailimportorder;
-import java.util.List;
-import java.util.Map;
+import com.XPTB.pojo.Material;
+import com.XPTB.pojo.Materialstock;
 
 /**
  *
  * @author ADMIN
  */
-public interface ImportOderDetailsRepository {
-    public void saveimp(Detailimportorder di);
-    public List<Object[]> getDetailOrder(Map<String,String> params);
-    
+public interface MaterialStockRepository {
+    public void addMaterialinStock(Materialstock material);
 }

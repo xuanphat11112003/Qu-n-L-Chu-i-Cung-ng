@@ -11,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -55,12 +56,12 @@ public class Productstock implements Serializable {
     @Column(name = "date_expire")
     @Temporal(TemporalType.DATE)
     private Date dateExpire;
-    @JoinColumn(name = "inventory_id", referencedColumnName = "id")
+   @JoinColumn(name = "inventory_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Inventory inventoryId;
+    private Inventory inventory;
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Product productId;
+    private Product product;
 
     public Productstock() {
     }
@@ -108,20 +109,20 @@ public class Productstock implements Serializable {
         this.dateExpire = dateExpire;
     }
 
-    public Inventory getInventoryId() {
-        return inventoryId;
+    public Inventory getInventory() {
+        return inventory;
     }
 
-    public void setInventoryId(Inventory inventoryId) {
-        this.inventoryId = inventoryId;
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
     }
 
-    public Product getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(Product productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Override

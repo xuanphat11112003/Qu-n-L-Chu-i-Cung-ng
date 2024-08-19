@@ -8,6 +8,7 @@ import com.XPTB.pojo.Product;
 import com.XPTB.repository.ProductRepository;
 import com.XPTB.service.ProductService;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +22,8 @@ public class ProductServiceImpl implements ProductService{
     private ProductRepository productRepo;
 
     @Override
-    public List<Product> getListProducts() {
-        return this.productRepo.getListProducts();
+    public List<Product> getListProducts(Map<String, String> params) {
+        return this.productRepo.getListProducts(params);
     }
     @Override
     public void addOrUpdate(Product p) {
@@ -37,6 +38,16 @@ public class ProductServiceImpl implements ProductService{
 //            }
 //        }
         this.productRepo.addOrUpdate(p);
+    }
+
+    @Override
+    public void deleteProduct(int id) {
+        this.productRepo.deleteProduct(id);
+    }
+
+    @Override
+    public Product getProductById(int id) {
+        return this.productRepo.getProductById(id);
     }
     
 }

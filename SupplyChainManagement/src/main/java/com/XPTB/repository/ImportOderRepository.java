@@ -5,8 +5,6 @@
 package com.XPTB.repository;
 
 import com.XPTB.pojo.Importorder;
-import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -14,6 +12,6 @@ import java.util.Map;
  */
 public interface ImportOderRepository {
     public void save(Importorder impoder);
-    public void Create(Map<String, Object> params);
-    
+    public void UpdateActive(int id);
+    public Importorder getImportorderById(int id);
 }

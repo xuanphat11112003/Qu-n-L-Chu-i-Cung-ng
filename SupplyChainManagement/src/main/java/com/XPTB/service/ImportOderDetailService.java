@@ -5,6 +5,7 @@
 package com.XPTB.service;
 
 import com.XPTB.pojo.Detailimportorder;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -13,5 +14,6 @@ import java.util.Map;
  */
 public interface ImportOderDetailService {
     public void save(Detailimportorder d);
+    public List<Object[]> getDetailOrder(Map<String,String> params);
     
 }

@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.velocity.runtime.directive.Foreach;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,10 +43,19 @@ public class ImportOderRepositoryImpl implements ImportOderRepository {
     }
 
     @Override
-    public void Create(Map<String, Object> params) {
+    public Importorder getImportorderById(int i) {
         Session s = factory.getObject().getCurrentSession();
-        
-//        s.getTransaction().commit();
+        return s.get(Importorder.class, i);
     }
+    @Override
+    public void UpdateActive(int i) {
+        Session s = factory.getObject().getCurrentSession();
+        Importorder imp = this.getImportorderById(i);
+        imp.setActive(true);
+    }
+
+    
+
+  
 
 }

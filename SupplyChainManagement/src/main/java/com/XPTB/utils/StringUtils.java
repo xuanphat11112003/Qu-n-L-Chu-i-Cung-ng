@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.XPTB.utils;
+import com.XPTB.pojo.Importorder.Payment;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import lombok.Getter;
@@ -19,5 +20,12 @@ public class StringUtils {
      */
     public static SimpleDateFormat getDateFormating() {
         return DateFormating;
+    }
+    public static Payment fromString(String paymentStr) {
+        return Payment.fromValue(paymentStr);
+    }
+
+    public static String toString(Payment payment) {
+        return payment.getValue();
     }
 }

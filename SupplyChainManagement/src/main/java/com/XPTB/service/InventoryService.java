@@ -4,18 +4,12 @@
  */
 package com.XPTB.service;
 
-import com.XPTB.pojo.Detailimportorder;
-
-import java.util.List;
-import com.XPTB.pojo.Importorder;
-import java.util.Map;
+import com.XPTB.pojo.Inventory;
 
 /**
  *
  * @author ADMIN
  */
-public interface ImportOderService {
-    public void save(Importorder impoder);
-    public void UpdateActive(int id);
-
+public interface InventoryService {
+    public void saveInventory(Inventory inventory);
 }

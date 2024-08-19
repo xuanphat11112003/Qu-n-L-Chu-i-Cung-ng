@@ -6,12 +6,15 @@ package com.XPTB.repository;
 
 import com.XPTB.pojo.Product;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
  * @author ADMIN
  */
 public interface ProductRepository {
-    List<Product> getListProducts();
+    List<Product> getListProducts(Map<String, String> params);
     void addOrUpdate(Product p);
+    void deleteProduct(int id);
+    Product getProductById ( int id);
 }

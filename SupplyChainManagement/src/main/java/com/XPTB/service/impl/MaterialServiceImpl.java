@@ -4,10 +4,16 @@
  */
 package com.XPTB.service.impl;
 
+import com.XPTB.DTO.MaterialDTO;
 import com.XPTB.pojo.Material;
 import com.XPTB.repository.MaterialRepository;
 import com.XPTB.service.MaterialService;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +37,21 @@ public class MaterialServiceImpl implements MaterialService{
         return this.maRepo.getMaterialById(id);
     }
 
-    
+    @Override
+    public List<MaterialDTO> getMaterialsBySupplier(Map<String, String> params) {
+        
+       List<Material> m= this.maRepo.getMaterialsBySupplier(params);
+       List<MaterialDTO> materialDTOs = new ArrayList<>();
+       for (Material material : m ){
+           materialDTOs.add(new MaterialDTO(material));
+       }
+       
+       return materialDTOs;
+    }
+
+    @Override
+    public Material getMaterialByName(String name) {
+        return this.maRepo.getMaterialByName(name);
+    }
     
 }

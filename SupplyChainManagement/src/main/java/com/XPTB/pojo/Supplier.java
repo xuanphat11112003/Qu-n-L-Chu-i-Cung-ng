@@ -58,7 +58,7 @@ public class Supplier implements Serializable {
     private String feedback;
     @OneToMany(mappedBy = "supplierId")
     private Collection<Material> materialCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "supplierId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "supplier")
     private Collection<Supplierperformance> supplierperformanceCollection;
 
     public Supplier() {

@@ -7,6 +7,7 @@ package com.XPTB.service.impl;
 import com.XPTB.pojo.Detailimportorder;
 import com.XPTB.repository.ImportOderDetailsRepository;
 import com.XPTB.service.ImportOderDetailService;
+import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,11 @@ public class ImportOderDetailServiceImpl implements ImportOderDetailService{
     @Override
     public void save(Detailimportorder d) {
         this.d.saveimp(d);
+    }
+
+    @Override
+    public List<Object[]> getDetailOrder(Map<String,String> params) {
+        return this.d.getDetailOrder(params);
     }
 
    

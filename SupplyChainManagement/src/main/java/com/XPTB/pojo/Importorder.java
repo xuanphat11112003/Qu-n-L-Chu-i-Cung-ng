@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.XPTB.pojo;
-
+import com.XPTB.utils.StringUtils;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,7 +21,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -37,9 +40,39 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Importorder.findByExpectDate", query = "SELECT i FROM Importorder i WHERE i.expectDate = :expectDate"),
     @NamedQuery(name = "Importorder.findByDeliveryDate", query = "SELECT i FROM Importorder i WHERE i.deliveryDate = :deliveryDate"),
     @NamedQuery(name = "Importorder.findByTotalPrice", query = "SELECT i FROM Importorder i WHERE i.totalPrice = :totalPrice"),
-    @NamedQuery(name = "Importorder.findByTotalCost", query = "SELECT i FROM Importorder i WHERE i.totalCost = :totalCost"),
-    @NamedQuery(name = "Importorder.findByActive", query = "SELECT i FROM Importorder i WHERE i.active = :active")})
+    @NamedQuery(name = "Importorder.findByActive", query = "SELECT i FROM Importorder i WHERE i.active = :active"),
+    @NamedQuery(name = "Importorder.findByPayment", query = "SELECT i FROM Importorder i WHERE i.payment = :payment")})
 public class Importorder implements Serializable {
+//    private String v1 = "thanh toán ngay lập tức";
+//    private String v2 = "thanh toán sau 1 ngày nhận hóa đơn";
+//    private String v3 = "thanh toán sau khi nhận hàng";
+    //ENUM('thanh toán ngay lập tức', 'thanh toán sau 1 ngày nhận hóa đơn', 'thanh toán sau khi nhận hàng')
+
+    public enum Payment {
+        V1("thanh toán ngay lập tức"),
+        V2("thanh toán sau 1 ngày nhận hóa đơn"),
+        V3("thanh toán sau khi nhận hàng");
+        private String value;
+
+        Payment(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public static Payment fromValue(String value) {
+            for (Payment payment : Payment.values()) {
+                if (payment.getValue().equalsIgnoreCase(value)) {
+                    return payment;
+                }
+            }
+            throw new IllegalArgumentException("Không tìm thấy giá trị phù hợp cho Payment: " + value);
+        }
+    }
+    @Transient
+    private String payenum;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -59,12 +92,13 @@ public class Importorder implements Serializable {
     private Long totalPrice;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "total_cost")
-    private long totalCost;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "active")
     private boolean active;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 34)
+    @Column(name = "Payment")
+    private String payment;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "importOrderId")
     private Collection<Detailsimportordercost> detailsimportordercostCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "importOderID")
@@ -77,11 +111,11 @@ public class Importorder implements Serializable {
         this.id = id;
     }
 
-    public Importorder(Integer id, Date expectDate, long totalCost, boolean active) {
+    public Importorder(Integer id, Date expectDate, boolean active, String payment) {
         this.id = id;
         this.expectDate = expectDate;
-        this.totalCost = totalCost;
         this.active = active;
+        this.payment = payment;
     }
 
     public Integer getId() {
@@ -116,20 +150,20 @@ public class Importorder implements Serializable {
         this.totalPrice = totalPrice;
     }
 
-    public long getTotalCost() {
-        return totalCost;
-    }
-
-    public void setTotalCost(long totalCost) {
-        this.totalCost = totalCost;
-    }
-
     public boolean getActive() {
         return active;
     }
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public String getPayment() {
+        return payment;
+    }
+
+    public void setPayment(String payment) {
+        this.payment = payment;
     }
 
     @XmlTransient
@@ -174,5 +208,4 @@ public class Importorder implements Serializable {
     public String toString() {
         return "com.XPTB.pojo.Importorder[ id=" + id + " ]";
     }
-    
 }
