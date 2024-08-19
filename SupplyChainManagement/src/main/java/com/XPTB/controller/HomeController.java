@@ -34,7 +34,7 @@ public class HomeController {
 
     @RequestMapping("/")
     public String index(Model model) {
-        model.addAttribute("material",this.materialService.getMaterials().get(0));
+       
 //        System.out.println(this.materialService.getMaterials().get(1).getName());
 //        model.addAttribute("user", this.userDetailsService.getUserByUsername("admin"));
 //        System.out.println(this.userDetailsService.getUserByUsername("admin").getName());

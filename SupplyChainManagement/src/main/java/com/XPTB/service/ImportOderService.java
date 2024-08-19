@@ -8,11 +8,14 @@ import com.XPTB.pojo.Detailimportorder;
 
 import java.util.List;
 import com.XPTB.pojo.Importorder;
+import java.util.Map;
 
 /**
  *
  * @author ADMIN
  */
 public interface ImportOderService {
-    public void save(Importorder impoder, List<Detailimportorder> detail);
+    public void save(Importorder impoder);
+    public void UpdateActive(int id);
+
 }

@@ -11,15 +11,11 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -43,25 +39,18 @@ public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
+    @NotNull
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
     @NotNull
-
-    @Size(min=4, max=50,message="{product.name.sizeMsg}")
-
-    @Size(min=4, max=50,message="{product.name.sizeMsg}")
+    @Size(min = 1, max = 100)
     @Column(name = "name")
     private String name;
-    
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
-
+    @NotNull
     @Column(name = "price")
-    @NotNull(message="{product.price.notNullMsg}")
-    @Min(value = 10000, message = "{product.price.minMsg}")
-    @Max(value = 10000000, message = "{product.price.maxMsg}")
     private BigDecimal price;
     @Basic(optional = false)
     @NotNull
@@ -70,7 +59,7 @@ public class Product implements Serializable {
     private String detail;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
     private Collection<Manufacture> manufactureCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     private Collection<Productstock> productstockCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
     private Collection<Detailexportorder> detailexportorderCollection;
@@ -172,9 +161,5 @@ public class Product implements Serializable {
     public String toString() {
         return "com.XPTB.pojo.Product[ id=" + id + " ]";
     }
-
-
-}
-
     
-
+}

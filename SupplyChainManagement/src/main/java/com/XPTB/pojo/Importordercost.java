@@ -60,7 +60,7 @@ public class Importordercost implements Serializable {
     @Column(name = "cost_date")
     @Temporal(TemporalType.DATE)
     private Date costDate;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "costId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "costid")
     private Collection<Detailsimportordercost> detailsimportordercostCollection;
 
     public Importordercost() {

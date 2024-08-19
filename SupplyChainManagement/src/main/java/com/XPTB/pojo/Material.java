@@ -5,13 +5,16 @@
 package com.XPTB.pojo;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -32,14 +35,13 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Material.findAll", query = "SELECT m FROM Material m"),
     @NamedQuery(name = "Material.findById", query = "SELECT m FROM Material m WHERE m.id = :id"),
     @NamedQuery(name = "Material.findByName", query = "SELECT m FROM Material m WHERE m.name = :name"),
-    @NamedQuery(name = "Material.findByPrice", query = "SELECT m FROM Material m WHERE m.price = :price"),
-    @NamedQuery(name = "Material.findBySupplierId", query = "SELECT m FROM Material m WHERE m.supplierId = :supplierId")})
+    @NamedQuery(name = "Material.findByPrice", query = "SELECT m FROM Material m WHERE m.price = :price")})
 public class Material implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
@@ -47,21 +49,19 @@ public class Material implements Serializable {
     @Size(min = 1, max = 100)
     @Column(name = "name")
     private String name;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Column(name = "price")
-    private BigDecimal price;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "supplier_id")
-    private int supplierId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "materialId")
+    private long price;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "materialID")
     private Collection<Detailimportorder> detailimportorderCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "materialId")
     private Collection<Manufacture> manufactureCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "materialId")
     private Collection<Materialprice> materialpriceCollection;
+    @JoinColumn(name = "supplier_id", referencedColumnName = "id")
+    @ManyToOne
+    private Supplier supplierId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "materialId")
     private Collection<Materialstock> materialstockCollection;
 
@@ -72,11 +72,10 @@ public class Material implements Serializable {
         this.id = id;
     }
 
-    public Material(Integer id, String name, BigDecimal price, int supplierId) {
+    public Material(Integer id, String name, long price) {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.supplierId = supplierId;
     }
 
     public Integer getId() {
@@ -95,20 +94,12 @@ public class Material implements Serializable {
         this.name = name;
     }
 
-    public BigDecimal getPrice() {
+    public long getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(long price) {
         this.price = price;
-    }
-
-    public int getSupplierId() {
-        return supplierId;
-    }
-
-    public void setSupplierId(int supplierId) {
-        this.supplierId = supplierId;
     }
 
     @XmlTransient
@@ -136,6 +127,14 @@ public class Material implements Serializable {
 
     public void setMaterialpriceCollection(Collection<Materialprice> materialpriceCollection) {
         this.materialpriceCollection = materialpriceCollection;
+    }
+
+    public Supplier getSupplierId() {
+        return supplierId;
+    }
+
+    public void setSupplierId(Supplier supplierId) {
+        this.supplierId = supplierId;
     }
 
     @XmlTransient

@@ -11,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -67,7 +68,7 @@ public class Supplierperformance implements Serializable {
     private String comment;
     @JoinColumn(name = "supplier_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Supplier supplierId;
+    private Supplier supplier;
 
     public Supplierperformance() {
     }
@@ -132,12 +133,12 @@ public class Supplierperformance implements Serializable {
         this.comment = comment;
     }
 
-    public Supplier getSupplierId() {
-        return supplierId;
+    public Supplier getSupplier() {
+        return supplier;
     }
 
-    public void setSupplierId(Supplier supplierId) {
-        this.supplierId = supplierId;
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
     }
 
     @Override
@@ -164,5 +165,5 @@ public class Supplierperformance implements Serializable {
     public String toString() {
         return "com.XPTB.pojo.Supplierperformance[ id=" + id + " ]";
     }
-    
+
 }

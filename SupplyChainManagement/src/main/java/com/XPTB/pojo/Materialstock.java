@@ -9,8 +9,11 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -33,11 +36,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Materialstock.findByAmount", query = "SELECT m FROM Materialstock m WHERE m.amount = :amount"),
     @NamedQuery(name = "Materialstock.findByDateExpire", query = "SELECT m FROM Materialstock m WHERE m.dateExpire = :dateExpire")})
 public class Materialstock implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
@@ -45,13 +47,12 @@ public class Materialstock implements Serializable {
     @Column(name = "amount")
     private int amount;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "date_expire")
     @Temporal(TemporalType.DATE)
     private Date dateExpire;
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    @JoinColumn(name = "inventory_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Inventory productId;
+    private Inventory inventory;
     @JoinColumn(name = "material_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Material materialId;
@@ -93,12 +94,12 @@ public class Materialstock implements Serializable {
         this.dateExpire = dateExpire;
     }
 
-    public Inventory getProductId() {
-        return productId;
+    public Inventory getInventory() {
+        return inventory;
     }
 
-    public void setProductId(Inventory productId) {
-        this.productId = productId;
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
     }
 
     public Material getMaterialId() {

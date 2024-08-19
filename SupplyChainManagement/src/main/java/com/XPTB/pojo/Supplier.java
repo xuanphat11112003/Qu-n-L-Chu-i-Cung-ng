@@ -56,7 +56,9 @@ public class Supplier implements Serializable {
     @Size(max = 65535)
     @Column(name = "feedback")
     private String feedback;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "supplierId")
+    @OneToMany(mappedBy = "supplierId")
+    private Collection<Material> materialCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "supplier")
     private Collection<Supplierperformance> supplierperformanceCollection;
 
     public Supplier() {
@@ -104,6 +106,15 @@ public class Supplier implements Serializable {
 
     public void setFeedback(String feedback) {
         this.feedback = feedback;
+    }
+
+    @XmlTransient
+    public Collection<Material> getMaterialCollection() {
+        return materialCollection;
+    }
+
+    public void setMaterialCollection(Collection<Material> materialCollection) {
+        this.materialCollection = materialCollection;
     }
 
     @XmlTransient

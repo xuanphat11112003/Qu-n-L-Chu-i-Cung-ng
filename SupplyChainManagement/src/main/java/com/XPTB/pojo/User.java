@@ -90,9 +90,7 @@ public class User implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "phone")
     private String phone;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
+    @Size(max = 255)
     @Column(name = "avartar")
     private String avartar;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
@@ -105,7 +103,7 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User(Integer id, String username, String password, String userRole, Date createDate, String email, String name, String adress, String phone, String avartar) {
+    public User(Integer id, String username, String password, String userRole, Date createDate, String email, String name, String adress, String phone) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -115,7 +113,6 @@ public class User implements Serializable {
         this.name = name;
         this.adress = adress;
         this.phone = phone;
-        this.avartar = avartar;
     }
 
     public Integer getId() {

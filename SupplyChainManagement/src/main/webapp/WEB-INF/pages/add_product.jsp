@@ -38,9 +38,14 @@
     
     <button class="btn btn-success" type="submit">
 
-        
-                Thêm sản phẩm
-        
+         <c:choose>
+                <c:when test="${product.id != null}">
+                    <option value="${c.id}" selected>Cập nhật sản phẩm</option>
+                </c:when>
+                <c:otherwise>
+                    Thêm sản phẩm
+                </c:otherwise>
+            </c:choose>
     </button>
 </div>
 </form:form>
