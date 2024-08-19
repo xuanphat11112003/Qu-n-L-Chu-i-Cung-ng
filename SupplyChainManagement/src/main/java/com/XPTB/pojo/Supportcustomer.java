@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Supportcustomer.findAll", query = "SELECT s FROM Supportcustomer s"),
     @NamedQuery(name = "Supportcustomer.findById", query = "SELECT s FROM Supportcustomer s WHERE s.id = :id"),
     @NamedQuery(name = "Supportcustomer.findByProblem", query = "SELECT s FROM Supportcustomer s WHERE s.problem = :problem"),
-    @NamedQuery(name = "Supportcustomer.findBySupportstate", query = "SELECT s FROM Supportcustomer s WHERE s.supportstate = :supportstate")})
+    @NamedQuery(name = "Supportcustomer.findBySupportState", query = "SELECT s FROM Supportcustomer s WHERE s.supportState = :supportState")})
 public class Supportcustomer implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,14 +42,14 @@ public class Supportcustomer implements Serializable {
     @Column(name = "problem")
     private String problem;
     @Size(max = 20)
-    @Column(name = "supportstate")
-    private String supportstate;
-    @JoinColumn(name = "CustomerID", referencedColumnName = "id")
+    @Column(name = "support_state")
+    private String supportState;
+    @JoinColumn(name = "agency_id", referencedColumnName = "user_id")
     @ManyToOne
-    private Customers customerID;
-    @JoinColumn(name = "ExportOrderID", referencedColumnName = "id")
+    private Agency agencyId;
+    @JoinColumn(name = "export_order_id", referencedColumnName = "id")
     @ManyToOne
-    private Exportorders exportOrderID;
+    private Exportorder exportOrderId;
 
     public Supportcustomer() {
     }
@@ -74,28 +74,28 @@ public class Supportcustomer implements Serializable {
         this.problem = problem;
     }
 
-    public String getSupportstate() {
-        return supportstate;
+    public String getSupportState() {
+        return supportState;
     }
 
-    public void setSupportstate(String supportstate) {
-        this.supportstate = supportstate;
+    public void setSupportState(String supportState) {
+        this.supportState = supportState;
     }
 
-    public Customers getCustomerID() {
-        return customerID;
+    public Agency getAgencyId() {
+        return agencyId;
     }
 
-    public void setCustomerID(Customers customerID) {
-        this.customerID = customerID;
+    public void setAgencyId(Agency agencyId) {
+        this.agencyId = agencyId;
     }
 
-    public Exportorders getExportOrderID() {
-        return exportOrderID;
+    public Exportorder getExportOrderId() {
+        return exportOrderId;
     }
 
-    public void setExportOrderID(Exportorders exportOrderID) {
-        this.exportOrderID = exportOrderID;
+    public void setExportOrderId(Exportorder exportOrderId) {
+        this.exportOrderId = exportOrderId;
     }
 
     @Override

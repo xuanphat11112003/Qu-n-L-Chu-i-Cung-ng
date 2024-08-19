@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -37,25 +39,35 @@ public class Materialprice implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "ID")
+    @Column(name = "id")
     private Integer id;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "UnitPrice")
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "unit_price")
     private BigDecimal unitPrice;
-    @Column(name = "ChangeDate")
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "change_date")
     @Temporal(TemporalType.DATE)
     private Date changeDate;
-    @JoinColumn(name = "MaterialID", referencedColumnName = "ID")
-    @ManyToOne
-    private Materials materialID;
+    @JoinColumn(name = "material_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Material materialId;
 
     public Materialprice() {
     }
 
     public Materialprice(Integer id) {
         this.id = id;
+    }
+
+    public Materialprice(Integer id, BigDecimal unitPrice, Date changeDate) {
+        this.id = id;
+        this.unitPrice = unitPrice;
+        this.changeDate = changeDate;
     }
 
     public Integer getId() {
@@ -82,12 +94,12 @@ public class Materialprice implements Serializable {
         this.changeDate = changeDate;
     }
 
-    public Materials getMaterialID() {
-        return materialID;
+    public Material getMaterialId() {
+        return materialId;
     }
 
-    public void setMaterialID(Materials materialID) {
-        this.materialID = materialID;
+    public void setMaterialId(Material materialId) {
+        this.materialId = materialId;
     }
 
     @Override

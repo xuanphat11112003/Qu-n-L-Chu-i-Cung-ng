@@ -5,7 +5,7 @@
 package com.XPTB.pojo;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,22 +37,32 @@ public class Warehouse implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ID")
+    @Column(name = "id")
     private Integer id;
-    @Size(max = 100)
-    @Column(name = "Name")
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
+    @Column(name = "name")
     private String name;
-    @Size(max = 50)
-    @Column(name = "Address")
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
+    @Column(name = "address")
     private String address;
-    @OneToMany(mappedBy = "stockID")
-    private Set<Inventory> inventorySet;
+    @OneToMany(mappedBy = "warehouse")
+    private Collection<Inventory> inventoryCollection;
 
     public Warehouse() {
     }
 
     public Warehouse(Integer id) {
         this.id = id;
+    }
+
+    public Warehouse(Integer id, String name, String address) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
     }
 
     public Integer getId() {
@@ -80,12 +90,12 @@ public class Warehouse implements Serializable {
     }
 
     @XmlTransient
-    public Set<Inventory> getInventorySet() {
-        return inventorySet;
+    public Collection<Inventory> getInventoryCollection() {
+        return inventoryCollection;
     }
 
-    public void setInventorySet(Set<Inventory> inventorySet) {
-        this.inventorySet = inventorySet;
+    public void setInventoryCollection(Collection<Inventory> inventoryCollection) {
+        this.inventoryCollection = inventoryCollection;
     }
 
     @Override

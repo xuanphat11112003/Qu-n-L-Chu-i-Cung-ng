@@ -5,13 +5,17 @@
 package com.XPTB.pojo;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -37,25 +41,27 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Inventory.findByExitDate", query = "SELECT i FROM Inventory i WHERE i.exitDate = :exitDate")})
 public class Inventory implements Serializable {
 
+   
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
-    @Column(name = "EntryDate")
+    @Column(name = "entry_date")
     @Temporal(TemporalType.DATE)
     private Date entryDate;
-    @Column(name = "ExitDate")
+    @Column(name = "exit_date")
     @Temporal(TemporalType.DATE)
     private Date exitDate;
-    @OneToMany(mappedBy = "productID")
-    private Set<Materialsstock> materialsstockSet;
-    @JoinColumn(name = "StockID", referencedColumnName = "ID")
+    @JoinColumn(name = "warehouse_id", referencedColumnName = "id")
     @ManyToOne
-    private Warehouse stockID;
-    @OneToMany(mappedBy = "inventoryID")
-    private Set<Productstock> productstockSet;
+    private Warehouse warehouse;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "inventory")
+    private Collection<Materialstock> materialstockCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "inventory")
+    private Collection<Productstock> productstockCollection;
 
     public Inventory() {
     }
@@ -88,30 +94,30 @@ public class Inventory implements Serializable {
         this.exitDate = exitDate;
     }
 
-    @XmlTransient
-    public Set<Materialsstock> getMaterialsstockSet() {
-        return materialsstockSet;
+    public Warehouse getWarehouse() {
+        return warehouse;
     }
 
-    public void setMaterialsstockSet(Set<Materialsstock> materialsstockSet) {
-        this.materialsstockSet = materialsstockSet;
-    }
-
-    public Warehouse getStockID() {
-        return stockID;
-    }
-
-    public void setStockID(Warehouse stockID) {
-        this.stockID = stockID;
+    public void setWarehouse(Warehouse warehouse) {
+        this.warehouse = warehouse;
     }
 
     @XmlTransient
-    public Set<Productstock> getProductstockSet() {
-        return productstockSet;
+    public Collection<Materialstock> getMaterialstockCollection() {
+        return materialstockCollection;
     }
 
-    public void setProductstockSet(Set<Productstock> productstockSet) {
-        this.productstockSet = productstockSet;
+    public void setMaterialstockCollection(Collection<Materialstock> materialstockCollection) {
+        this.materialstockCollection = materialstockCollection;
+    }
+
+    @XmlTransient
+    public Collection<Productstock> getProductstockCollection() {
+        return productstockCollection;
+    }
+
+    public void setProductstockCollection(Collection<Productstock> productstockCollection) {
+        this.productstockCollection = productstockCollection;
     }
 
     @Override
@@ -138,5 +144,7 @@ public class Inventory implements Serializable {
     public String toString() {
         return "com.XPTB.pojo.Inventory[ id=" + id + " ]";
     }
+
+
     
 }

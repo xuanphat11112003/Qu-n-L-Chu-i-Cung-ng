@@ -5,10 +5,11 @@
 package com.XPTB.pojo;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -34,27 +35,33 @@ public class Detailimportorder implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ID")
-    private Integer id;
-    @Column(name = "Quantity")
-    private Integer quantity;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "TotalAmount")
-    private BigDecimal totalAmount;
-    @JoinColumn(name = "ImportOrderID", referencedColumnName = "ID")
-    @ManyToOne
-    private Importorders importOrderID;
-    @JoinColumn(name = "MaterialID", referencedColumnName = "ID")
-    @ManyToOne
-    private Materials materialID;
+    @Column(name = "quantity")
+    private int quantity;
+    @Column(name = "total_amount")
+    private Long totalAmount;
+    @JoinColumn(name = "ImportOder_ID", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Importorder importOderID;
+    @JoinColumn(name = "Material_ID", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Material materialID;
 
     public Detailimportorder() {
     }
 
     public Detailimportorder(Integer id) {
         this.id = id;
+    }
+
+    public Detailimportorder(Integer id, int quantity) {
+        this.id = id;
+        this.quantity = quantity;
     }
 
     public Integer getId() {
@@ -65,35 +72,35 @@ public class Detailimportorder implements Serializable {
         this.id = id;
     }
 
-    public Integer getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
-    public BigDecimal getTotalAmount() {
+    public Long getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(BigDecimal totalAmount) {
+    public void setTotalAmount(Long totalAmount) {
         this.totalAmount = totalAmount;
     }
 
-    public Importorders getImportOrderID() {
-        return importOrderID;
+    public Importorder getImportOderID() {
+        return importOderID;
     }
 
-    public void setImportOrderID(Importorders importOrderID) {
-        this.importOrderID = importOrderID;
+    public void setImportOderID(Importorder importOderID) {
+        this.importOderID = importOderID;
     }
 
-    public Materials getMaterialID() {
+    public Material getMaterialID() {
         return materialID;
     }
 
-    public void setMaterialID(Materials materialID) {
+    public void setMaterialID(Material materialID) {
         this.materialID = materialID;
     }
 

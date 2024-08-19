@@ -4,7 +4,13 @@
  */
 package com.XPTB.controller;
 
+
+import com.XPTB.service.MaterialService;
+import com.XPTB.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -13,8 +19,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class HomeController {
+
+
+    
+
+
+//    @Autowired
+//    private MaterialService materialService;
+//    @Autowired
+//    private UserService userDetailsService;
+
+
+   
+
     @RequestMapping("/")
-    public String index(){
+    public String index(Model model) {
+       
+//        System.out.println(this.materialService.getMaterials().get(1).getName());
+//        model.addAttribute("user", this.userDetailsService.getUserByUsername("admin"));
+//        System.out.println(this.userDetailsService.getUserByUsername("admin").getName());
         return "index";
     }
 }

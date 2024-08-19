@@ -31,9 +31,7 @@ public class HibernateConfigs {
     @Bean
     public LocalSessionFactoryBean getSessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-        sessionFactory.setPackagesToScan(new String[]{
-            "com.XPTB.pojo"
-        });
+        sessionFactory.setPackagesToScan(new String[]{"com.XPTB.pojo"});
         sessionFactory.setDataSource(dataSource());
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
@@ -42,11 +40,9 @@ public class HibernateConfigs {
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(
-                env.getProperty("hibernate.connection.driverClass"));
+        dataSource.setDriverClassName(env.getProperty("hibernate.connection.driverClass"));
         dataSource.setUrl(env.getProperty("hibernate.connection.url"));
-        dataSource.setUsername(
-                env.getProperty("hibernate.connection.username"));
+        dataSource.setUsername(env.getProperty("hibernate.connection.username"));
         dataSource.setPassword(env.getProperty("hibernate.connection.password"));
         return dataSource;
     }
@@ -57,13 +53,11 @@ public class HibernateConfigs {
         props.setProperty(SHOW_SQL, env.getProperty("hibernate.showSql"));
         return props;
     }
-     @Bean
+
+    @Bean
     public HibernateTransactionManager transactionManager() {
-        HibernateTransactionManager transactionManager
-                = new HibernateTransactionManager();
-        transactionManager.setSessionFactory(
-                getSessionFactory().getObject());
+        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
+        transactionManager.setSessionFactory(getSessionFactory().getObject());
         return transactionManager;
     }
-
 }

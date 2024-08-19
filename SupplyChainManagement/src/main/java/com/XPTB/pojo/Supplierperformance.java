@@ -11,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -33,39 +34,55 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Supplierperformance.findAll", query = "SELECT s FROM Supplierperformance s"),
     @NamedQuery(name = "Supplierperformance.findById", query = "SELECT s FROM Supplierperformance s WHERE s.id = :id"),
     @NamedQuery(name = "Supplierperformance.findByEvaluationDate", query = "SELECT s FROM Supplierperformance s WHERE s.evaluationDate = :evaluationDate"),
-    @NamedQuery(name = "Supplierperformance.findByDeliveryTimelinessRating", query = "SELECT s FROM Supplierperformance s WHERE s.deliveryTimelinessRating = :deliveryTimelinessRating"),
+    @NamedQuery(name = "Supplierperformance.findByDeliveryRating", query = "SELECT s FROM Supplierperformance s WHERE s.deliveryRating = :deliveryRating"),
     @NamedQuery(name = "Supplierperformance.findByQualityRating", query = "SELECT s FROM Supplierperformance s WHERE s.qualityRating = :qualityRating"),
-    @NamedQuery(name = "Supplierperformance.findByCustomerServiceRating", query = "SELECT s FROM Supplierperformance s WHERE s.customerServiceRating = :customerServiceRating")})
+    @NamedQuery(name = "Supplierperformance.findByPriceRating", query = "SELECT s FROM Supplierperformance s WHERE s.priceRating = :priceRating")})
 public class Supplierperformance implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ID")
+    @Column(name = "id")
     private Integer id;
-    @Column(name = "EvaluationDate")
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "evaluation_date")
     @Temporal(TemporalType.DATE)
     private Date evaluationDate;
-    @Column(name = "DeliveryTimelinessRating")
-    private Integer deliveryTimelinessRating;
-    @Column(name = "QualityRating")
-    private Integer qualityRating;
-    @Column(name = "CustomerServiceRating")
-    private Integer customerServiceRating;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "delivery_rating")
+    private int deliveryRating;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "quality_rating")
+    private int qualityRating;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "price_rating")
+    private int priceRating;
     @Lob
     @Size(max = 65535)
-    @Column(name = "Comments")
-    private String comments;
-    @JoinColumn(name = "SupplierID", referencedColumnName = "id")
-    @ManyToOne
-    private Suppliers supplierID;
+    @Column(name = "comment")
+    private String comment;
+    @JoinColumn(name = "supplier_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Supplier supplier;
 
     public Supplierperformance() {
     }
 
     public Supplierperformance(Integer id) {
         this.id = id;
+    }
+
+    public Supplierperformance(Integer id, Date evaluationDate, int deliveryRating, int qualityRating, int priceRating) {
+        this.id = id;
+        this.evaluationDate = evaluationDate;
+        this.deliveryRating = deliveryRating;
+        this.qualityRating = qualityRating;
+        this.priceRating = priceRating;
     }
 
     public Integer getId() {
@@ -84,44 +101,44 @@ public class Supplierperformance implements Serializable {
         this.evaluationDate = evaluationDate;
     }
 
-    public Integer getDeliveryTimelinessRating() {
-        return deliveryTimelinessRating;
+    public int getDeliveryRating() {
+        return deliveryRating;
     }
 
-    public void setDeliveryTimelinessRating(Integer deliveryTimelinessRating) {
-        this.deliveryTimelinessRating = deliveryTimelinessRating;
+    public void setDeliveryRating(int deliveryRating) {
+        this.deliveryRating = deliveryRating;
     }
 
-    public Integer getQualityRating() {
+    public int getQualityRating() {
         return qualityRating;
     }
 
-    public void setQualityRating(Integer qualityRating) {
+    public void setQualityRating(int qualityRating) {
         this.qualityRating = qualityRating;
     }
 
-    public Integer getCustomerServiceRating() {
-        return customerServiceRating;
+    public int getPriceRating() {
+        return priceRating;
     }
 
-    public void setCustomerServiceRating(Integer customerServiceRating) {
-        this.customerServiceRating = customerServiceRating;
+    public void setPriceRating(int priceRating) {
+        this.priceRating = priceRating;
     }
 
-    public String getComments() {
-        return comments;
+    public String getComment() {
+        return comment;
     }
 
-    public void setComments(String comments) {
-        this.comments = comments;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
-    public Suppliers getSupplierID() {
-        return supplierID;
+    public Supplier getSupplier() {
+        return supplier;
     }
 
-    public void setSupplierID(Suppliers supplierID) {
-        this.supplierID = supplierID;
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
     }
 
     @Override
@@ -148,5 +165,5 @@ public class Supplierperformance implements Serializable {
     public String toString() {
         return "com.XPTB.pojo.Supplierperformance[ id=" + id + " ]";
     }
-    
+
 }
