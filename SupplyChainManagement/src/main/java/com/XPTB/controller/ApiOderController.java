@@ -36,8 +36,6 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,22 +47,16 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  *
  * @author ADMIN
  */
-<<<<<<< HEAD
 @RequestMapping("/api")
 @RestController
 public class ApiOderController {
 
-=======
-@RestController
-public class ApiOderController {
->>>>>>> 0ba8f7f4aa5b1e1e2cc2efadf25a07179ad3b4fa
     @Autowired
     private ImportOderService ImportOder;
     @Autowired
     private MaterialService ma;
     @Autowired
     private ImportOderDetailService ImpDetail;
-<<<<<<< HEAD
     @Autowired
     private WareHouseService wareHouse;
     @Autowired
@@ -73,10 +65,6 @@ public class ApiOderController {
     private MaterialStockService materialStock;
 
     @PostMapping(path = "/orders/add", consumes = "application/json", produces = "application/json")
-=======
-
-    @PostMapping(path = "/orders/add", consumes = "application/json",produces = "application/json")
->>>>>>> 0ba8f7f4aa5b1e1e2cc2efadf25a07179ad3b4fa
     public ResponseEntity<String> order(@RequestBody Map<String, Object> params) throws ParseException {
         Importorder i = new Importorder();
 //        s.getTransaction().begin();
@@ -84,7 +72,6 @@ public class ApiOderController {
         try {
             DayE = StringUtils.getDateFormating().parse((String) params.get("expectDate"));
             Date DayD = StringUtils.getDateFormating().parse((String) params.get("deliveryDate"));
-<<<<<<< HEAD
 
             String payment = (String) params.get("payment");
             Payment p = StringUtils.fromString(payment);
@@ -106,33 +93,10 @@ public class ApiOderController {
                     Material m = ma.getMaterialById((int) d.get("materialId"));
                     D.setMaterialID(m);
                     D.setTotalAmount(Math.multiplyExact(m.getPrice(), a));
-=======
-            
-            Long totalCost = Long.parseLong((String) params.get("totalCost"));
-            i.setDeliveryDate(DayD);
-            i.setExpectDate(DayE);
-            i.setActive(false);
-            i.setTotalCost(totalCost);
-            ImportOder.save(i);
-            int Totalprice = 0;
-            
-            if(params.get("details") != null){
-                
-                List<Map<String, Object>> Details = (List<Map<String, Object>>) params.get("details");
-                for (Map<String,Object> d :Details){
-                    Detailimportorder D = new Detailimportorder();
-                    D.setImportOderID(i);
-                    int a= (int) d.get("quantity");
-                    D.setQuantity(a);
-                    Material m = ma.getMaterialById((int) d.get("materialId"));
-                    D.setMaterialID(m);
-                    D.setTotalAmount(Math.multiplyExact(m.getPrice(), a));  
->>>>>>> 0ba8f7f4aa5b1e1e2cc2efadf25a07179ad3b4fa
                     ImpDetail.save(D);
                     Totalprice = (int) Math.addExact(Totalprice, D.getTotalAmount());
                 }
             }
-<<<<<<< HEAD
             i.setTotalPrice((long) Totalprice);
             ImportOder.save(i);
 
@@ -178,17 +142,6 @@ public class ApiOderController {
         }
 
         return new ResponseEntity<>("ok", HttpStatus.OK);
-=======
-            i.setTotalPrice((long)Totalprice);
-            ImportOder.save(i);
-            
-            
-            
-        } catch (ParseException ex) {
-            Logger.getLogger(ImportOderRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }     
-        return new ResponseEntity<>("ok",HttpStatus.OK);
->>>>>>> 0ba8f7f4aa5b1e1e2cc2efadf25a07179ad3b4fa
     }
 
 }
