@@ -8,6 +8,7 @@ import com.XPTB.pojo.Supplier;
 import com.XPTB.repository.SupplierRepository;
 import com.XPTB.service.SupplierService;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,26 @@ public class SupplierServiceImpl implements SupplierService{
     @Override
     public List<Supplier> getAllSupplier() {
         return this.supRepo.getAllSupplier();
+    }
+
+    @Override
+    public Supplier getSupplierByid(int id) {
+        return this.supRepo.getSupplierByid(id);
+    }
+
+    @Override
+    public void AddorUpdate(Supplier s) {
+        this.supRepo.AddorUpdate(s);
+    }
+
+    @Override
+    public void Delete(int id) {
+        this.supRepo.Delete(id);
+    }
+
+    @Override
+    public List<Supplier> getAllSupplier(Map<String, String> params) {
+        return this.supRepo.getAllSupplier(params);
     }
     
 }

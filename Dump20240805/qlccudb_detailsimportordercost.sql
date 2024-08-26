@@ -23,14 +23,14 @@ DROP TABLE IF EXISTS `detailsimportordercost`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `detailsimportordercost` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `import_order_id` int NOT NULL,
-  `cost_id` int NOT NULL,
+  `Cost_id` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `detailsimportordercost_ibfk_1` (`import_order_id`),
-  KEY `detailsimportordercost_ibfk_2` (`cost_id`),
-  CONSTRAINT `detailsimportordercost_ibfk_1` FOREIGN KEY (`import_order_id`) REFERENCES `importorder` (`id`),
-  CONSTRAINT `detailsimportordercost_ibfk_2` FOREIGN KEY (`cost_id`) REFERENCES `importordercost` (`id`)
+  KEY `import_oder_id_idx` (`import_order_id`),
+  KEY `Cost_id_idx` (`Cost_id`),
+  CONSTRAINT `Cost_id` FOREIGN KEY (`Cost_id`) REFERENCES `importordercost` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `import_oder_id` FOREIGN KEY (`import_order_id`) REFERENCES `importorder` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-08-06 17:10:21
+-- Dump completed on 2024-08-27  1:49:17

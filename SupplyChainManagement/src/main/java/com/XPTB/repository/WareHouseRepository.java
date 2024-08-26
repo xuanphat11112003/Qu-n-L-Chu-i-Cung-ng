@@ -6,6 +6,7 @@ package com.XPTB.repository;
 
 import com.XPTB.pojo.Warehouse;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -14,4 +15,7 @@ import java.util.List;
 public interface WareHouseRepository {
     public List<Warehouse> getAllWarehouses();
     public Warehouse getWarehouseById(int id);
+    public void AddorUpdate(Warehouse w);
+    public void Delete(int id);
+    public List<Warehouse> getAllWarehouses(Map<String, String> params);
 }

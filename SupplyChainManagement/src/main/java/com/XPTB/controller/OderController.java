@@ -42,7 +42,7 @@ public class OderController {
     private SupplierService sup;
 
     @Autowired
-    private MaterialService materialRepository;
+    private MaterialService material;
     
     @Autowired
     private ImportOderDetailService orderService;
@@ -73,7 +73,7 @@ public class OderController {
         for(Payment pay : Payment.values()){
             p.add(StringUtils.toString(pay));    
         }
-        List<Material> materials = materialRepository.getMaterials();
+        List<Material> materials = material.getMaterials();
         List<Supplier> supplier = sup.getAllSupplier();
         model.addAttribute("materials", materials);
         model.addAttribute("supplier", supplier);

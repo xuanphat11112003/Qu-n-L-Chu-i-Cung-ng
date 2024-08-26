@@ -8,6 +8,7 @@ import com.XPTB.pojo.Warehouse;
 import com.XPTB.repository.WareHouseRepository;
 import com.XPTB.service.WareHouseService;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,21 @@ public class WareHouseServiceImpl implements WareHouseService{
     @Override
     public Warehouse getWarehouseById(int id) {
         return this.wareHouseRepo.getWarehouseById(id);
+    }
+
+    @Override
+    public void AddorUpdate(Warehouse w) {
+        this.wareHouseRepo.AddorUpdate(w);
+    }
+
+    @Override
+    public void Delete(int id) {
+        this.wareHouseRepo.Delete(id);
+    }
+
+    @Override
+    public List<Warehouse> getAllWarehouses(Map<String, String> params) {
+        return this.wareHouseRepo.getAllWarehouses(params);
     }
     
 }

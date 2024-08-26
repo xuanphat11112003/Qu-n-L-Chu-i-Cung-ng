@@ -56,14 +56,14 @@
             <img src="https://cdn-icons-png.flaticon.com/128/3321/3321752.png" class="card-img-top" alt="...">
             <div class="card-body">
                 
-                <a href="#" class="btn btn-primary">Nhà cung cấp</a>
+                <a href="<c:url value="/supplier/index"/>" class="btn btn-primary">Nhà cung cấp</a>
             </div>
         </div>
         <div class="card" style="width: 18rem;">
             <img src="https://cdn-icons-png.flaticon.com/128/1350/1350237.png" class="card-img-top" alt="...">
             <div class="card-body">
                 
-                <a href="#" class="btn btn-primary">Kho Hàng</a>
+                <a href="<c:url value="/warehouse/index"/>" class="btn btn-primary">Kho Hàng</a>
             </div>
         </div>
         <div class="card" style="width: 18rem;">
@@ -84,14 +84,14 @@
             <img src="https://cdn-icons-png.flaticon.com/128/10614/10614568.png" class="card-img-top" alt="...">
             <div class="card-body">
                 
-                <a href="#" class="btn btn-primary">Nguyên vật liệu</a>
+                <a href="<c:url value="/material/index"/>" class="btn btn-primary">Nguyên vật liệu</a>
             </div>
         </div>
         <div class="card" style="width: 18rem;">
             <img src="https://cdn-icons-png.flaticon.com/128/11083/11083287.png" class="card-img-top" alt="...">
             <div class="card-body">
                 
-                <a href="#" class="btn btn-primary">Báo cáo thống kê</a>
+                <a href="<c:url value="/stats/index"/>" class="btn btn-primary">Báo cáo thống kê</a>
             </div>
         </div>
 

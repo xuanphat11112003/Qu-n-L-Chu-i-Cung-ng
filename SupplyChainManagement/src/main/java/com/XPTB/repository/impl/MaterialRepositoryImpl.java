@@ -33,10 +33,28 @@ public class MaterialRepositoryImpl implements MaterialRepository {
     private LocalSessionFactoryBean factory;
 
     @Override
-    public List<Material> getMaterials() {
+    public List<Material> getMaterials(Map<String, String> params) {
         Session s = this.factory.getObject().getCurrentSession();
-        Query q = s.createNamedQuery("Material.findAll");
-        return q.getResultList();
+        CriteriaBuilder b = s.getCriteriaBuilder();
+        CriteriaQuery<Material> q = b.createQuery(Material.class);
+        Root root = q.from(Material.class);
+        q.select(root);
+        if (params != null) {
+            String name = params.get("q");
+            if(name != null){
+                Predicate p1 = b.like(root.get("name"), String.format("%%%s%%", name));
+                q.where(p1);
+            }
+            
+        }
+        Query query = s.createQuery(q);
+        return query.getResultList();    
+    }
+    @Override
+    public List<Material> getMaterials(){
+        Session s = this.factory.getObject().getCurrentSession();
+        Query aQuery = s.createNamedQuery("Material.findAll");
+        return  aQuery.getResultList();
     }
 
 
@@ -66,6 +84,22 @@ public class MaterialRepositoryImpl implements MaterialRepository {
         Query q = s.createNamedQuery("Material.findByName");
         q.setParameter("name", name);
         return (Material) q.getSingleResult();
+    }
+
+    @Override
+    public void AddorUpdate(Material mtrl) {
+        Session s = this.factory.getObject().getCurrentSession();
+        if(mtrl.getId() != null){
+            s.update(mtrl);
+        }else
+            s.save(mtrl);
+    }
+
+    @Override
+    public void deleteMaterial(int i) {
+        Session s = this.factory.getObject().getCurrentSession();
+        Material ma = this.getMaterialById(i);
+        s.delete(ma);
     }
 
 }

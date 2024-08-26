@@ -27,6 +27,10 @@ public class MaterialServiceImpl implements MaterialService{
     private MaterialRepository maRepo;
 
     @Override
+    public List<Material> getMaterials(Map<String, String> params) {
+        return this.maRepo.getMaterials(params);
+    }
+    @Override
     public List<Material> getMaterials() {
         return this.maRepo.getMaterials();
     }
@@ -52,6 +56,16 @@ public class MaterialServiceImpl implements MaterialService{
     @Override
     public Material getMaterialByName(String name) {
         return this.maRepo.getMaterialByName(name);
+    }
+
+    @Override
+    public void AddorUpdate(Material mtrl) {
+        this.maRepo.AddorUpdate(mtrl);
+    }
+
+    @Override
+    public void deleteMaterial(int i) {
+        this.maRepo.deleteMaterial(i);
     }
     
 }

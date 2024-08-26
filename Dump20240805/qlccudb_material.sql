@@ -23,14 +23,14 @@ DROP TABLE IF EXISTS `material`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `material` (
-  `id` int NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `price` decimal(10,2) NOT NULL,
-  `supplier_id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `price` decimal(10,0) NOT NULL,
+  `supplier_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `materials_ibfk_1` (`supplier_id`),
+  KEY `supplier_idx` (`supplier_id`),
   CONSTRAINT `supplier` FOREIGN KEY (`supplier_id`) REFERENCES `supplier` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `material` (
 
 LOCK TABLES `material` WRITE;
 /*!40000 ALTER TABLE `material` DISABLE KEYS */;
-INSERT INTO `material` VALUES (1,'đường mía',100.00,1),(2,'Trà',50.00,2);
+INSERT INTO `material` VALUES (1,'đường mía',100,1),(2,'Trà',50,2),(3,'Nước Suối',20,2),(4,'Gạo',100,1);
 /*!40000 ALTER TABLE `material` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-08-06 17:10:21
+-- Dump completed on 2024-08-27  1:49:16

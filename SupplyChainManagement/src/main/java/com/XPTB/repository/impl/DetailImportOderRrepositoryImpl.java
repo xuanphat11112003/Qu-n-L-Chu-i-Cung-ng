@@ -73,13 +73,15 @@ public class DetailImportOderRrepositoryImpl implements ImportOderDetailsReposit
                 importOrder.get("active"),//6
                 supplierJoin.get("name"),//7
                 supplierJoin.get("address"),//8
-                supplierJoin.get("phone")//9
+                supplierJoin.get("phone"),//9
+                importOrder.get("activeEvaluate"),//10
+                supplierJoin.get("id")//11
 
         );
 
         // Nếu cần nhóm dữ liệu
         cq.groupBy(importOrder.get("id"), materialJoin.get("name"), supplierJoin.get("name"),
-                supplierJoin.get("address"), supplierJoin.get("phone"));
+                supplierJoin.get("address"), supplierJoin.get("phone"),supplierJoin.get("id"));
         if (params != null) {
             List<Predicate> predicates = new ArrayList<>();
             String id = params.get("q");

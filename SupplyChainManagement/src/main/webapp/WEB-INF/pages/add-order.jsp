@@ -177,6 +177,7 @@
                 .then(function (data) {
                     console.log('Response:', data);
                     alert('Hợp đồng đã được tạo thành công!');
+                    window.location.reload();
 
                 })
                 .catch(function (error) {

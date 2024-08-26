@@ -5,6 +5,9 @@
 package com.XPTB.configs;
 
 
+import javax.servlet.FilterRegistration;
+import javax.servlet.ServletContext;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**
@@ -34,6 +37,18 @@ public class DispatcherServleInit extends AbstractAnnotationConfigDispatcherServ
     @Override
     protected String[] getServletMappings() {
         return new String[]{"/"};
+    }
+    @Override
+    protected void registerDispatcherServlet(ServletContext servletContext) {
+        super.registerDispatcherServlet(servletContext);
+        
+        // Create and register CharacterEncodingFilter
+        CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
+        encodingFilter.setEncoding("UTF-8");
+        encodingFilter.setForceEncoding(true);
+        
+        FilterRegistration.Dynamic filterRegistration = servletContext.addFilter("characterEncodingFilter", encodingFilter);
+        filterRegistration.addMappingForUrlPatterns(null, true, "/*");
     }
 
 

@@ -23,13 +23,15 @@ DROP TABLE IF EXISTS `importorder`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `importorder` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `expect_date` date NOT NULL,
   `delivery_date` date DEFAULT NULL,
-  `total_price` decimal(10,2) NOT NULL,
-  `total_cost` decimal(10,2) NOT NULL,
+  `total_price` decimal(10,0) DEFAULT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  `Payment` enum('thanh toán ngay lập tức','thanh toán sau 1 ngày nhận hóa đơn','thanh toán sau khi nhận hàng') NOT NULL DEFAULT 'thanh toán ngay lập tức',
+  `active_evaluate` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +40,7 @@ CREATE TABLE `importorder` (
 
 LOCK TABLES `importorder` WRITE;
 /*!40000 ALTER TABLE `importorder` DISABLE KEYS */;
+INSERT INTO `importorder` VALUES (26,'2024-08-18','2024-08-17',1200,1,'thanh toán sau 1 ngày nhận hóa đơn',1),(27,'0001-12-02','0001-12-02',400,1,'thanh toán sau khi nhận hàng',0),(28,'2024-08-17','2024-08-18',100,1,'thanh toán sau 1 ngày nhận hóa đơn',0),(29,'2024-08-18','2024-08-14',1200,1,'thanh toán sau 1 ngày nhận hóa đơn',0),(30,'2024-08-20','2024-08-18',660,1,'thanh toán sau 1 ngày nhận hóa đơn',0),(31,'2024-08-21','2024-08-19',290,1,'thanh toán ngay lập tức',0),(32,'2024-08-24','2024-08-21',1500,0,'thanh toán sau 1 ngày nhận hóa đơn',0),(33,'2024-08-24','2024-08-21',1500,0,'thanh toán sau 1 ngày nhận hóa đơn',0);
 /*!40000 ALTER TABLE `importorder` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-08-06 17:10:19
+-- Dump completed on 2024-08-27  1:49:18

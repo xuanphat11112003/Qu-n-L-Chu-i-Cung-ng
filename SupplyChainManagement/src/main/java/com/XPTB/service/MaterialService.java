@@ -14,10 +14,13 @@ import java.util.Map;
  * @author ADMIN
  */
 public interface MaterialService {
-    List<Material> getMaterials();
+    List<Material> getMaterials(Map<String, String> params);
     public Material getMaterialById(int id);
     public Material getMaterialByName(String name);
     List<MaterialDTO> getMaterialsBySupplier(Map<String, String> params);
+    public void AddorUpdate(Material ma);
+    List<Material> getMaterials();
+    public void deleteMaterial(int i);
 
 
    

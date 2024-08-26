@@ -40,6 +40,11 @@ public class ImportOderServiceImpl implements ImportOderService{
         this.importOrderRepository.UpdateActive(i);
     }
 
+    @Override
+    public Importorder getImportorderById(int i) {
+        return this.importOrderRepository.getImportorderById(i);
+    }
+
     
     
 }

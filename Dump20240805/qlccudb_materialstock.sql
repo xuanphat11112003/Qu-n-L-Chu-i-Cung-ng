@@ -23,17 +23,17 @@ DROP TABLE IF EXISTS `materialstock`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `materialstock` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `amount` int NOT NULL,
-  `product_id` int NOT NULL,
+  `inventory_id` int NOT NULL,
   `material_id` int NOT NULL,
-  `date_expire` date NOT NULL,
+  `date_expire` date DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `materialsstock_ibfk_1` (`product_id`),
-  KEY `materialsstock_ibfk_2` (`material_id`),
-  CONSTRAINT `materialstock_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `inventory` (`id`),
-  CONSTRAINT `materialstock_ibfk_2` FOREIGN KEY (`material_id`) REFERENCES `material` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `materialsstock_ibfk_1` (`inventory_id`),
+  KEY `mateId_idx` (`material_id`),
+  CONSTRAINT `mateId` FOREIGN KEY (`material_id`) REFERENCES `material` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `materialstock` FOREIGN KEY (`inventory_id`) REFERENCES `inventory` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,6 +42,7 @@ CREATE TABLE `materialstock` (
 
 LOCK TABLES `materialstock` WRITE;
 /*!40000 ALTER TABLE `materialstock` DISABLE KEYS */;
+INSERT INTO `materialstock` VALUES (1,3,18,3,NULL),(2,4,19,1,NULL),(3,12,20,1,NULL),(4,12,21,1,NULL),(5,12,22,1,NULL),(6,12,23,1,NULL),(7,2,24,3,NULL);
 /*!40000 ALTER TABLE `materialstock` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-08-06 17:10:22
+-- Dump completed on 2024-08-27  1:49:16

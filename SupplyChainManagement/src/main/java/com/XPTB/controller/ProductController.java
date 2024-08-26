@@ -46,7 +46,7 @@ public class ProductController {
             return "add-product";
         try {
             this.product.addOrUpdate(p);  
-            return "redirect:/";
+            return "redirect:/product";
         } catch (Exception ex) {
             model.addAttribute("errMsg", ex.getMessage());
         }

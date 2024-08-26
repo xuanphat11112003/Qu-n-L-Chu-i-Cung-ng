@@ -23,17 +23,17 @@ DROP TABLE IF EXISTS `detailimportorder`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `detailimportorder` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `quantity` int NOT NULL,
-  `total_amount` decimal(10,2) DEFAULT NULL,
-  `material_id` int NOT NULL,
-  `import_order_id` int NOT NULL,
+  `total_amount` decimal(10,0) DEFAULT NULL,
+  `ImportOder_ID` int NOT NULL,
+  `Material_ID` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `detailimportorder_ibfk_1` (`material_id`),
-  KEY `detailimportorder_ibfk_2` (`import_order_id`),
-  CONSTRAINT `detailimportorder_ibfk_1` FOREIGN KEY (`material_id`) REFERENCES `material` (`id`),
-  CONSTRAINT `detailimportorder_ibfk_2` FOREIGN KEY (`import_order_id`) REFERENCES `importorder` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `ImpID_idx` (`ImportOder_ID`),
+  KEY `materialID_idx` (`Material_ID`),
+  CONSTRAINT `ImpID` FOREIGN KEY (`ImportOder_ID`) REFERENCES `importorder` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `materialID` FOREIGN KEY (`Material_ID`) REFERENCES `material` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,6 +42,7 @@ CREATE TABLE `detailimportorder` (
 
 LOCK TABLES `detailimportorder` WRITE;
 /*!40000 ALTER TABLE `detailimportorder` DISABLE KEYS */;
+INSERT INTO `detailimportorder` VALUES (16,12,1200,26,1),(17,4,400,27,1),(18,1,100,28,1),(19,12,1200,29,1),(20,12,600,30,2),(21,3,60,30,3),(22,5,250,31,2),(23,2,40,31,3),(24,12,1200,32,4),(25,3,300,32,1),(26,12,1200,33,4),(27,3,300,33,1);
 /*!40000 ALTER TABLE `detailimportorder` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-08-06 17:10:20
+-- Dump completed on 2024-08-27  1:49:18

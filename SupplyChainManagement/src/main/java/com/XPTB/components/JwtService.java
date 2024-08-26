@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 
 /**
  *
- * @author huu-thanhduong
+
  */
 @Component
 public class JwtService {

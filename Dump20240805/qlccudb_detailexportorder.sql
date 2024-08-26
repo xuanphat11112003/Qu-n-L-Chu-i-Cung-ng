@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `detailexportorder`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `detailexportorder` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `amount` int NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `discount` decimal(10,2) NOT NULL,
@@ -32,9 +32,9 @@ CREATE TABLE `detailexportorder` (
   `product_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `detailexportorder_ibfk_1` (`export_order_id`),
-  KEY `detailexportorder_ibfk_2` (`product_id`),
+  KEY `product_ibfk_2` (`product_id`),
   CONSTRAINT `detailexportorder_ibfk_1` FOREIGN KEY (`export_order_id`) REFERENCES `exportorder` (`id`),
-  CONSTRAINT `detailexportorder_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
+  CONSTRAINT `product_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -56,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-08-06 17:10:22
+-- Dump completed on 2024-08-27  1:49:18

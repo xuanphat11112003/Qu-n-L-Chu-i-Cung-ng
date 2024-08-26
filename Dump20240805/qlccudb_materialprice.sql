@@ -23,13 +23,13 @@ DROP TABLE IF EXISTS `materialprice`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `materialprice` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `material_id` int NOT NULL,
   `unit_price` decimal(10,2) NOT NULL,
   `change_date` date NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `materialprice_ibfk_1` (`material_id`),
-  CONSTRAINT `materialprice_ibfk_1` FOREIGN KEY (`material_id`) REFERENCES `material` (`id`)
+  KEY `materialId_idx` (`material_id`),
+  CONSTRAINT `mat_id` FOREIGN KEY (`material_id`) REFERENCES `material` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-08-06 17:10:20
+-- Dump completed on 2024-08-27  1:49:17

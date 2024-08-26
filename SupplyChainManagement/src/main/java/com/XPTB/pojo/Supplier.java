@@ -10,6 +10,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
@@ -39,7 +41,7 @@ public class Supplier implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
     @Size(max = 100)
@@ -52,10 +54,6 @@ public class Supplier implements Serializable {
     @Size(max = 20)
     @Column(name = "phone")
     private String phone;
-    @Lob
-    @Size(max = 65535)
-    @Column(name = "feedback")
-    private String feedback;
     @OneToMany(mappedBy = "supplierId")
     private Collection<Material> materialCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "supplier")
@@ -98,14 +96,6 @@ public class Supplier implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public String getFeedback() {
-        return feedback;
-    }
-
-    public void setFeedback(String feedback) {
-        this.feedback = feedback;
     }
 
     @XmlTransient

@@ -34,14 +34,64 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
                        value="/WEB-INF/pages/add-order.jsp" />
     </definition>
     <definition name="seeorder" extends="baseLayout">
-        <put-attribute name="title" value="mua hàng" />
+        <put-attribute name="title" value="xem hàng" />
         <put-attribute name="content"
                        value="/WEB-INF/pages/see-order.jsp" />
     </definition>
     <definition name="viewInventory" extends="baseLayout">
-        <put-attribute name="title" value="mua hàng" />
+        <put-attribute name="title" value="xem kho" />
         <put-attribute name="content"
                        value="/WEB-INF/pages/viewInventory.jsp" />
+    </definition>
+    <definition name="indexmaterial" extends="baseLayout">
+        <put-attribute name="title" value="xem nguyên vật liệu" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/see-material.jsp" />
+    </definition>
+     <definition name="addmaterial" extends="baseLayout">
+        <put-attribute name="title" value="thêm nguyên vật liệu" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/add-material.jsp" />
+    </definition>
+    <definition name="indexwarehouse" extends="baseLayout">
+        <put-attribute name="title" value="xem nhà kho" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/see-warehouse.jsp" />
+    </definition>
+    <definition name="addwarehouse" extends="baseLayout">
+        <put-attribute name="title" value="thêm nhà kho" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/add-warehouse.jsp" />
+    </definition>
+    <definition name="ïndexsupplier" extends="baseLayout">
+        <put-attribute name="title" value="xem nhà cung cấp" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/see-supplier.jsp" />
+    </definition>
+    <definition name="addsupplier" extends="baseLayout">
+        <put-attribute name="title" value="thêm nhà cung cấp" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/add-supplier.jsp" />
+    </definition>
+    <definition name="addEvaluatesupplier" extends="baseLayout">
+        <put-attribute name="title" value="thêm nhà cung cấp" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/add-evaluatesupplier.jsp" />
+    </definition>
+    <definition name="indexevaluate" extends="baseLayout">
+        <put-attribute name="title" value="xem nhà cung cấp" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/see-evaluate.jsp" />
+    </definition>
+     <definition name="indexstats" extends="baseLayout">
+        <put-attribute name="title" value="xem nhà cung cấp" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/index-stats.jsp" />
+    </definition>
+     <definition name="detailstats" extends="baseLayout">
+        <put-attribute name="title" value="xem nhà cung cấp" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/detail-stats.jsp" />
     </definition>
 
     

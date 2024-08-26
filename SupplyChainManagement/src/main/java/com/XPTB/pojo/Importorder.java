@@ -43,15 +43,19 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Importorder.findByActive", query = "SELECT i FROM Importorder i WHERE i.active = :active"),
     @NamedQuery(name = "Importorder.findByPayment", query = "SELECT i FROM Importorder i WHERE i.payment = :payment")})
 public class Importorder implements Serializable {
-//    private String v1 = "thanh toán ngay lập tức";
-//    private String v2 = "thanh toán sau 1 ngày nhận hóa đơn";
-//    private String v3 = "thanh toán sau khi nhận hàng";
-    //ENUM('thanh toán ngay lập tức', 'thanh toán sau 1 ngày nhận hóa đơn', 'thanh toán sau khi nhận hàng')
+
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "active_evaluate")
+    private boolean activeEvaluate;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderId")
+    private Collection<Supplierperformance> supplierperformanceCollection;
 
     public enum Payment {
         V1("thanh toán ngay lập tức"),
         V2("thanh toán sau 1 ngày nhận hóa đơn"),
         V3("thanh toán sau khi nhận hàng");
+        
         private String value;
 
         Payment(String value) {
@@ -207,6 +211,23 @@ public class Importorder implements Serializable {
     @Override
     public String toString() {
         return "com.XPTB.pojo.Importorder[ id=" + id + " ]";
+    }
+
+    public boolean getActiveEvaluate() {
+        return activeEvaluate;
+    }
+
+    public void setActiveEvaluate(boolean activeEvaluate) {
+        this.activeEvaluate = activeEvaluate;
+    }
+
+    @XmlTransient
+    public Collection<Supplierperformance> getSupplierperformanceCollection() {
+        return supplierperformanceCollection;
+    }
+
+    public void setSupplierperformanceCollection(Collection<Supplierperformance> supplierperformanceCollection) {
+        this.supplierperformanceCollection = supplierperformanceCollection;
     }
 
 }

@@ -23,14 +23,14 @@ DROP TABLE IF EXISTS `inventory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `inventory` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `entry_date` date DEFAULT NULL,
   `exit_date` date DEFAULT NULL,
   `warehouse_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `StockID` (`warehouse_id`),
   CONSTRAINT `inventory_ibfk_1` FOREIGN KEY (`warehouse_id`) REFERENCES `warehouse` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,6 +39,7 @@ CREATE TABLE `inventory` (
 
 LOCK TABLES `inventory` WRITE;
 /*!40000 ALTER TABLE `inventory` DISABLE KEYS */;
+INSERT INTO `inventory` VALUES (1,'2024-08-18',NULL,1),(2,'2024-08-13',NULL,1),(3,'2024-08-13',NULL,1),(4,'2024-08-13',NULL,1),(5,'2024-08-13',NULL,1),(6,'2024-08-13',NULL,1),(7,'2024-08-13',NULL,1),(8,'2024-08-13',NULL,1),(9,'2024-08-13',NULL,1),(10,'2024-08-13',NULL,1),(11,'2024-08-13',NULL,1),(12,'2024-08-13',NULL,1),(13,'2024-08-13',NULL,1),(14,'2024-08-13',NULL,1),(15,'2024-08-13',NULL,1),(16,'2024-08-13',NULL,1),(17,'2024-08-13',NULL,1),(18,'2024-08-13',NULL,1),(19,'2024-08-13',NULL,1),(20,'2024-08-19',NULL,1),(21,'2024-08-19',NULL,1),(22,'2024-08-19',NULL,1),(23,'2024-08-19',NULL,3),(24,'2024-08-19',NULL,1);
 /*!40000 ALTER TABLE `inventory` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-08-06 17:10:19
+-- Dump completed on 2024-08-27  1:49:19

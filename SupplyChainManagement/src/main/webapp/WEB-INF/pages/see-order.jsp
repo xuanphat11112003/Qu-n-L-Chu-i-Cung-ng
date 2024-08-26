@@ -140,6 +140,8 @@
                                     <td>${detail[2]}</td>
                                     <c:set var="totalValue" value="${detail[3]}" />
                                     <c:set var="Active" value="${detail[6]}" />
+                                    <c:set var="A" value="${detail[10]}" />
+                                    <c:set var="ids" value="${detail[11]}" />
 
                                 </tr>
                             </c:if>
@@ -169,6 +171,12 @@
                 <c:choose>
                     <c:when test="${Active != false}">
                         <button type="button" class="btn btn-primary">Đã Xác Nhận</button>
+                        <c:if test="${A != true}">
+                            <div class="col-md-10 col-12">
+                                <a class="btn btn-info m-1" href="<c:url value="/supplier/evaluate/add/${entry.key}/${ids}" />">Đánh giá nhà cung cấp</a>
+                            </div>
+                        </c:if>
+
                     </c:when>
                     <c:otherwise>
                         <c:url value="/api/updateStatus/${entry.key}" var="updateUrl" />

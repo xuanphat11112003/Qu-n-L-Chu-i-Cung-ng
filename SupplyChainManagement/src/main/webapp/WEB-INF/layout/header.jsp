@@ -10,6 +10,7 @@
     width: 250px; /* Chiều rộng của thanh bên */
     transition: left 0.3s ease; /* Hiệu ứng chuyển động khi mở/đóng */
     z-index: 1000;
+
 }
 #sidebar.open {
     left: 0; /* Hiển thị thanh bên */
@@ -76,7 +77,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn nav-link alert-primary" href="<c:url value="/product" />">
+                            <a class="btn nav-link alert-primary" href="<c:url value="/" />">
                                 Sản Xuất
                             </a>
                         </li>
@@ -106,7 +107,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn nav-link alert-primary" href="<c:url value="/" />">
+                            <a class="btn nav-link alert-primary" href="<c:url value="/product" />">
                                 Sản Phẩm
                             </a>
                         </li>
@@ -133,6 +134,18 @@
             sidebar.classList.remove('open');
         } else {
             sidebar.classList.add('open');
+        }
+    });
+    document.addEventListener('scroll', function() {
+        var sidebarToggle = document.getElementById('sidebar-toggle');
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (scrollTop > 100) { // Thay đổi giá trị này tùy thuộc vào vị trí bạn muốn nút di chuyển
+            sidebarToggle.style.top = '0'; // Đưa nút lên cùng với cạnh trên của trang
+            sidebar.style.top = '50px';
+        } else {
+            sidebarToggle.style.top = '70px'; // Đặt lại vị trí ban đầu khi cuộn lên trên
+            sidebar.style.top = '120px';
         }
     });
 </script>
