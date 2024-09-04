@@ -1,9 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<style>
+    #backgrOrder{
+         background-color: rgba(173, 216, 230, 1.0);
+    }
+</style>
 
-
-<div class="container mt-5">
+<div class="container mt-5" id ="backgrOrder">
     <h2 class="text-center">Tạo Đơn Hàng Nhập</h2>
     <form id="orderForm">
         <div class="form-group">
@@ -95,7 +99,7 @@
             <td>
                 <button type="button" class="btn btn-danger remove-btn">Xóa</button>
             </td>
-        `;
+        `
 
             // Thêm dòng mới vào bảng
             tbody.appendChild(newRow);
@@ -173,8 +177,7 @@
             if (!response.ok) {
                 throw new Error('Có lỗi xảy ra khi tạo hợp đồng. Vui lòng thử lại sau.');
             }
-        })
-                .then(function (data) {
+        }).then(function (data) {
                     console.log('Response:', data);
                     alert('Hợp đồng đã được tạo thành công!');
                     window.location.reload();

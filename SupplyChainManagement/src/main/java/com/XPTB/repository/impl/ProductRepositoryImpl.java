@@ -39,15 +39,15 @@ public class ProductRepositoryImpl implements ProductRepository {
         q.select(root);
         if (params != null) {
             String name = params.get("q");
-            if(name != null){
+            if (name != null) {
                 Predicate p1 = b.like(root.get("name"), String.format("%%%s%%", name));
                 q.where(p1);
             }
-            
+
         }
         Query query = s.createQuery(q);
         return query.getResultList();
-        
+
     }
 
     @Override
@@ -59,6 +59,7 @@ public class ProductRepositoryImpl implements ProductRepository {
             s.save(p);
         }
     }
+
     @Override
     public Product getProductById(int i) {
         Session s = this.factory.getObject().getCurrentSession();
@@ -67,11 +68,16 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public void deleteProduct(int id) {
-        Session s =this.factory.getObject().getCurrentSession();
+        Session s = this.factory.getObject().getCurrentSession();
         Product p = this.getProductById(id);
         s.delete(p);
     }
 
-    
+    @Override
+    public List<Product> getListProducts() {
+        Session s = this.factory.getObject().getCurrentSession();
+        org.hibernate.query.Query query = s.createNamedQuery("Product.findAll");
+        return query.getResultList();
+    }
 
 }

@@ -6,10 +6,13 @@ package com.XPTB.configs;
 
 import com.XPTB.service.UserService;
 import com.XPTB.service.impl.UserServiceImpl;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -54,13 +57,23 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.logout().logoutSuccessUrl("/login");
 
-        http.exceptionHandling().accessDeniedPage("/login?accessDenied");
-        http.authorizeRequests().antMatchers("/api/**").permitAll()
-                .antMatchers("/**").access("hasRole('ROLE_ADMIN')");
+//        http.exceptionHandling().accessDeniedPage("/login?accessDenied");
+//        http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/user/**").access("hasRole('ROLE_ADMIN')");
+//        http.authorizeRequests().antMatchers(HttpMethod.GET,"/**").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')");
+//        http.authorizeRequests().antMatchers("/api/**").permitAll()
+//                .antMatchers("/**").access("hasRole('ROLE_ADMIN')");
 
 //        http.authorizeRequests().antMatchers("/api/**").permitAll()
 //                .antMatchers("/**").hasRole("ADMIN");
         http.csrf().disable();
+    }
+    @Bean
+    public Cloudinary cloudinary() {
+        Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap("cloud_name", "dsrf9kurf",
+                        "api_key", "719791144812691",
+                        "api_secret", "MhOUS2bRoOYyfrQCZFlerjJGpWA",
+                        "secure", true));
+        return cloudinary;
     }
 
 }

@@ -54,6 +54,13 @@ public class ImportOderRepositoryImpl implements ImportOderRepository {
         imp.setActive(true);
     }
 
+    @Override
+    public void deltete(int id) {
+        Session s = this.factory.getObject().getCurrentSession();
+        Importorder i = this.getImportorderById(id);
+        s.delete(i);
+    }
+
     
 
   

@@ -10,6 +10,8 @@ import com.XPTB.repository.MaterialRepository;
 import com.XPTB.repository.MaterialStockRepository;
 
 import com.XPTB.service.MaterialStockService;
+import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,31 @@ public class MaterialStockServiceImpl implements MaterialStockService{
     @Override
     public void addMaterialinStock(Materialstock material) {
         this.materialRepo.addMaterialinStock(material);
+    }
+
+    @Override
+    public List<Object[]> getAllMaterialStock(Map<String, String> map) {
+        return this.materialRepo.getAllMaterialStock(map);
+    }
+
+    @Override
+    public void Delete(int i) {
+        this.materialRepo.Delete(i);
+    }
+
+    @Override
+    public Materialstock getMaterialstockById(int i) {
+        return this.materialRepo.getMaterialstockById(i);
+    }
+
+    @Override
+    public void update(Materialstock m) {
+        this.materialRepo.updateExpireDate(m);
+    }
+
+    @Override
+    public void updateQuantity(Materialstock ms) {
+        this.materialRepo.updateQuantity(ms);
     }
 
     

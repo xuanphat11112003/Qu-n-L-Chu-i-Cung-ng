@@ -18,5 +18,6 @@ public interface ImportOderService {
     public void save(Importorder impoder);
     public void UpdateActive(int id);
     public Importorder getImportorderById(int id);
+    public void delete(int id);
 
 }

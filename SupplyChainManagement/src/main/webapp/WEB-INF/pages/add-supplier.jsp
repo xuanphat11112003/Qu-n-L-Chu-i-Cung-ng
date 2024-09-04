@@ -10,6 +10,12 @@
         ${errMsg}
     </div>
 </c:if>
+<style>
+    form{
+        background-color: whitesmoke;
+        padding: 10px;
+    }
+</style>
 <form:form method="post"  action="${action}" modelAttribute="supplier">
     <form:errors path="*" element="div" cssClass="alert alert-danger" />
 

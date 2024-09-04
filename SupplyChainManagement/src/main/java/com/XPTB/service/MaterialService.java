@@ -6,6 +6,7 @@ package com.XPTB.service;
 
 import com.XPTB.DTO.MaterialDTO;
 import com.XPTB.pojo.Material;
+import com.XPTB.pojo.Materialstock;
 import java.util.List;
 import java.util.Map;
 
@@ -20,8 +21,5 @@ public interface MaterialService {
     List<MaterialDTO> getMaterialsBySupplier(Map<String, String> params);
     public void AddorUpdate(Material ma);
     List<Material> getMaterials();
-    public void deleteMaterial(int i);
-
-
-   
+    public void deleteMaterial(int i); 
 }

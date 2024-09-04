@@ -21,6 +21,7 @@ import com.XPTB.service.WareHouseService;
 import com.XPTB.utils.StringUtils;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -36,6 +37,8 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,8 +50,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  *
  * @author ADMIN
  */
-@RequestMapping("/api")
+
 @RestController
+@CrossOrigin
 public class ApiOderController {
 
     @Autowired
@@ -64,7 +68,7 @@ public class ApiOderController {
     @Autowired
     private MaterialStockService materialStock;
 
-    @PostMapping(path = "/orders/add", consumes = "application/json", produces = "application/json")
+    @PostMapping(path = "/api/orders/add", consumes = "application/json", produces = "application/json")
     public ResponseEntity<String> order(@RequestBody Map<String, Object> params) throws ParseException {
         Importorder i = new Importorder();
 //        s.getTransaction().begin();
@@ -105,14 +109,62 @@ public class ApiOderController {
         }
         return new ResponseEntity<>("ok", HttpStatus.OK);
     }
+    
+    @DeleteMapping("/orders/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteOrder(@PathVariable(value = "id") int id){
+        this.ImportOder.delete(id);
+    }
 
-    @GetMapping("/getMaterialsBySupplier")
+    @GetMapping("/api/orders")
+    public ResponseEntity<?> showOrders(@RequestParam Map<String, String> params) {
+        List<Object[]> orderDetails = this.ImpDetail.getDetailOrder(params);
+        Map<Integer, List<Map<String, Object>>> groupedOrderDetails = new HashMap<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        for (Object[] detail : orderDetails) {
+            int orderId = (int) detail[0];
+            Date sqlDate = (java.sql.Date) detail[4];
+            String formattedExpectDate = sdf.format(sqlDate);
+            sqlDate = (java.sql.Date) detail[5];
+            String formattedDeliveryDate = sdf.format(sqlDate);
+            Map<String, Object> formattedDetail = new HashMap<>();
+            formattedDetail.put("id", detail[0]);
+            formattedDetail.put("materialName", detail[1]);
+            formattedDetail.put("quantity", detail[2]);
+            formattedDetail.put("totalPrice", detail[3]);
+            formattedDetail.put("expectDate", formattedExpectDate);
+            formattedDetail.put("deliveryDate", formattedDeliveryDate);
+            formattedDetail.put("active", detail[6]);
+            formattedDetail.put("supplierName", detail[7]);
+            formattedDetail.put("supplierAddress", detail[8]);
+            formattedDetail.put("supplierPhone", detail[9]);
+            formattedDetail.put("activeEvaluate", detail[10]);
+            formattedDetail.put("supplierId", detail[11]);
+            if (!groupedOrderDetails.containsKey(orderId)) {
+                List<Map<String, Object>> detailsList = new ArrayList<>();
+                groupedOrderDetails.put(orderId, detailsList);
+            }
+            groupedOrderDetails.get(orderId).add(formattedDetail);
+        }
+        return new ResponseEntity<>(groupedOrderDetails, HttpStatus.OK);
+    }
+
+    @GetMapping("/api/getMaterialsBySupplier")
     public ResponseEntity<List<MaterialDTO>> getMaterialsBySupplier(@RequestParam Map<String, String> params) {
         List<MaterialDTO> m = this.ma.getMaterialsBySupplier(params);
         return new ResponseEntity<>(m, HttpStatus.OK);
     }
 
-    @PostMapping(path = "/updateStatus", consumes = "application/json", produces = "application/json")
+    @GetMapping("/api/orders/payment")
+    public ResponseEntity<List<String>> getPayment() {
+        List<String> p = new ArrayList<>();
+        for (Payment pay : Payment.values()) {
+            p.add(pay.getValue());
+        }
+        return new ResponseEntity<>(p, HttpStatus.OK);
+    }
+
+    @PostMapping(path = "/api/updateStatus", consumes = "application/json", produces = "application/json")
     public ResponseEntity<String> AcceptOrder(@RequestBody Map<String, Object> params) {
         int id = Integer.parseInt((String) params.get("orderid"));
         Materialstock mStock = new Materialstock();
@@ -125,7 +177,7 @@ public class ApiOderController {
             List<Object[]> detailorder = this.ImpDetail.getDetailOrder(null);
             this.inventory.saveInventory(inv);
             for (Object[] detail : detailorder) {
-                if ((int) detail[0] == id) {                  
+                if ((int) detail[0] == id) {
                     String name = (String) detail[1];
                     long p = (long) detail[2];
                     mStock.setMaterialId(this.ma.getMaterialByName(name));
@@ -135,8 +187,7 @@ public class ApiOderController {
                 }
 
             }
-            
-            
+
         } catch (Exception e) {
             return new ResponseEntity<>("Error occurred: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }

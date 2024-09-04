@@ -18,11 +18,13 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -38,6 +40,10 @@ import org.springframework.beans.factory.annotation.Value;
     @NamedQuery(name = "Product.findByPrice", query = "SELECT p FROM Product p WHERE p.price = :price"),
     @NamedQuery(name = "Product.findByDetail", query = "SELECT p FROM Product p WHERE p.detail = :detail")})
 public class Product implements Serializable {
+
+    @Size(max = 200)
+    @Column(name = "image")
+    private String image;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -66,6 +72,8 @@ public class Product implements Serializable {
     private Collection<Productstock> productstockCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
     private Collection<Detailexportorder> detailexportorderCollection;
+    @Transient
+    private MultipartFile file;
 
     public Product() {
     }
@@ -163,6 +171,28 @@ public class Product implements Serializable {
     @Override
     public String toString() {
         return "com.XPTB.pojo.Product[ id=" + id + " ]";
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    /**
+     * @return the file
+     */
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
     }
     
 }

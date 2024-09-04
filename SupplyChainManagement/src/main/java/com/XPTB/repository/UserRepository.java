@@ -5,6 +5,8 @@
 package com.XPTB.repository;
 
 import com.XPTB.pojo.User;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -16,4 +18,12 @@ public interface UserRepository {
     User getUserByUsername(String username);
 
     boolean authUser(String username, String password);
+    
+    List<User> getAllUser(Map<String,String> params);
+    
+    public void save(User u);
+    
+    User getnUserById (int id);
+    
+    public void delete(int id);
 }

@@ -33,6 +33,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class SupplierPerformanceRepositoryImpl implements SupplierPerformaceRepository{
     @Autowired
     private LocalSessionFactoryBean factory;
+    
+    private static final int PAGE_SIZE = 4;
 
     @Override
     public void save(Supplierperformance s) {
@@ -47,12 +49,25 @@ public class SupplierPerformanceRepositoryImpl implements SupplierPerformaceRepo
         CriteriaQuery<Supplierperformance> cq = b.createQuery(Supplierperformance.class);
         Root r = cq.from(Supplierperformance.class);
         cq.select(r);
-        if(params != null){
-            int id = Integer.parseInt(params.get("p"));
-            Predicate p1 = b.equal(r.get("supplier").get("id"), id);
-            cq.where(p1);
+        if(params != null && !params.isEmpty()){
+            String id =params.get("name");
+            if(id != null){
+                int y = Integer.parseInt(id);
+                Predicate p1 = b.equal(r.get("supplier").get("id"),y );
+                cq.where(p1);
+            }
+            
         }
         Query query = s.createQuery(cq);
+        if(params != null && !params.isEmpty()){
+            String page = params.get("page");
+            if(page != null && !page.isEmpty()){
+                int p = Integer.parseInt(page);
+                int start = (p-1) * PAGE_SIZE;
+                query.setFirstResult(start);
+                query.setMaxResults(PAGE_SIZE);
+            }
+        }
         return query.getResultList();
     }
 
@@ -67,9 +82,12 @@ public class SupplierPerformanceRepositoryImpl implements SupplierPerformaceRepo
                 superFor.get("name"),
                 b.avg(root.get("deliveryRating").as(Integer.class)),
                 b.avg(root.get("qualityRating").as(Integer.class)),
-               b.avg(root.get("priceRating").as(Integer.class))           
+               b.avg(root.get("priceRating").as(Integer.class)),
+               superFor.get("address"),
+               superFor.get("phone"),
+               superFor.get("id")
         );
-        cq.groupBy(superFor.get("name"));
+        cq.groupBy(superFor.get("id"),superFor.get("name"),superFor.get("address"),superFor.get("phone"));
         if(params!=null){
             List<Predicate> predicates = new ArrayList<>();
             String name = params.get("name");
@@ -79,6 +97,7 @@ public class SupplierPerformanceRepositoryImpl implements SupplierPerformaceRepo
             cq.where(predicates.toArray(new Predicate[0] ));
         }
         Query<Object[]> query = s.createQuery(cq);
+        
         return query.getResultList();
     }
 
@@ -112,5 +131,7 @@ public class SupplierPerformanceRepositoryImpl implements SupplierPerformaceRepo
         return query.getResultList();
         
     }
+
+    
     
 }

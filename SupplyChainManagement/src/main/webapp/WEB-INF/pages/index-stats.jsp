@@ -17,7 +17,7 @@
     }
     .table {
         width: 100%; /* Đảm bảo bảng chiếm toàn bộ chiều rộng của bảng chứa */
-         /* Đảm bảo các cột có kích thước đồng nhất */
+        /* Đảm bảo các cột có kích thước đồng nhất */
     }
     .row1{
         position: relative;
@@ -27,12 +27,16 @@
         padding: 10px;
         margin: 10px 0;
         box-sizing: border-box;
+        background-color: #b2d8fa;
+        padding: 10px
+
     }
     .btn-container {
-    position: absolute;
-    bottom: 10px; /* Khoảng cách từ đáy */
-    right: 10px; /* Khoảng cách từ cạnh phải */
-}
+        position: absolute;
+        bottom: 10px; /* Khoảng cách từ đáy */
+        right: 10px; /* Khoảng cách từ cạnh phải */
+    }
+   
 </style>
 
 <div class="row1">
@@ -62,14 +66,14 @@
 
                     </tr>
                 </c:forEach>
-                   
+
             </tbody>
         </table>
-       
+
     </div>
-     <div class="btn-container">
-            <a class="btn btn-info m-1" href="<c:url value="/stats/detail" />">xem chi tiết</a>
-      </div>
+    <div class="btn-container">
+        <a class="btn btn-info m-1" href="<c:url value="/stats/detail" />">xem chi tiết</a>
+    </div>
 </div>
 
 

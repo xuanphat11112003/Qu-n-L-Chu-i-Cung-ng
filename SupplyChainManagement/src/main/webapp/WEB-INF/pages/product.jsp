@@ -4,6 +4,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script src="<c:url value="/js/Product.js" />"></script>
+<style>
+    section{
+        background-color: rgba(173, 216, 230, 0.9);
+        padding: 10px;
+    }
+</style>
 <section class="container">
     <div class="col-md-10 col-12">
         <a class="btn btn-info m-1" href="<c:url value="/add-product" />">Thêm sản phẩm</a>
@@ -14,7 +20,7 @@
     <c:url value="/product" var="action" />
     <form action="${action}">
         <div class="d-flex ">
-           
+
             <div >
 
                 <input type="text" class="form-control" id="kw" placeholder="Từ khóa..." name="q">
@@ -29,6 +35,7 @@
         <thead>
             <tr>
                 <th>ID</th>
+                <th></th>
                 <th>Name</th>
                 <th>Price</th>
                 <th>Detail</th>
@@ -38,6 +45,9 @@
             <c:forEach items="${product}" var="p">
                 <tr id="product${p.id}">
                     <td>${p.id}</td>
+                    <td>
+                        <img width="120" src="${p.image}" alt="${p.name}" />
+                    </td>
                     <td>${p.name}</td>
                     <td>${p.price}VNĐ</td>
                     <td>${p.detail}</td>

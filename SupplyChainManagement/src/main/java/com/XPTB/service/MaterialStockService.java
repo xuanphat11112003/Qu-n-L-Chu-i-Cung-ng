@@ -5,6 +5,8 @@
 package com.XPTB.service;
 
 import com.XPTB.pojo.Materialstock;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -12,4 +14,9 @@ import com.XPTB.pojo.Materialstock;
  */
 public interface MaterialStockService {
     public void addMaterialinStock(Materialstock material);
+    public List<Object[]> getAllMaterialStock(Map<String,String> params);
+    public void Delete(int id);
+    public Materialstock getMaterialstockById(int id);
+    public void update(Materialstock ms );
+    public void updateQuantity(Materialstock ms);
 }

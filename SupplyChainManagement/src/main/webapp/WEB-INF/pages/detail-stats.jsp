@@ -13,8 +13,9 @@
     .table-container {
         width: 50%;
         right : 5px;
-        height: 200px;
+        height: 100%;
         overflow-x: auto;
+        width: 50%;
 
     }
     .table {
@@ -26,8 +27,10 @@
         
         justify-content: center;
         margin-bottom: 100px;
-
+        background-color: whitesmoke;
         margin: 10px;
+        padding: 10px;
+        height: 330px;
     }
     
 
@@ -40,11 +43,13 @@
         display: flex;
         justify-content: center;
         margin-bottom: 100px;
-       
+       background-color: whitesmoke;
         margin: 10px;
+        padding: 10px;
     }
     #r2{
          display: none;
+         height: 250px;
     }
 </style>
 <div class ="container"> 

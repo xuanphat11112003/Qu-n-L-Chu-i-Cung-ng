@@ -7,6 +7,7 @@ package com.XPTB.DTO;
 import com.XPTB.pojo.Importorder;
 import com.XPTB.pojo.Supplier;
 import com.XPTB.pojo.Supplierperformance;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,7 @@ public class PerformanceSupplierDTO {
     private int supplier;
     private int importorder;
     private String nameSupplier;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private Date evaluationDate;
     public PerformanceSupplierDTO(Supplierperformance supFor){
         this.comment = supFor.getComment();

@@ -33,6 +33,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @Transactional
 public class DetailImportOderRrepositoryImpl implements ImportOderDetailsRepository {
+    
 
     @Autowired
     private LocalSessionFactoryBean factory;
@@ -105,6 +106,14 @@ public class DetailImportOderRrepositoryImpl implements ImportOderDetailsReposit
                     predicates.add(cb.equal(importOrder.get("active"), true));
                 } else if (status.equals("unconfirmed")) {
                     predicates.add(cb.equal(importOrder.get("active"), false));
+                }
+            }
+            String content = params.get("evaluate");
+            if(content != null && !content.isEmpty()){
+                if (content.equals("confirmed")) {
+                    predicates.add(cb.equal(importOrder.get("activeEvaluate"), true));
+                } else if (content.equals("unconfirmed")) {
+                    predicates.add(cb.equal(importOrder.get("activeEvaluate"), false));
                 }
             }
             cq.where(predicates.toArray(new Predicate[0] ));

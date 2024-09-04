@@ -9,6 +9,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
@@ -32,25 +34,19 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Productstock.findAll", query = "SELECT p FROM Productstock p"),
     @NamedQuery(name = "Productstock.findById", query = "SELECT p FROM Productstock p WHERE p.id = :id"),
     @NamedQuery(name = "Productstock.findByQuantity", query = "SELECT p FROM Productstock p WHERE p.quantity = :quantity"),
-    @NamedQuery(name = "Productstock.findByDate", query = "SELECT p FROM Productstock p WHERE p.date = :date"),
     @NamedQuery(name = "Productstock.findByDateExpire", query = "SELECT p FROM Productstock p WHERE p.dateExpire = :dateExpire")})
 public class Productstock implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
     @NotNull
     @Column(name = "quantity")
     private int quantity;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "date")
-    @Temporal(TemporalType.DATE)
-    private Date date;
     @Basic(optional = false)
     @NotNull
     @Column(name = "date_expire")
@@ -73,7 +69,6 @@ public class Productstock implements Serializable {
     public Productstock(Integer id, int quantity, Date date, Date dateExpire) {
         this.id = id;
         this.quantity = quantity;
-        this.date = date;
         this.dateExpire = dateExpire;
     }
 
@@ -93,13 +88,7 @@ public class Productstock implements Serializable {
         this.quantity = quantity;
     }
 
-    public Date getDate() {
-        return date;
-    }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
 
     public Date getDateExpire() {
         return dateExpire;

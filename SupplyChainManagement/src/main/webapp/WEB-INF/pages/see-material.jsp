@@ -4,6 +4,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script src="<c:url value="/js/Material.js" />"></script>
+<style>
+    section{
+        background-color: rgba(173, 216, 230, 0.9);
+        padding: 10px;
+    }
+</style>
 <section class="container">
     <div class="col-md-10 col-12">
         <a class="btn btn-info m-1" href="<c:url value="/material/add" />">Thêm sản phẩm</a>

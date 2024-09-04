@@ -6,6 +6,7 @@ package com.XPTB.service.impl;
 
 import com.XPTB.DTO.MaterialDTO;
 import com.XPTB.pojo.Material;
+import com.XPTB.pojo.Materialstock;
 import com.XPTB.repository.MaterialRepository;
 import com.XPTB.service.MaterialService;
 import java.util.ArrayList;
@@ -67,5 +68,7 @@ public class MaterialServiceImpl implements MaterialService{
     public void deleteMaterial(int i) {
         this.maRepo.deleteMaterial(i);
     }
+
+    
     
 }

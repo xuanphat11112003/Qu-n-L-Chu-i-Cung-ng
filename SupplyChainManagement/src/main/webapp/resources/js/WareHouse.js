@@ -1,4 +1,4 @@
-function deleteMaterial(endpoint, id) {
+function deleteW(endpoint, id) {
     if (confirm("Bạn chắc chắn xóa không?") === true) {
         console.log(endpoint);
         fetch(endpoint, {

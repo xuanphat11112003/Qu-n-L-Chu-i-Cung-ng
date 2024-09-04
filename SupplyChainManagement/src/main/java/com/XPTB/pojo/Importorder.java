@@ -4,6 +4,7 @@
  */
 package com.XPTB.pojo;
 import com.XPTB.utils.StringUtils;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -86,10 +87,12 @@ public class Importorder implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     @Column(name = "expect_date")
     @Temporal(TemporalType.DATE)
     private Date expectDate;
     @Column(name = "delivery_date")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     @Temporal(TemporalType.DATE)
     private Date deliveryDate;
     @Column(name = "total_price")

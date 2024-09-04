@@ -10,7 +10,10 @@
         ${errMsg}
     </div>
 </c:if>
-<form:form method="post"  action="${action}" modelAttribute="product">
+<style>
+    form{background-color: whitesmoke; padding: 10px}
+</style>
+<form:form method="post"  action="${action}" modelAttribute="product" enctype="multipart/form-data">
     <form:errors path="*" element="div" cssClass="alert alert-danger" />
 
     <div class="mb-3 mt-3">
@@ -26,6 +29,13 @@
         <label for="detail" class="form-label">mô tả sản phẩm:</label>
         <form:input path="detail" type="text" class="form-control" id="detail" placeholder="mô tả sản phẩm..." name="detail" />
     </div>
+    <div class="mb-3 mt-3">
+        <label for="file" class="form-label">Ảnh sản phẩm</label>
+        <form:input path="file" accept=".png,.jpg" type="file" class="form-control" id="file" name="file" />
+        <c:if test="${product.id != null}">
+            <img src="${product.image}" alt="${product.name}" width="120" />
+        </c:if>
+    </div>
 
 
 
@@ -33,6 +43,7 @@
 
 <div class="mb-3 mt-3">
     <form:hidden path="id" />
+    <form:hidden path="image"/>
     
     <button class="btn btn-success" type="submit">
 

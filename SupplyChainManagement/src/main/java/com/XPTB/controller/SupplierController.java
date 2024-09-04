@@ -74,16 +74,13 @@ public class SupplierController {
         model.addAttribute("sup", this.supplierService.getSupplierByid(sid));
         return "addEvaluatesupplier";
     }
+    //này xem tổng quát tất cả mà chưa có giao diện mới có giao diện xem chi tiết thôi
     @GetMapping("/evaluate")
     public String SeeEvaluate(Model model,@RequestParam Map<String,String> params){
         model.addAttribute("supFor",this.supplierPerformanceService.performanceSupplierDTOs(params));
         return "indexevaluate";
     }
-    @GetMapping("/evaluate/detail")
-    public String SeeDetailEvaluate(Model model,@RequestParam Map<String,String> params){
-        model.addAttribute("supFor",this.supplierPerformanceService.performanceSupplierDTOs(params));
-        return "detailvaluate";
-    }
+    
    
     
 }

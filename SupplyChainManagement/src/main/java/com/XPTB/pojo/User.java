@@ -10,6 +10,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -17,9 +19,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -42,10 +46,32 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "User.findByAvartar", query = "SELECT u FROM User u WHERE u.avartar = :avartar")})
 public class User implements Serializable {
 
+    public enum user_role{
+        V1("ROLE_ADMIN"),
+        V2("ROLE_USER"),
+        V3("ROLE_AGENCY");
+        private String value;
+
+        private user_role(String value) {
+            this.value = value;
+        }
+        public String getValue() {
+            return value;
+        }
+        public static  user_role fromValue(String value){
+            for(user_role u : user_role.values()){
+                if(u.getValue().equalsIgnoreCase(value))
+                    return u;
+            }
+            throw new IllegalArgumentException("Không tìm thấy giá trị phù hợp cho Payment: " + value);
+        }
+        
+    }
+    
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
@@ -64,7 +90,7 @@ public class User implements Serializable {
     @Column(name = "user_role")
     private String userRole;
     @Basic(optional = false)
-    @NotNull
+//    @NotNull
     @Column(name = "create_date")
     @Temporal(TemporalType.DATE)
     private Date createDate;
@@ -95,6 +121,8 @@ public class User implements Serializable {
     private String avartar;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
     private Agency agency;
+    @Transient
+    private MultipartFile file;
 
     public User() {
     }
@@ -226,6 +254,20 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "com.XPTB.pojo.User[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the file
+     */
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
     }
     
 }

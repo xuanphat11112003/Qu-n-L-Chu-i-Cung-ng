@@ -84,14 +84,44 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
                        value="/WEB-INF/pages/see-evaluate.jsp" />
     </definition>
      <definition name="indexstats" extends="baseLayout">
-        <put-attribute name="title" value="xem nhà cung cấp" />
+        <put-attribute name="title" value="xem đánh giá nhà cung cấp" />
         <put-attribute name="content"
                        value="/WEB-INF/pages/index-stats.jsp" />
     </definition>
      <definition name="detailstats" extends="baseLayout">
-        <put-attribute name="title" value="xem nhà cung cấp" />
+        <put-attribute name="title" value="xem đánh giá nhà cung cấp" />
         <put-attribute name="content"
                        value="/WEB-INF/pages/detail-stats.jsp" />
+    </definition>
+     <definition name="indexUser" extends="baseLayout">
+        <put-attribute name="title" value="User" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/see-user.jsp" />
+    </definition>
+    <definition name="addUser" extends="baseLayout">
+        <put-attribute name="title" value="User" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/add-user.jsp" />
+    </definition>
+    <definition name="indexManufacture" extends="baseLayout">
+        <put-attribute name="title" value="Manufacture" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/see-manufacture.jsp" />
+    </definition>
+    <definition name="addManufacture" extends="baseLayout">
+        <put-attribute name="title" value="Manufacture" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/add-manufacture.jsp" />
+    </definition>
+    <definition name="seeMaterialStock" extends="baseLayout">
+        <put-attribute name="title" value="MaterialStock" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/see-materialStock.jsp" />
+    </definition>
+    <definition name="addUser" extends="baseLayout">
+        <put-attribute name="title" value="User" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/add-user.jsp" />
     </definition>
 
     

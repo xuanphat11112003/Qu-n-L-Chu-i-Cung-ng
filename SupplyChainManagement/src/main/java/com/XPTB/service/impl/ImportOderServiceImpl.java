@@ -45,6 +45,11 @@ public class ImportOderServiceImpl implements ImportOderService{
         return this.importOrderRepository.getImportorderById(i);
     }
 
+    @Override
+    public void delete(int i) {
+        this.importOrderRepository.deltete(i);
+    }
+
     
     
 }

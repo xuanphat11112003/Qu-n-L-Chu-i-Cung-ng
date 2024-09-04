@@ -16,6 +16,7 @@
     }
 
     .containers {
+        background-color: whitesmoke;
         margin: 10px;
         width: 400px; /* Chiều rộng của containers là 20% của vùng chứa */
         padding: 10px;
@@ -76,7 +77,7 @@
         <div class="col-auto">
             <select id ="date" name="dateFilter" class="form-control" >
                 <option value="" label="-- lọc theo ngày --"></option>
-                <option value="newest">Ngày mới nhất</option>
+                <option value="lastest">Ngày mới nhất</option>
                 <option value="oldest">Ngày cũ nhất</option>
             </select>
         </div>
@@ -182,8 +183,11 @@
                         <c:url value="/api/updateStatus/${entry.key}" var="updateUrl" />
 
                         <button type="submit" class="btn btn-danger" onclick="confirmAndUpdateStatus('${updateUrl}', ${entry.key})">chưa xác nhận</button>
+                        <c:url value="/orders/${entry.key}" var="uD" />
+                        <button onclick="deleteO('${uD}', ${p.id})" class="btn btn-danger">Xóa đơn hàng</button>
                     </c:otherwise>
                 </c:choose>
+                        
             </div>
         </div>
         <div id="formContainer" style="display: none;">
@@ -237,7 +241,7 @@
             "warehouse": v1
         }
 
-        var updateUrl = "<c:url value="/updateStatus" />";
+        var updateUrl = "<c:url value="/api/updateStatus" />";
 
         var formData = new FormData(this);
 
@@ -261,5 +265,18 @@
                     console.error('Error:', error);
                 });
     });
+    function deleteO(endpoint, id) {
+    if (confirm("Bạn chắc chắn xóa không?") === true) {
+        console.log(endpoint);
+        fetch(endpoint, {
+            method: "delete"
+        }).then(res => {
+            if (res.status === 204) {
+                window.location.reload();
+            } else
+                alert("Something Wrong!");
+        });
+    }
+}
 
 </script>

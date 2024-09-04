@@ -15,4 +15,5 @@ public interface ImportOderRepository {
     public void save(Importorder impoder);
     public void UpdateActive(int id);
     public Importorder getImportorderById(int id);
+    public void deltete(int id);
 }

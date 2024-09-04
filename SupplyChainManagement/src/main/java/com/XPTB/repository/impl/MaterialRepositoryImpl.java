@@ -11,7 +11,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.Session;
-import org.hibernate.validator.constraints.br.CNPJ;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
@@ -28,7 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @Transactional
 public class MaterialRepositoryImpl implements MaterialRepository {
-
+    private static final int PAGE_SIZE =8;
     @Autowired
     private LocalSessionFactoryBean factory;
 
@@ -48,6 +47,16 @@ public class MaterialRepositoryImpl implements MaterialRepository {
             
         }
         Query query = s.createQuery(q);
+        if(params != null){
+            String page = params.get("page");
+            if(page != null && !page.isEmpty()){
+                int p = Integer.parseInt(page);
+                int start = (p - 1) * PAGE_SIZE;
+
+                query.setFirstResult(start);
+                query.setMaxResults(PAGE_SIZE);
+            }
+        }
         return query.getResultList();    
     }
     @Override

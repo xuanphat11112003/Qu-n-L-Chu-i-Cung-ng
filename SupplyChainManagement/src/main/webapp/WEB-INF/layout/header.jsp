@@ -1,40 +1,58 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="http://www.springframework.org/security/tags" %>
-<style>
-    #sidebar {
-    background-color: #f8f9fa;
-    height: 100vh;
-    position: fixed;
-    left: -250px; /* Khởi đầu nằm ngoài màn hình */
-    width: 250px; /* Chiều rộng của thanh bên */
-    transition: left 0.3s ease; /* Hiệu ứng chuyển động khi mở/đóng */
-    z-index: 1000;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        #sidebar {
+            background: linear-gradient(to bottom, rgba(0, 51, 204, 0.9), rgba(102, 179, 255, 0.9)) !important;
+            height: 100vh;
+            position: fixed;
+            left: -250px;
+            width: 250px;
+            transition: left 0.3s ease;
+            z-index: 1000;
+            top:110px;
+        }
 
-}
-#sidebar.open {
-    left: 0; /* Hiển thị thanh bên */
-}
-#sidebar .nav-link {
-    padding: 5px;
-    font-size: 1rem;
-}
-#sidebar-toggle {
-    position: fixed;
-    top: 70px;
-    left: 10px;
-    z-index: 1001; /* Đảm bảo nút nằm trên thanh bên */
-}
-.nav-item{
-    margin: 3px;
-}
-</style>
+        #sidebar.open {
+            left: 0;
+        }
+
+        #sidebar .nav-link {
+            padding: 5px;
+            font-size: 1rem;
+        }
+
+        #sidebar-toggle {
+            position: fixed;
+            top: 70px;
+            left: 10px;
+            z-index: 1001;
+        }
+
+        .nav-item {
+            margin: 3px;
+        }
+
+        .navbar {
+            background: linear-gradient(to right, rgba(0, 51, 204, 0.9), rgba(102, 179, 255, 0.9)) !important;
+            color: white;
+        }
+
+        .container-fluid {
+            margin-left: 250px; /* Adjusted for sidebar */
+        }
+    </style>
+</head>
+<body>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 
 
 
     <div class="container text-light p-3 mb-3">
-        <h1>Chào mừng đến với trang web của chúng tôi!</h1>
+        <h1>SUPPLY CHAIN ADMIN </h1>
     </div>
     <div class="d-flex p-2">
     <s:authorize access="hasAnyRole('USER', 'ADMIN')">
@@ -54,7 +72,7 @@
         <div class="row">
             <!-- Thanh Bên -->
             <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
-                <div class="position-sticky">
+                <div class="sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class=" btn nav-link alert alert-primary" href="<c:url value="/" />">
@@ -102,7 +120,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn nav-link alert-primary" href="<c:url value="/" />">
+                            <a class="btn nav-link alert-primary" href="<c:url value="/user/index" />">
                                 Người Dùng
                             </a>
                         </li>
@@ -127,6 +145,7 @@
             </nav>
         </div>
     </div>
+</body>
 <script>
     document.getElementById('sidebar-toggle').addEventListener('click', function() {
         var sidebar = document.getElementById('sidebar');
@@ -145,9 +164,10 @@
             sidebar.style.top = '50px';
         } else {
             sidebarToggle.style.top = '70px'; // Đặt lại vị trí ban đầu khi cuộn lên trên
-            sidebar.style.top = '120px';
+            sidebar.style.top = '110px';
         }
     });
 </script>
+</html>
 
 

@@ -4,7 +4,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script src="<c:url value="/js/Material.js" />"></script>
-<section class="container">
+<style>
+    #backgrOrder{
+    background-color: rgba(173, 216, 230, 0.8);
+    }
+</style>
+<section class="container" id="backgrOrder">
     <div class="col-md-10 col-12">
         <a class="btn btn-info m-1" href="<c:url value="/supplier/add" />">Thêm Nhà Cung Cấp</a>
     </div>
@@ -53,7 +58,7 @@
                         <a href="${u}" class="btn btn-success">&#9997</a>
 
                         <c:url value="/supplier/${p.id}" var="uD" />
-                        <button onclick="deleteMaterial('${uD}', ${p.id})" class="btn btn-danger">&times;</button>
+                        <button onclick="deleteS('${uD}', ${p.id})" class="btn btn-danger">&times;</button>
                     </td>
                 </tr>
             </c:forEach>

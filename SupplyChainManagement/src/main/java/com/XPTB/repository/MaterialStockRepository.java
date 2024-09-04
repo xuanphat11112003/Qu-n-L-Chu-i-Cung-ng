@@ -6,6 +6,8 @@ package com.XPTB.repository;
 
 import com.XPTB.pojo.Material;
 import com.XPTB.pojo.Materialstock;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -13,4 +15,9 @@ import com.XPTB.pojo.Materialstock;
  */
 public interface MaterialStockRepository {
     public void addMaterialinStock(Materialstock material);
+    public List<Object[]> getAllMaterialStock(Map<String,String> params);
+    public void Delete(int id);
+    public Materialstock getMaterialstockById(int id);
+    public void updateExpireDate(Materialstock ms );
+    public void updateQuantity(Materialstock ms);
 }

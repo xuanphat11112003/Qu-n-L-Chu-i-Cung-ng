@@ -4,7 +4,10 @@
  */
 package com.XPTB.service;
 
+import com.XPTB.DTO.UserDTO;
 import com.XPTB.pojo.User;
+import java.util.List;
+import java.util.Map;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
@@ -16,4 +19,9 @@ public interface UserService extends UserDetailsService {
 //    User addUser(User user);
     User getUserByUsername(String username);
     boolean authUser(String username, String password);
+    List<UserDTO> getAllUser(Map<String,String> params);
+    public void save (User u);
+    User getUserById(int id);
+    public void edit (User u);
+    public void delete(int id);
 }

@@ -25,8 +25,6 @@ public class StatsController {
     
     @RequestMapping("/index")
     public String indexStats(Model model, Map<String, String> params){
-        
-        
         model.addAttribute("superFor",this.superFor.Stats(params));
         return ("indexstats");
     }

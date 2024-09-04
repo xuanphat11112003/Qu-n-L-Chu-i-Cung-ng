@@ -4,6 +4,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script src="<c:url value="/js/WareHouse.js" />"></script>
+<style>
+    section{
+        background-color: rgba(173, 216, 230, 1.0);
+        padding: 10px;
+    }
+</style>
 <section class="container">
     <div class="col-md-10 col-12">
         <a class="btn btn-info m-1" href="<c:url value="/warehouse/add" />">Thêm Nhà Kho</a>
@@ -41,7 +47,7 @@
                         <a href="${u}" class="btn btn-success">&#9997</a>
 
                         <c:url value="/warehouse/${p.id}" var="uD" />
-                        <button onclick="deleteMaterial('${uD}', ${p.id})" class="btn btn-danger">&times;</button>
+                        <button onclick="deleteW('${uD}', ${p.id})" class="btn btn-danger">&times;</button>
                     </td>
                 </tr>
             </c:forEach>
